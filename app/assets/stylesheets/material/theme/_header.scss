@@ -1,0 +1,103 @@
+.header {
+	background-color: $brand-color;
+	color: $white;
+	position: fixed;
+		top: 0;
+		left: 0;
+	width: 100%;
+	z-index: $header-base;
+	@include box-shadow(0 0 0 rgba(0, 0, 0, 0));
+	@include clearfix();
+	@include transition(background-color 0.3s $timing, box-shadow 0.15s linear);
+	&.fixed,
+	.menu-open & {
+		background-color: $brand-color-dark-m;
+		@include box-shadow(0 1px 10px rgba(0, 0, 0, 0.5));
+	}
+	@each $color in $palette-list {
+		$i: index($palette-list, $color);
+		
+		.page-#{$color} & {
+			background-color: nth($palette-color, $i);
+			&.fixed {
+				background-color: nth($palette-color-dark-m, $i);
+			}
+		}
+		.menu-open.page-#{$color} & {
+			background-color: nth($palette-color-dark-m, $i);
+		}
+	}
+	a {
+		color: $white;
+	}
+	.dropdown.open .dropdown-toggle {
+		color: $black-text;
+	}
+	.dropdown-menu a {
+		color: $black-text;
+	}
+	.nav {
+		margin: 0;
+		> li {
+			> a {
+				.avatar,
+				.fa,
+				.icon {
+					@include transition(all 0.3s $timing);
+				}
+				.header-close {
+					position: absolute;
+						top: ($line-height / 2 + ($line-height - $font-size) / 2);
+						left: 0;
+					text-align: center;
+					width: 100%;
+					@include opacity(0);
+					@include transform(rotate(-225deg));
+				}
+			}
+			&.active > a {
+				.avatar,
+				.fa,
+				.icon {
+					@include opacity(0);
+					@include transform(rotate(225deg));
+				}
+				.header-close {
+					@include opacity(1);
+					@include transform(rotate(0));
+				}
+			}
+		}
+	}
+}
+
+.header-btn {
+	display: block;
+	float: left;
+	height: ($line-height * 2);
+	padding: (($line-height * 2 - $line-height-h4) / 2) $grid-gutter;
+	text-align: center;
+	&:focus,
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.header-logo,
+.header-text {
+	display: block;
+	float: left;
+	font-weight: 300;
+	height: ($line-height * 2);
+	line-height: $line-height-h4;
+	margin: 0;
+	padding: (($line-height * 2 - $line-height-h4) / 2) 0;
+	&:focus,
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.header-logo {
+	font-size: $font-size-h4;
+}

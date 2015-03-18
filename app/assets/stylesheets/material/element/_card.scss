@@ -1,0 +1,203 @@
+.card {
+	background-color: $white;
+	border-radius: 2px;
+	display: block;
+	display: -webkit-box;
+	display:    -moz-box;
+	display:     -ms-flexbox;
+	display: -webkit-flex;
+	display:         flex;
+	margin-bottom: $line-height;
+	position: relative;
+	@include box-shadow(0 0 1px rgba(0, 0, 0, 0.5));
+	@include transition(box-shadow 0.3s $timing);
+	&:focus,
+	&:hover {
+		@include box-shadow(0 0 5px rgba(0, 0, 0, 0.25));
+	}
+}
+
+.card-action {
+	position: relative;
+	@include clearfix();
+	&:before {
+		border-top: 1px solid $black-bg;
+		content: '';
+		display: block;
+		position: absolute;
+			top: 0;
+			left: 0;
+		width: 100%;
+		.card-header + & {
+			display: none;
+		}
+	}
+	.nav {
+		margin-top: 0;
+		margin-bottom: 0;
+		> li {
+			> a {
+				color: $black-sec;
+				&:focus,
+				&:hover {
+					color: $link-color;
+				}
+			}
+			&.active > a,
+			&.open > a {
+				color: $link-color;
+			}
+		}
+	}
+}
+
+.card-header {
+	padding-top: ($line-height / 4);
+	padding-bottom: ($line-height / 4);
+	position: relative;
+	@include clearfix();
+	&:before {
+		border-bottom: 1px solid $black-bg;
+		content: '';
+		display: block;
+		position: absolute;
+			bottom: 0;
+			left: 0;
+		width: 100%;
+	}
+}
+
+.card-heading {
+	display: block;
+	font-size: $font-size-h4;
+	line-height: $line-height-h4;
+	margin-top: $line-height;
+	margin-bottom: $line-height;
+	.card-header & {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+}
+
+.card-img {
+	position: relative;
+	img {
+		display: block;
+		height: auto;
+		width: 100%;
+	}
+}
+
+.card-img-heading {
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5));
+	color: $white;
+	font-size: $font-size-h4;
+	line-height: $line-height-h4;
+	margin: 0;
+	padding: ($line-height / 2) $grid-gutter;
+	position: absolute;
+		bottom: 0;
+		left: 0;
+	width: 100%;
+}
+
+.card-inner {
+	padding-right: $grid-gutter;
+	padding-left: $grid-gutter;
+	position: relative;
+	z-index: 1;
+	.card-header & {
+		padding-top: ($line-height / 2);
+		padding-bottom: ($line-height / 2);
+	}
+}
+
+.card-main {
+	-webkit-box-flex: 1;
+	   -moz-box-flex: 1;
+	    -webkit-flex: 1;
+	        -ms-flex: 1;
+	            flex: 1;
+}
+
+.card-side {
+	background-color: $white-bg;
+	max-width: 33.33333%;
+	padding-right: $grid-gutter;
+	padding-left: $grid-gutter;
+	&[href] {
+		color: $black-text;
+		&:focus,
+		&:hover {
+			background-color: $white-bg-dark;
+			text-decoration: none;
+		}
+	}
+	&.card-side-img {
+		overflow: hidden;
+		padding-right: 0;
+		padding-left: 0;
+	}
+	&.card-side-right {
+		-webkit-box-ordinal-group: 2;
+		   -moz-box-ordinal-group: 2;
+		           -ms-flex-order: 2;
+		            -webkit-order: 2;
+		                    order: 2;
+	}
+}
+
+.card-wrap {
+	margin-top: $line-height;
+}
+
+// colour
+	@each $color in $palette-list {
+		$i: index($palette-list, $color);
+
+		.card-#{$color} {
+			@include box-shadow(0 0 1px nth($palette-color, $i));
+			&:focus,
+			&:hover {
+				@include box-shadow(0 0 5px nth($palette-color, $i));
+			}
+			.card-action:before {
+				border-top-color: nth($palette-color-light, $i);
+			}
+			.card-side {
+				background-color: nth($palette-color, $i);
+				color: $white;
+				&[href] {
+					&:focus,
+					&:hover {
+						background-color: nth($palette-color-dark-m, $i);
+					}
+				}
+			}
+		}
+
+		.card-#{$color}-bg {
+			background-color: nth($palette-color, $i);
+			.card-side {
+				background-color: nth($palette-color-dark-m, $i);
+				&[href] {
+					&:focus,
+					&:hover {
+						background-color: nth($palette-color-dark, $i);
+					}
+				}
+			}
+		}
+	}
+
+	.card[class*="-bg"] {
+		color: $white;
+		.card-action .nav > li {
+			> a {
+				color: $white;
+			}
+			&.open > a {
+				color: $black-text;
+			}
+		}
+	}
