@@ -6,7 +6,7 @@ require 'material-sass/version'
 Gem::Specification.new do |spec|
   spec.name          = "material-sass"
   spec.version       = Material::Sass::VERSION
-  spec.authors       = ["Mohd Khairi"]
+  spec.authors       = ["mkhairi"]
   spec.email         = ["khairi@labs.my"]
   spec.summary       = %q{HTML5 UI design based on Google Material}
   spec.description   = %q{HTML5 UI design based on Google Material.}
@@ -18,6 +18,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency "bundler", "~> 1.7"
+  spec.add_development_dependency "rake", "~> 10.0"
 end
