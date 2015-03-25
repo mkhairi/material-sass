@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ```console
 $ gem install material-sass
-
+```
 
 ## Usage
 
