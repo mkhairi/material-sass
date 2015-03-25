@@ -1,25 +1,54 @@
 # Material-sass
 
-TODO: Write a gem description
-[github.com/Daemonite/material](https://github.com/Daemonite/material)
+`material-sass` is a Sass rubygems version of Material, a HTML5 UI design based on Google Material. Offical repo [github.com/Daemonite/material](https://github.com/Daemonite/material)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'material-sass'
+```ruby
+gem 'material-sass'
+```
 
-And then execute:
+**NOTE:** Ensure that the `sass-rails` gem is presented in your Gemfile.
 
-    $ bundle
+And then run the bundler and restart your server to make the files available through the pipeline:
+
+```console
+$ bundle install
+```
 
 Or install it yourself as:
 
-    $ gem install material-sass
+```console
+$ gem install material-sass
+
 
 ## Usage
 
-TODO: Write usage instructions here
+### a. Sass
+
+Import Materialize styles in `app/assets/stylesheets/application.scss`:
+
+```scss
+@import "material";
+```
+
+**NOTE:** If you have just generated a new Rails application, it  may come with a `.css` file instead. If this file exists, it will be served instead of Sass, so remove it.
+
+```console
+$ rm app/assets/stylesheets/application.css
+```
+
+### b. JavaScript
+
+Require Material javascripts in `app/assets/javascripts/application.js`:
+
+```js
+//= require jquery
+//= require material-sprockets
+```
+
 
 ## Contributing
 
