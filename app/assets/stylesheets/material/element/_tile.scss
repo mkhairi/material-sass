@@ -87,6 +87,7 @@
 	.tile-inner {
 		padding: ($line-height / 2) $grid-gutter;
 		position: relative;
+		.tile-action ~ &,
 		.tile-side ~ & {
 			overflow: hidden;
 		}
@@ -108,7 +109,7 @@
 		width: 100%;
 		&:before {
 			border-top: 1px solid $black-bg;
-			content: '';
+			content: "";
 			display: block;
 			position: absolute;
 				top: 0;
@@ -124,7 +125,7 @@
 		@include clearfix();
 		&:before {
 			border-top: 1px solid $black-bg;
-			content: '';
+			content: "";
 			display: block;
 			position: absolute;
 				top: 0;
