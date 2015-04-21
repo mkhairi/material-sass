@@ -1,4 +1,4 @@
-@import url(//fonts.googleapis.com/css?family=Roboto:300,400,400italic,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,400italic,700);
 
 *,
 *:after,
@@ -6,19 +6,8 @@
 	@include box-sizing(border-box);
 }
 
-@-webkit-viewport {
-	width: device-width;
-}
-@-moz-viewport {
-	width: device-width;
-}
+
 @-ms-viewport {
-	width: device-width;
-}
-@-o-viewport {
-	width: device-width;
-}
-@viewport {
 	width: device-width;
 }
 
@@ -48,6 +37,7 @@
 		line-height: $line-height;
 		margin: 0;
 		padding: 0;
+		-webkit-font-smoothing: subpixel-antialiased;
 	}
 
 	html {

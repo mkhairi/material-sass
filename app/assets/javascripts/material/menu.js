@@ -37,3 +37,35 @@
 			};
 		}
 	});
+
+// menu toggle collapse
+	if ($('.menu-collapse').length) {
+		$('.menu-collapse').each(function(index) {
+			var $this = $(this),
+			    $thisLi = $this.closest('li');
+			if ($this.hasClass('in')) {
+				$thisLi.attr('data-height', $thisLi.height());
+			};
+		});
+	};
+
+	$(document).on('show.bs.collapse', '.menu-collapse', function() {
+		var $this = $(this),
+		    $thisLi = $this.closest('li'),
+		    height,
+		    offset = $thisLi.offset().top - window.pageYOffset,
+		    winHeight = window.innerHeight;
+
+		if ($thisLi.attr('data-height') == null) {
+			$thisLi.attr('data-height', $this.height() + $('> a', $thisLi).outerHeight());
+		};
+
+		height = parseInt($thisLi.attr('data-height'));
+
+		if (height + offset > winHeight) {
+			var $thisMenu = $this.closest('.menu-wrap');
+			$thisMenu.animate({
+				scrollTop: height + offset - winHeight + $thisMenu.scrollTop()
+			}, 300);
+		};
+	});

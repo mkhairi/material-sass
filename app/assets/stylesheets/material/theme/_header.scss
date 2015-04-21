@@ -6,10 +6,10 @@
 		left: 0;
 	width: 100%;
 	z-index: $header-base;
-	@include box-shadow(0 0 0 rgba(0, 0, 0, 0));
 	@include clearfix();
 	@include transition(background-color 0.3s $timing, box-shadow 0.15s linear);
 	&.fixed,
+	&.open,
 	.menu-open & {
 		background-color: $brand-color-dark-m;
 		@include box-shadow(0 1px 10px rgba(0, 0, 0, 0.5));
@@ -19,7 +19,8 @@
 		
 		.page-#{$color} & {
 			background-color: nth($palette-color, $i);
-			&.fixed {
+			&.fixed,
+			&.open {
 				background-color: nth($palette-color-dark-m, $i);
 			}
 		}
@@ -30,11 +31,50 @@
 	a {
 		color: $white;
 	}
-	.dropdown.open .dropdown-toggle {
-		color: $black-text;
+	.dropdown-menu {
+		border-radius: 2px;
+		a {
+			color: $black-text;
+		}
 	}
-	.dropdown-menu a {
-		color: $black-text;
+	.dropdown-toggle {
+		z-index: 1;
+		&:after {
+			background-color: $brand-color;
+			border-radius: 50%;
+			content: '';
+			display: block;
+			height: ($line-height * 1.5);
+			position: absolute;
+				top: ($line-height * 0.25);
+				right: ($line-height * 0.25);
+				bottom: ($line-height * 0.25);
+				left: ($line-height * 0.25);
+			z-index: -1;
+			@include transition(all 0.3s $timing);
+			@include transform(scale(0));
+			@each $color in $palette-list {
+				$i: index($palette-list, $color);
+				
+				.page-#{$color} & {
+					background-color: nth($palette-color, $i);
+				}
+			}
+			// no csstransforms
+				.no-csstransforms & {
+					display: none;
+				}
+		}
+	}
+	.dropdown.open .dropdown-toggle {
+		background-color: transparent;
+		&:after {
+			@include transform(scale(1));
+			// no csstransforms
+				.no-csstransforms & {
+					display: block;
+				}
+		}
 	}
 	.nav {
 		margin: 0;
@@ -53,6 +93,32 @@
 					width: 100%;
 					@include opacity(0);
 					@include transform(rotate(-225deg));
+					&:after {
+						background-color: $brand-color;
+						border-radius: 50%;
+						content: '';
+						display: block;
+						height: ($line-height * 1.5);
+						margin-top: ($line-height * -0.75);
+						margin-left: ($line-height * -0.75);
+						position: absolute;
+							top: 50%;
+							left: 50%;
+						width: ($line-height * 1.5);
+						@include transition(all 0.3s $timing);
+						@include transform(scale(0));
+						@each $color in $palette-list {
+							$i: index($palette-list, $color);
+							
+							.page-#{$color} & {
+								background-color: nth($palette-color, $i);
+							}
+						}
+					}
+					&:before {
+						position: relative;
+						z-index: 1;
+					}
 				}
 			}
 			&.active > a {
@@ -65,6 +131,9 @@
 				.header-close {
 					@include opacity(1);
 					@include transform(rotate(0));
+					&:after {
+						@include transform(scale(1));
+					}
 				}
 			}
 		}
@@ -91,7 +160,7 @@
 	height: ($line-height * 2);
 	line-height: $line-height-h4;
 	margin: 0;
-	padding: (($line-height * 2 - $line-height-h4) / 2) 0;
+	padding: (($line-height * 2 - $line-height-h4) / 2) $grid-gutter;
 	&:focus,
 	&:hover {
 		text-decoration: none;

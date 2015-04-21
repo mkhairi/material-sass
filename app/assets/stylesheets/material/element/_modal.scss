@@ -34,9 +34,13 @@
 .modal-close {
 	color: $black-sec;
 	cursor: pointer;
+	display: block;
 	float: right;
 	font-size: $font-size-h4;
 	line-height: $line-height-h4;
+	margin-right: ($grid-gutter / -2);
+	padding-right: ($grid-gutter / 2);
+	padding-left: ($grid-gutter / 2);
 	&:focus,
 	&:hover {
 		color: $link-color;
@@ -58,12 +62,23 @@
 }
 
 .modal-dialog {
-	margin: ($line-height * 2) $grid-gutter;
+	margin-right: auto;
+	margin-left: auto;
+	padding: ($line-height * 2) $grid-gutter;
 	position: relative;
+	&.modal-full {
+		height: 100%;
+		.modal-content {
+			height: 100%;
+			overflow-x: hidden;
+			overflow-y: auto;
+			-webkit-overflow-scrolling: touch;
+			-ms-overflow-style: -ms-autohiding-scrollbar;
+		}
+	}
 	.modal.fade & {
 		@include transform(scale(0, 0));
-		-webkit-transition: -webkit-transform 0.3s $timing 0s;
-		        transition: transform 0.3s $timing 0s;
+		@include transition(all 0.3s $timing);
 	}
 	.modal.fade.in & {
 		@include transform(scale(1, 1));
@@ -71,20 +86,16 @@
 	// 480
 		@include responsive(xs) {
 			&.modal-xs {
-				margin-right: auto;
-				margin-left: auto;
-				width: ($screen-xs - $grid-gutter * 2);
+				width: $screen-xs;
 			}
 		}
 	// 992
 		@include responsive(md) {
-			margin-right: auto;
-			margin-left: auto;
-			width: ($screen-md - $grid-gutter * 4);
+			width: ($screen-md - $grid-gutter * 2);
 		}
 	// 1440
 		@include responsive(lg) {
-			width: ($screen-lg - $grid-gutter * 4);
+			width: ($screen-lg - $grid-gutter * 2);
 		}
 }
 
