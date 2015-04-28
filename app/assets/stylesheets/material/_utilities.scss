@@ -172,6 +172,14 @@
 	}
 }
 
+.modal-scrollbar-measure {
+	height: 50px;
+	overflow: scroll;
+	position: absolute;
+		top: -99999px;
+	width: 50px;
+}
+
 .no-overflow {
 	overflow: hidden;
 }
@@ -190,12 +198,12 @@
 	float: right;
 }
 
-.scrollbar-measure {
-	height: 50px;
-	overflow: scroll;
-	position: absolute;
-		top: -99999px;
-	width: 50px;
+.text-break {
+	word-break: break-all;
+	-webkit-hyphens: auto;
+	   -moz-hyphens: auto;
+	    -ms-hyphens: auto;
+	        hyphens: auto;
 }
 
 .text-overflow {
