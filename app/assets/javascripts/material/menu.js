@@ -1,10 +1,27 @@
+// menu backdrop
+	if ($('html').hasClass('touch') && $('.menu').length && !$('.menu-backdrop').length) {
+		$('body').append('<div class="menu-backdrop"></div>');
+	};
+
+	var menuBD = document.getElementsByClassName('menu-backdrop')[0];
+
+	if (menuBD !== undefined) {
+		var menuBDTap = new Hammer(menuBD);
+
+		menuBDTap.on('tap', function(e) {
+			if ($('body').hasClass('menu-open')) {
+				mReset();
+			};
+		});
+	};
+
 // menu close
 	$(document).on('click', function(e) {
 		var $target = $(e.target);
 
 		if ($('body').hasClass('menu-open') && !$target.is('.fbtn-container *, .menu *')) {
 			mReset();
-		}
+		};
 	});
 	
 	function mReset() {
@@ -23,9 +40,7 @@
 		    $thisMenu = $($this.attr('href'));
 
 		if ($thisLi.hasClass('active')) {
-			$('body').removeClass('menu-open');
-			$thisLi.removeClass('active');
-			$thisMenu.removeClass('open');
+			mReset();
 		} else {
 			$('body').addClass('menu-open');
 			$('.menu-toggle').closest('li.active').removeClass('active');
