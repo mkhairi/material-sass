@@ -1,0 +1,10 @@
+@font-face {
+	font-family: "MaterialDesignIcon";
+	font-style: normal;
+	font-weight: normal;
+	src: font-url("MaterialDesignIcon.eot?v=#{$mdicon-version}");
+	src: font-url("MaterialDesignIcon.eot?#iefix&v=#{$mdicon-version}") format("embedded-opentype"),
+	     font-url("MaterialDesignIcon.woff?v=#{$mdicon-version}") format("woff"),
+	     font-url("MaterialDesignIcon.ttf?v=#{$mdicon-version}") format("truetype"),
+	     font-url("MaterialDesignIcon.svg?v=#{$mdicon-version}#MaterialDesignIcon") format("svg");
+}
