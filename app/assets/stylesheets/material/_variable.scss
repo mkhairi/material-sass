@@ -91,6 +91,8 @@
 		$cell-height:  (($base * 3) * 2);   // 48px
 		$input-height: (($base * 3) * 1.5); // 36px
 
+		$fa-font-size-base: $font-size !default;
+
 // grid
 	$grid-cols: 12;
 	$grid-gutter: ($base * 2);
