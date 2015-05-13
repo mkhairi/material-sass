@@ -2,16 +2,21 @@
 	WebFontConfig = {
 		classes: false,
 		fontactive: function() {
+			$('.avoid-fout').each(function(index) {
+				$(this).addClass('avoid-fout-done');
+			});
+
 			// fixed left/right hand side column padding bottom and width
-				if ($('.content-fix').length) {
-					contentFixPushCal();
-				};
+				contentFixPushCal();
 
 			// footer push
 				footerPush();
 
 			// header height
 				headerHeightCal();
+
+			// tile wrap animation
+				tileInView();
 		},
 		google: {
 			families: ['Roboto:300,300italic,400,400italic,700,700italic']
