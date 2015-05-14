@@ -53,5 +53,5 @@
     document.addEventListener('DOMContentLoaded', function() {
         headerAffix();
         headerNavPos();
-    }
+    }, false);
     
