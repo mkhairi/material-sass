@@ -4,15 +4,17 @@
 	    headerNavMinWidth = 0;
 
 // header affix
-	$(window).on('scroll', function() {
-		if ($('.header').length) {
-			if (window.pageYOffset > headerHeight) {
-				$header.addClass('fixed');
-			} else {
-				$header.removeClass('fixed');
-			}
-		};
-	});
+    function headerAffix() {
+        $(window).on('scroll', function() {
+            if ($('.header').length) {
+                if (window.pageYOffset > headerHeight) {
+                    $header.addClass('fixed');
+                } else {
+                    $header.removeClass('fixed');
+                }
+            };
+        });
+    }
 
 // header height
 	function headerHeightCal() {
@@ -22,17 +24,19 @@
 	}
 
 // header nav positioning
-	if ($('.header-nav-scroll').length) {
-		$('.header-nav-scroll .nav > li').each(function(index) {
-			var $this = $(this);
+    function headerNavPos() {
+        if ($('.header-nav-scroll').length) {
+            $('.header-nav-scroll .nav > li').each(function(index) {
+                var $this = $(this);
 
-			if (index < 3) {
-				headerNavMinWidth += $this.width();
-			} else {
-				return false;
-			}
-		});
-	};
+                if (index < 3) {
+                    headerNavMinWidth += $this.width();
+                } else {
+                    return false;
+                }
+            });
+        };
+    }
 
 	function headerNavPos() {
 		var $headerNav = $('.header-nav-scroll');
@@ -45,3 +49,9 @@
 			$headerNav.removeClass('pull-down');
 		}
 	}
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        headerAffix();
+        headerNavPos();
+    }
+    
