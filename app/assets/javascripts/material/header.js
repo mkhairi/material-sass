@@ -5,6 +5,7 @@
 
 // header affix
     function runHeaderAffix() {
+	var $header = $('.header');
         $(window).on('scroll', function() {
             if ($('.header').length) {
                 if (window.pageYOffset > headerHeight) {
