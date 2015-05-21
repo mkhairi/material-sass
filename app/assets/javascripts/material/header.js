@@ -5,20 +5,19 @@
 
 // header affix
     function runHeaderAffix() {
-	var $header = $('.header');
         $(window).on('scroll', function() {
             if ($('.header').length) {
                 if (window.pageYOffset > headerHeight) {
                     $header.addClass('fixed');
                 } else {
                     $header.removeClass('fixed');
-		}
+                }
             };
         });
     }
-
+    
 // header height
-	function headerHeightCal() {
+	headerHeightCal = function () {
 		if ($('.header').length) {
 			headerHeight = $header.height();
 		};
@@ -39,7 +38,7 @@
         };
     }
 
-	function headerNavPos() {
+	headerNavPos  = function () {
 		var $headerNav = $('.header-nav-scroll');
 
 		$headerNav.removeClass('pull-down');
