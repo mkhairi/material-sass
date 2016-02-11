@@ -4,8 +4,8 @@
 	height: 100%;
 	overflow: hidden;
 	position: fixed;
-		top: 0;
-		left: 0;
+	top: 0;
+	left: 0;
 	transition: background-color 0.3s $timing, width 0s 0.3s;
 	width: 0;
 	z-index: ($header-base + 1);

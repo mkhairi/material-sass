@@ -14,6 +14,10 @@
 			$bd.removeClass('nav-drawer-open');
 		};
 
+    if ($bd.hasClass('menu-open')) {
+      $bd.removeClass('menu-open');
+    };
+
 		$('[data-toggle="menu"]').closest('.active').removeClass('active');
 		$('.menu.open').removeClass('open');
 	}
@@ -35,6 +39,10 @@
 			if ($thisMenu.hasClass('nav-drawer')) {
 				$('body').addClass('nav-drawer-open');
 			}
+
+      if ($thisMenu.hasClass('nav-menu')) {
+        $('body').addClass('menu-open');
+      }
 
 			$thisLi.addClass('active');
 			$thisMenu.addClass('open');
