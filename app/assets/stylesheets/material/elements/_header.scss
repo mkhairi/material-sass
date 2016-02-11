@@ -1,0 +1,145 @@
+.header {
+	backface-visibility: hidden;
+	background-color: $offwhite-solid;
+	color: $black-text-solid;
+	min-height: $header-height;
+	padding-top: (($header-height - $nav-height) / 2);
+	padding-bottom: (($header-height - $nav-height) / 2);
+	z-index: $header-base;
+	&:after {
+		box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+		content: "";
+		display: block;
+		height: 100%;
+		opacity: 0;
+		position: absolute;
+			top: 0;
+			left: 0;
+		transition: opacity 0.3s $timing;
+		width: 100%;
+		z-index: -1;
+	}
+	&.affix:after {
+		opacity: 1;
+	}
+	a {
+		color: inherit;
+		z-index: 1;
+	}
+	.nav {
+		margin: 0;
+	}
+	.tab-nav {
+		box-shadow: none;
+		margin-top: (($header-height - $nav-height) / -2);
+		margin-bottom: (($header-height - $nav-height) / -2);
+		.nav > li {
+			> a,
+			> .a {
+				padding-top: (($header-height - $line-height) / 2);
+				padding-bottom: (($header-height - $line-height) / 2 - 2);
+			}
+		}
+	}
+}
+
+// colour
+	@each $color in $palette-list-class {
+		$i: index($palette-list-class, $color);
+
+		.header-#{$color} {
+			background-color: nth($palette-list-color, $i);
+			color: nth($palette-list-text, $i);
+		}
+	}
+
+.header-affix {
+	max-height: $nav-height;
+	overflow: hidden;
+	position: static !important;
+	width: 0;
+	&.affix {
+		overflow: visible;
+		width: auto;
+	}
+}
+
+.header-affix-hide {
+	position: static !important;
+	&.affix {
+		max-height: $nav-height;
+		overflow: hidden;
+		width: 0;
+	}
+}
+
+.header-logo,
+.header-text {
+	display: block;
+	float: left;
+	font-weight: $font-weight-light;
+	height: $nav-height;
+	line-height: $line-height-h4;
+	margin: 0 $grid-gutter;
+	padding: (($nav-height - $line-height-h4) / 2) 0;
+	&:focus,
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.header-logo {
+	font-size: $font-size-h4;
+	img {
+		display: block;
+		max-height: $line-height-h4;
+		width: auto;
+	}
+}
+
+.header-seamed,
+.header-standard,
+.header-waterfall {
+	position: fixed;
+		top: 0;
+		right: 0;
+		left: 0;
+}
+
+.header-standard {
+	&:after {
+		opacity: 1;
+	}
+}
+
+.header-transparent {
+	background-color: transparent;
+	&:before {
+		background-color: $offwhite-solid;
+		content: "";
+		display: block;
+		height: 100%;
+		opacity: 0;
+		position: absolute;
+			top: 0;
+			left: 0;
+		transition: opacity 0.3s $timing;
+		width: 100%;
+		z-index: -1;
+	}
+	&.affix:before {
+		opacity: 1;
+	}
+}
+
+// colour
+	@each $color in $palette-list-class {
+		$i: index($palette-list-class, $color);
+
+		.page-#{$color} .header-transparent {
+			color: nth($palette-list-text, $i);
+			&:before {
+				background-color: nth($palette-list-color, $i);
+			}
+		}
+	}

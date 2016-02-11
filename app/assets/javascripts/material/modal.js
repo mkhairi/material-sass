@@ -1,10 +1,12 @@
-// modal iframe
-	$(document).on('click', '.modal-close-iframe', function(e) {
-		e.preventDefault();
+// modale dialog vertical alignment
+	$(function () {
+		'use strict';
 
-		window.parent.closeModal(getTargetFromTrigger($(this)));
+		$(document).on('hidden.bs.modal', '.modal-va-middle', function () {
+			$(this).removeClass('modal-va-middle-show');
+		});
+
+		$(document).on('show.bs.modal', '.modal-va-middle', function () {
+			$(this).addClass('modal-va-middle-show');
+		});
 	});
-
-	window.closeModal = function(iframe) {
-		$(iframe).modal('hide');
-	};
