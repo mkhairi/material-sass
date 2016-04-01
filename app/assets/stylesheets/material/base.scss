@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-@import "mixin/css3";
 @import "mixin/grid";
 @import "mixin/responsive";
 @import "mixin/utilities";
@@ -46,6 +45,5 @@
 		@import "components/tile";
 
 		@import "elements/content";
-		@import "elements/footer";
 		@import "elements/header";
 		@import "elements/menu";
