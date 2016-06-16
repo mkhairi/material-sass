@@ -307,21 +307,21 @@
 	$offwhite-solid-light:         $palette-grey-050;
 
 // palettes
-	$brand-color:                  $palette-indigo-500 !default;
-	$brand-color-dark:             $palette-indigo-700 !default;
-	$brand-color-light:            $palette-indigo-300 !default;
+	$brand-color:                  $palette-indigo-500;
+	$brand-color-dark:             $palette-indigo-700;
+	$brand-color-light:            $palette-indigo-300;
 
-	$brand-color-accent:           $palette-pink-a200 !default;
-	$brand-color-accent-dark:      $palette-pink-a400 !default;
-	$brand-color-accent-light:     $palette-pink-a100 !default;
+	$brand-color-accent:           $palette-pink-a200;
+	$brand-color-accent-dark:      $palette-pink-a400;
+	$brand-color-accent-light:     $palette-pink-a100;
 
-	$brand-text:                   $white-text !default;
-	$brand-text-dark:              $white-text !default;
-	$brand-text-light:             $black-text !default;
+	$brand-text:                   $white-text;
+	$brand-text-dark:              $white-text;
+	$brand-text-light:             $black-text;
 
-	$brand-text-accent:            $white-text !default;
-	$brand-text-accent-dark:       $white-text !default;
-	$brand-text-accent-light:      $black-text !default;
+	$brand-text-accent:            $white-text;
+	$brand-text-accent-dark:       $white-text;
+	$brand-text-accent-light:      $black-text;
 
 	$palette-list-class:           "brand",            "brand-accent",            "green",            "orange",            "red";
 	$palette-list-color:           $brand-color,       $brand-color-accent,       $palette-green-500, $palette-orange-500, $palette-red-500;
@@ -332,5 +332,5 @@
 	$palette-list-text-light:      $brand-text-light,  $brand-text-accent-light,  $black-text,        $black-text,         $black-text;
 
 // utilities
-	$link-color:                   $brand-color-accent !default;
-	$link-color-hover:             $brand-color-accent-dark !default;
+	$link-color:                   $brand-color-accent;
+	$link-color-hover:             $brand-color-accent-dark;
