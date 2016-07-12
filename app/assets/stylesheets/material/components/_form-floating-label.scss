@@ -1,64 +1,44 @@
 .floating-label {
-	color: $black-hint;
-	cursor: text;
-	display: block;
-	font-size: $font-size;
-	line-height: 1;
-	margin: 0;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-		top: (($input-height - $font-size) / 2);
-		left: 0;
-	text-overflow: ellipsis;
-	transform-origin: 0 0;
-	transition-duration: 0.3s;
-	transition-property: color, transform;
-	transition-timing-function: $timing;
-	white-space: nowrap;
-	.form-group-label [class*="col-"] & {
-		// position
-			left: $grid-gutter;
-	}
-	.form-group-label.control-focus &,
-	.form-group-label.control-highlight & {
-		transform: scale(($font-size-h6 / $font-size), ($font-size-h6 / $font-size)) translateY(($input-height - $line-height) * -1 - ($input-height - $font-size) / 2);
-	}
-	.form-group-label.control-focus & {
-		color: $link-color;
-	}
+  position: relative;
+  @include floating-label-size($floating-label-height, $floating-label-padding-top, $input-font-size, $input-height, $input-line-height, $input-margin-bottom, $input-padding-top);
+  > label {
+    color: $floating-label-color;
+    cursor: text;
+    display: block;
+    font-weight: normal;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+      left: 0;
+    text-overflow: ellipsis;
+    transform-origin: 0 0;
+    transition: all $transition-duration $transition-timing-function;
+    white-space: nowrap;
+  }
+  &.is-focused > label {
+    color: $floating-label-color-focus;
+  }
+  > .form-control {
+    margin-bottom: 0;
+    &::placeholder {
+      color: transparent;
+      opacity: 0;
+    }
+  }
 }
 
-.form-group-label {
-	margin-top: ($margin-md * 1.5);
-	margin-bottom: ($margin-md * 1.5);
-	position: relative;
-	.form-control {
-		position: relative;
-		z-index: 1;
-		&::placeholder {
-			color: transparent;
-		}
-	}
-	legend + & {
-		margin-top: ($margin-md / 2);
-	}
-}
+// size
+  .floating-label-lg {
+    @include floating-label-size($floating-label-height-lg, $floating-label-padding-top-lg, $input-font-size-lg, $input-height-lg, $input-line-height-lg, $input-margin-bottom-lg, $input-padding-top-lg);
+    > .form-control {
+      @extend .form-control-lg;
+    }
+  }
 
-// colour
-	@each $color in $palette-list-class {
-		$i: index($palette-list-class, $color);
-
-		.form-group-label.form-group-#{$color} .floating-label {
-			color: nth($palette-list-color, $i);
-		}
-	}
-
-.form-icon-label {
-	cursor: pointer;
-	display: block;
-	font-size: $font-size-h4;
-	line-height: $line-height-h4;
-	padding: (($input-height - $line-height-h4) / 2) 0;
-	transition: color 0.15s $timing;
-}
+  .floating-label-sm {
+    @include floating-label-size($floating-label-height-sm, $floating-label-padding-top-sm, $input-font-size-sm, $input-height-sm, $input-line-height-sm, $input-margin-bottom-sm, $input-padding-top-sm);
+    > .form-control {
+      @extend .form-control-sm;
+    }
+  }

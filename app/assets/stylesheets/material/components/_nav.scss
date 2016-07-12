@@ -1,53 +1,116 @@
 .nav {
-	list-style: none;
-	margin: $margin-md 0;
-	padding: 0;
-	position: relative;
-	@include clearfix();
-	li {
-		display: block;
-		position: relative;
-		> a,
-		> .a {
-			align-items: center;
-			display: flex;
-			min-height: $nav-height;
-			padding: 0 $grid-gutter;
-			position: relative;
-			&:focus,
-			&:hover {
-				text-decoration: none;
-			}
-		}
-	}
-	ul {
-		margin: 0;
-		padding: 0;
-	}
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
 }
 
-.nav-justified,
-.nav-list {
-	align-items: flex-start;
-	display: flex;
-	justify-content: flex-start;
+.nav-link {
+  display: inline-block;
+  position: relative;
+  // active, focus, hover
+    &:focus,
+    &:hover {
+      text-decoration: none;
+    }
+  // disabled
+    &.disabled {
+      color: $nav-link-color-disabled;
+      &:focus,
+      &:hover {
+        color: $nav-link-color-disabled;
+        cursor: $cursor-disabled;
+      }
+    }
 }
 
-.nav-justified {
-	flex-wrap: nowrap;
-	> li {
-		flex-grow: 1;
-		> a,
-		> .a {
-			justify-content: center;
-			text-align: center;
-		}
-	}
-}
+//
+// inline
+//
+  .nav-inline {
+    .nav-item {
+      display: inline-block;
+    }
+    .nav-item + .nav-item,
+    .nav-link + .nav-link {
+      margin-left: $spacer-md-x;
+    }
+  }
 
-.nav-list {
-	flex-wrap: wrap;
-	> li {
-		float: left;
-	}
-}
+//
+// pill
+//
+  .nav-pills {
+    @include clearfix;
+    .nav-item {
+      float: left;
+      + .nav-item {
+        margin-left: 1px;
+      }
+    }
+    .nav-link {
+      border-radius: $border-radius;
+      color: $nav-link-color;
+      display: block;
+      padding: $nav-link-padding;
+      &::before {
+        background-color: $nav-link-bg-active;
+        border-radius: $border-radius;
+        content: "";
+        display: block;
+        height: 100%;
+        opacity: 0;
+        position: absolute;
+          top: 0;
+          left: 0;
+        transition: opacity $transition-duration $transition-timing-function;
+        width: 100%;
+      }
+      // active, focus, hover
+        &.active {
+          color: $nav-link-color-active;
+          cursor: default;
+          &::before {
+            opacity: 1;
+          }
+        }
+      // disabled
+        &.disabled {
+          color: $nav-link-color-disabled;
+        }
+    }
+    .dropdown.open,
+    .dropup.open {
+      > .nav-link,
+      > .nav-link:focus,
+      > .nav-link:hover {
+        color: $nav-link-color-active;
+        cursor: default;
+        &::before {
+          opacity: 1;
+        }
+      }
+    }
+    .dropdown.open {
+      > .nav-link,
+      > .nav-link::before {
+        border-radius: $border-radius $border-radius 0 0;
+      }
+    }
+    .dropup.open {
+      > .nav-link,
+      > .nav-link::before {
+        border-radius: 0 0 $border-radius $border-radius;
+      }
+    }
+  }
+
+  .nav-stacked {
+    .nav-item {
+      display: block;
+      float: none;
+      + .nav-item {
+        margin-top: 1px;
+        margin-left: 0;
+      }
+    }
+  }

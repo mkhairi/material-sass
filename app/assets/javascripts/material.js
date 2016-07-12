@@ -62,18 +62,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /*!
- * dialogs are displayed centered vertically on the screen
- * based on Bootstrap's (v4.0.0-alpha.2) modal.js
- */
-$(document).on('hidden.bs.modal', '.modal-va-middle', function () {
-  $(this).removeClass('modal-va-middle-show');
-});
-
-$(document).on('show.bs.modal', '.modal-va-middle', function () {
-  $(this).addClass('modal-va-middle-show');
-});
-
-/*!
  * waterfall header:
  * header is initially presented as seamed,
  * but then separates to form the step
@@ -234,7 +222,9 @@ if ($('.textarea-autosize').length && typeof $.fn.textareaAutoSize !== 'undefine
  */
 if ($('.waves-attach').length && typeof Waves !== 'undefined') {
   Waves.attach('.waves-attach');
-  Waves.init();
+  Waves.init({
+    duration: 300
+  });
 };
 
 /*!
@@ -251,8 +241,8 @@ var Floatinglabel = function ($) {
   var NO_CONFLICT = $.fn[NAME];
 
   var ClassName = {
-    focus: 'control-focus',
-    highlight: 'control-highlight'
+    IS_FOCUSED: 'is-focused',
+    HAS_VALUE: 'has-value'
   };
 
   var Event = {
@@ -262,7 +252,8 @@ var Floatinglabel = function ($) {
   };
 
   var Selector = {
-    DATA_TOGGLE: '.floating-label-control'
+    DATA_PARENT: '.floating-label',
+    DATA_TOGGLE: '.floating-label .form-control'
   };
   // <<< constants
 
@@ -277,41 +268,27 @@ var Floatinglabel = function ($) {
       key: 'change',
       value: function change(relatedTarget) {
         if ($(this._element).val() || $(this._element).is('select') && $('option:first-child', $(this._element)).html().replace(' ', '') !== '') {
-          $(relatedTarget).addClass(ClassName.highlight);
+          $(relatedTarget).addClass(ClassName.HAS_VALUE);
         } else {
-          $(relatedTarget).removeClass(ClassName.highlight);
+          $(relatedTarget).removeClass(ClassName.HAS_VALUE);
         }
       }
     }, {
       key: 'focusin',
       value: function focusin(relatedTarget) {
-        $(relatedTarget).addClass(ClassName.focus);
+        $(relatedTarget).addClass(ClassName.IS_FOCUSED);
       }
     }, {
       key: 'focusout',
       value: function focusout(relatedTarget) {
-        $(relatedTarget).removeClass(ClassName.focus);
+        $(relatedTarget).removeClass(ClassName.IS_FOCUSED);
       }
     }], [{
-      key: '_getTargetFromElement',
-      value: function _getTargetFromElement(element) {
-        var selector = element.getAttribute('id');
-        var target = null;
-
-        if (selector) {
-          target = $('[for=' + selector + ']');
-          target = /[a-z]/i.test(target) ? target : null;
-        }
-
-        return target;
-      }
-    }, {
       key: '_jQueryInterface',
-      value: function _jQueryInterface(event, relatedTarget) {
+      value: function _jQueryInterface(event) {
         return this.each(function () {
           var data = $(this).data(DATA_KEY);
           var _event = event ? event : 'change';
-          var _relatedTarget = relatedTarget ? relatedTarget : Floatinglabel._getTargetFromElement(this);
 
           if (!data) {
             data = new Floatinglabel(this);
@@ -323,7 +300,7 @@ var Floatinglabel = function ($) {
               throw new Error('No method named "' + _event + '"');
             }
 
-            data[_event](_relatedTarget);
+            data[_event]($(this).parent(Selector.DATA_PARENT));
           }
         });
       }
@@ -334,9 +311,8 @@ var Floatinglabel = function ($) {
 
   $(document).on(Event.CHANGE_DATA_API + ' ' + Event.FOCUSIN_DATA_API + ' ' + Event.FOCUSOUT_DATA_API, Selector.DATA_TOGGLE, function (event) {
     var data = $(this).data(DATA_KEY);
-    var relatedTarget = Floatinglabel._getTargetFromElement(this);
 
-    Floatinglabel._jQueryInterface.call($(this), event.type, relatedTarget);
+    Floatinglabel._jQueryInterface.call($(this), event.type);
   });
 
   $.fn[NAME] = Floatinglabel._jQueryInterface;
@@ -348,6 +324,7 @@ var Floatinglabel = function ($) {
 
   return Floatinglabel;
 }(jQuery);
+
 /*!
  * navigation drawer
  * based on Bootstrap's (v4.0.0-alpha.2) modal.js
