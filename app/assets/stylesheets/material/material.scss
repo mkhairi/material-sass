@@ -1,6 +1,5 @@
-@import "variables/variable";
-
-@import "mixins/breakpoint", "mixins/form", "mixins/grid", "mixins/typography", "mixins/utility.scss";
+@import "mixins";
+@import "variables";
 
 //
 // base css
@@ -13,7 +12,9 @@
 // bootstrap components
 // components covered in Bootstrap's (v4.0.0-alpha.2) css but not in material design guidelines
 //
+  @import "bootstrap/animation";
   @import "bootstrap/code";
+  @import "bootstrap/media";
   @import "bootstrap/nav";
 
 //
@@ -41,9 +42,4 @@
 //
 // utilities
 //
-  @import "utilities/material-icons";
-  @import "utilities/utility";
-  @import "utilities/utility-background";
-  @import "utilities/utility-responsive";
-  @import "utilities/utility-spacing";
-  @import "utilities/waves";
+  @import "utilities";
