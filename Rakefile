@@ -37,11 +37,11 @@ namespace :stylesheets do
     cp_r src_dir, tgt_dir
   end
  
-  desc "Fix image URLs in stylesheets"
+  desc "Fix font url in stylesheets"
   task :fix_urls do
     Dir.glob('app/assets/stylesheet/**/*.scss').each do |tgt_file|
       content = File.read(tgt_file)
-      fixed_content = content.gsub(/url\(\"\.\.\/images\/([A-Za-z_]*.png)\"\)/, 'image-url("\1")')
+      fixed_content = content.gsub(/url\(\"\.\.\/Roboto\/([A-Za-z_]*.woff2)\"\)/, 'font-url("\1")')
       File.open(tgt_file, "w") { |f| f.puts fixed_content}
     end
   end
