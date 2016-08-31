@@ -15,7 +15,7 @@ namespace :javascripts do
     tgt_dir = "app/assets/javascripts/material/"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
-    mv (tgt_dir+"src.js"), (tgt_dir+"material.js")
+    mv (tgt_dir+"src.js"), "app/assets/javascripts/material.js"
   end
   
 
