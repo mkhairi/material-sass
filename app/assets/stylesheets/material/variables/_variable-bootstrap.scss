@@ -4,9 +4,17 @@ $enable-flex:              false !default;
 $enable-grid-classes:      true !default;
 $enable-hover-media-query: false !default;
 
+// alert
+  $alert-link-font-weight: $font-weight-medium !default;
+
 // body
   $body-bg:    $white-primary !default;
   $body-color: $black-primary !default;
+
+// close
+  $close-color:       $black-hint !default;
+  $close-color-hover: $black-primary !default;
+  $close-font-size:   $material-icon-size !default;
 
 // code
   $code-bg:                   #f7f7f9 !default;
