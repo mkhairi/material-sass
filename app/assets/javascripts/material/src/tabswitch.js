@@ -7,12 +7,13 @@ const Tabswitch = (($) => {
     const DATA_KEY            = 'md.tabswitch';
     const NAME                = 'tabswitch';
     const NO_CONFLICT         = $.fn[NAME];
-    const TRANSITION_DURATION = 300;
+    const TRANSITION_DURATION = 450;
 
     const ClassName = {
       ANIMATE    : 'animate',
       IN         : 'in',
       INDICATOR  : 'nav-tabs-indicator',
+      MATERIAL   : 'nav-tabs-material',
       REVERSE    : 'reverse',
       SCROLLABLE : 'nav-tabs-scrollable'
     };
@@ -56,23 +57,24 @@ const Tabswitch = (($) => {
 
         $(this._navindicator).css({
           left  : ((relatedLeft + navScrollLeft) - navLeft),
-          right : (navLeft + navWidth - (relatedLeft + navScrollLeft) - relatedWidth)
+          right : (navWidth - ((relatedLeft + navScrollLeft) - navLeft + relatedWidth))
         });
+
+        $(this._navindicator).addClass(ClassName.IN);
+        Util.reflow(this._navindicator);
 
         if (supportsTransition) {
           $(this._navindicator).addClass(ClassName.ANIMATE);
 
-          if ((relatedLeft + navScrollLeft) > elLeft) {
+          if (relatedLeft > elLeft) {
             $(this._navindicator).addClass(ClassName.REVERSE);
           }
-
-          Util.reflow(this._navindicator);
         }
       }
 
-      $(this._navindicator).addClass(ClassName.IN).css({
+      $(this._navindicator).css({
         left  : ((elLeft + navScrollLeft) - navLeft),
-        right : (navLeft + navWidth - (elLeft + navScrollLeft) - elWidth)
+        right : (navWidth - ((elLeft + navScrollLeft) - navLeft + elWidth))
       });
 
       let complete = () => {
@@ -95,6 +97,8 @@ const Tabswitch = (($) => {
       $(this._navindicator)
         .addClass(ClassName.INDICATOR)
         .appendTo(this._nav);
+
+      $(this._nav).addClass(ClassName.MATERIAL);
     }
 
     static _jQueryInterface(relatedTarget) {
