@@ -39,9 +39,9 @@ $enable-hover-media-query: false !default;
   $carousel-indicator-size:  0.5rem !default;
 
 // close
-  $close-color:       $black-hint !default;
-  $close-color-hover: $black-primary !default;
-  $close-font-size:   $material-icon-size !default;
+  $close-color:        $black-hint !default;
+  $close-color-active: $black-primary !default;
+  $close-font-size:    $material-icon-size !default;
 
 // code
   $code-bg:                   #f7f7f9 !default;
@@ -68,10 +68,10 @@ $enable-hover-media-query: false !default;
   $jumbotron-color:   $brand-text-color !default;
 
 // link
-  $link-color:            $brand-color !default;
-  $link-color-hover:      $brand-color-dark !default;
-  $link-decoration:       none !default;
-  $link-decoration-hover: underline !default;
+  $link-color:             $brand-color !default;
+  $link-color-active:      $brand-color-dark !default;
+  $link-decoration:        none !default;
+  $link-decoration-active: none !default;
 
 // media
   $media-alignment-padding-x:   $spacer-md-x !default;
@@ -102,6 +102,8 @@ $enable-hover-media-query: false !default;
 
   $table-caption-color:      $black-hint !default;
 
+  $thumbnail-box-shadow:     $shadow-2dp !default;
+
 // nav
   $nav-inline-item-spacer:  $spacer-md-x !default;
   $nav-item-margin:         1px !default;
@@ -117,4 +119,8 @@ $enable-hover-media-query: false !default;
   $pagination-padding-y: $btn-group-padding-y !default;
 
 // typography
-  $text-muted: $black-hint !default;
+  $blockquote-border-color: $brand-color !default;
+  $blockquote-border-width: 0.3125rem !default;
+  $blockquote-small-color:  $black-hint !default;
+
+  $text-muted:              $black-hint !default;
