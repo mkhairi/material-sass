@@ -2,14 +2,14 @@
  * Material
  */
 if (typeof jQuery === 'undefined') {
-	throw new Error('Material\'s JavaScript requires jQuery')
+  throw new Error('Material\'s JavaScript requires jQuery')
 }
 
 +function ($) {
-	var version = $.fn.jquery.split(' ')[0].split('.')
-	if ((version[0] < 2 && version[1] < 9) || (version[0] == 1 && version[1] == 9 && version[2] < 1) || (version[0] >= 4)) {
-		throw new Error('Material\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0')
-	}
+  var version = $.fn.jquery.split(' ')[0].split('.')
+  if ((version[0] < 2 && version[1] < 9) || (version[0] == 1 && version[1] == 9 && version[2] < 1) || (version[0] >= 4)) {
+    throw new Error('Material\'s JavaScript requires at least jQuery v1.9.1 but less than v4.0.0')
+  }
 }(jQuery);
 
 +function ($) {
@@ -712,7 +712,7 @@ var Util = function ($) {
     },
     getUID: function getUID(prefix) {
       do {
-        prefix += ~ ~(Math.random() * 1000000);
+        prefix += ~~(Math.random() * 1000000);
       } while (document.getElementById(prefix));
       return prefix;
     },
