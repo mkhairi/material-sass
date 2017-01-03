@@ -1,5 +1,5 @@
 module Material
   module Sass
-    VERSION = "1.4.1"
+    VERSION = '4.0.0.alpha1'
   end
 end
