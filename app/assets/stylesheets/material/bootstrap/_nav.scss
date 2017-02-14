@@ -1,5 +1,6 @@
 .nav {
   display: flex;
+  flex-wrap: wrap;
   list-style: none;
   margin-bottom: 0;
   padding-left: 0;
@@ -88,7 +89,8 @@
   }
 
   .tab-pane {
-    &.fade {
+    &.fade,
+    &.fade.show {
       transform: none;
     }
   }

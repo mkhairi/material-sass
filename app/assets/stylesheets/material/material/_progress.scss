@@ -12,7 +12,10 @@
 
 .progress-bar {
   background-color: $progress-bar-bg;
+  color: rgba(0, 0, 0, 0);
+  font-size: 0;
   height: $progress-height;
+  line-height: 0;
 
   &::before {
     background-color: inherit;
@@ -34,10 +37,18 @@
   .progress-bar-animated {
     &::before {
       animation-direction: reverse;
-      animation-duration: $transition-duration;
+      animation-duration: $transition-duration-mobile;
       animation-iteration-count: infinite;
       animation-name: progress-bar-animation;
       animation-timing-function: linear;
+
+      @include media-breakpoint-up(sm) {
+        animation-duration: $transition-duration-tablet;
+      }
+
+      @include media-breakpoint-up(lg) {
+        animation-duration: $transition-duration-desktop;
+      }
     }
   }
 
