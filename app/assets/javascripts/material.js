@@ -81,8 +81,8 @@ var FloatingLabel = function ($) {
       key: '_jQueryInterface',
       value: function _jQueryInterface(event) {
         return this.each(function () {
-          var data = $(this).data(DATA_KEY);
           var _event = event ? event : 'change';
+          var data = $(this).data(DATA_KEY);
 
           if (!data) {
             data = new FloatingLabel(this);
@@ -104,8 +104,6 @@ var FloatingLabel = function ($) {
   }();
 
   $(document).on(Event.CHANGE + ' ' + Event.FOCUSIN + ' ' + Event.FOCUSOUT, Selector.DATA_TOGGLE, function (event) {
-    var data = $(this).data(DATA_KEY);
-
     FloatingLabel._jQueryInterface.call($(this), event.type);
   });
 
@@ -130,8 +128,8 @@ var NavDrawer = function ($) {
   var EVENT_KEY = '.' + DATA_KEY;
   var NAME = 'navdrawer';
   var NO_CONFLICT = $.fn[NAME];
-  var TRANSITION_DURATION = 375;
-  var TRANSITION_DURATION_BACKDROP = 225;
+  var TRANSITION_DURATION = 292.5;
+  var TRANSITION_DURATION_BACKDROP = 487.5;
 
   var ClassName = {
     BACKDROP: 'navdrawer-backdrop',
@@ -207,11 +205,7 @@ var NavDrawer = function ($) {
 
         $(this._element).off(Event.CLICK_DISMISS).removeClass(ClassName.SHOW);
 
-        if (Util.supportsTransitionEnd()) {
-          $(this._element).one(Util.TRANSITION_END, $.proxy(this._hideNavdrawer, this, hideClassName)).emulateTransitionEnd(TRANSITION_DURATION);
-        } else {
-          this._hideNavdrawer();
-        }
+        this._hideNavdrawer(hideClassName);
       }
     }, {
       key: 'show',
@@ -242,7 +236,8 @@ var NavDrawer = function ($) {
           });
         });
 
-        this._showBackdrop($.proxy(this._showElement, this, relatedTarget));
+        this._showBackdrop();
+        this._showElement(relatedTarget);
       }
     }, {
       key: 'toggle',
@@ -274,10 +269,12 @@ var NavDrawer = function ($) {
       value: function _hideNavdrawer(className) {
         var _this3 = this;
 
-        this._element.style.display = 'none';
-
         this._showBackdrop(function () {
           $(document.body).removeClass(className);
+
+          _this3._element.setAttribute('aria-hidden', 'true');
+          _this3._element.style.display = 'none';
+
           $(_this3._element).trigger(Event.HIDDEN);
         });
       }
@@ -376,6 +373,7 @@ var NavDrawer = function ($) {
           document.body.appendChild(this._element);
         }
 
+        this._element.removeAttribute('aria-hidden');
         this._element.style.display = 'block';
 
         if (supportsTransition) {
@@ -404,8 +402,9 @@ var NavDrawer = function ($) {
       key: '_jQueryInterface',
       value: function _jQueryInterface(config, relatedTarget) {
         return this.each(function () {
-          var data = $(this).data(DATA_KEY);
           var _config = $.extend({}, NavDrawer.Default, $(this).data(), (typeof config === 'undefined' ? 'undefined' : _typeof(config)) === 'object' && config);
+
+          var data = $(this).data(DATA_KEY);
 
           if (!data) {
             data = new NavDrawer(this, _config);
@@ -475,6 +474,52 @@ var NavDrawer = function ($) {
 }(jQuery);
 
 /*!
+ * selection control focus:
+ * chrome persists the focus style on checkboxes/radio buttons
+ * after clicking with the mouse
+ */
+var ControlFocus = function ($) {
+  // constants >>>
+  var DATA_KEY = 'md.controlfocus';
+  var EVENT_KEY = '.' + DATA_KEY;
+
+  var ClassName = {
+    FOCUS: 'focus'
+  };
+
+  var LastInteraction = {
+    IS_MOUSEDOWN: false
+  };
+
+  var Event = {
+    BLUR: 'blur' + EVENT_KEY,
+    FOCUS: 'focus' + EVENT_KEY,
+    MOUSEDOWN: 'mousedown' + EVENT_KEY,
+    MOUSEUP: 'mouseup' + EVENT_KEY
+  };
+
+  var Selector = {
+    CONTROL: '.custom-control',
+    INPUT: '.custom-control-input'
+  };
+  // <<< constants
+
+  $(document).on('' + Event.BLUR, Selector.INPUT, function (event) {
+    $(event.target).removeClass(ClassName.FOCUS);
+  }).on('' + Event.FOCUS, Selector.INPUT, function (event) {
+    if (LastInteraction.IS_MOUSEDOWN === false) {
+      $(event.target).addClass(ClassName.FOCUS);
+    }
+  }).on('' + Event.MOUSEDOWN, Selector.CONTROL, function (event) {
+    LastInteraction.IS_MOUSEDOWN = true;
+  }).on('' + Event.MOUSEUP, Selector.CONTROL, function (event) {
+    setTimeout(function () {
+      LastInteraction.IS_MOUSEDOWN = false;
+    }, 1);
+  });
+}(jQuery);
+
+/*!
  * tab indicator animation
  * requires bootstrap's (v4.0.0-alpha.6) tab.js
  */
@@ -483,7 +528,7 @@ var TabSwitch = function ($) {
   var DATA_KEY = 'md.tabswitch';
   var NAME = 'tabswitch';
   var NO_CONFLICT = $.fn[NAME];
-  var TRANSITION_DURATION = 300;
+  var TRANSITION_DURATION = 390;
 
   var ClassName = {
     ANIMATE: 'animate',
@@ -727,13 +772,7 @@ var Util = function ($) {
         if (configTypes.hasOwnProperty(property)) {
           var expectedTypes = configTypes[property];
           var value = config[property];
-          var valueType = void 0;
-
-          if (value && isElement(value)) {
-            valueType = 'element';
-          } else {
-            valueType = toType(value);
-          }
+          var valueType = value && isElement(value) ? 'element' : toType(value);
 
           if (!new RegExp(expectedTypes).test(valueType)) {
             throw new Error(componentName.toUpperCase() + ': ' + ('Option "' + property + '" provided type "' + valueType + '" ') + ('but expected type "' + expectedTypes + '".'));
