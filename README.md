@@ -9,6 +9,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
+gem 'bootstrap'
 gem 'material-sass'
 ```
 
@@ -48,7 +49,8 @@ Require Material javascripts in `app/assets/javascripts/application.js`:
 
 ```js
 //= require jquery
-//= require material-sprockets
+//= require bootstrap
+//= require material
 ```
 
 
