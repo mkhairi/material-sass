@@ -105,9 +105,10 @@
   }
 }
 
-a.btn.disabled,
-fieldset[disabled] a.btn {
-  pointer-events: none;
+a {
+  &.btn.disabled {
+    pointer-events: none;
+  }
 }
 
 // Colour
@@ -220,7 +221,10 @@ fieldset[disabled] a.btn {
   }
 
   &:focus {
-    @include tab-focus;
+    // scss-lint:disable DuplicateProperty
+    outline: 1px dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    // scss-lint:enable DuplicateProperty
   }
 
   // Disabled
