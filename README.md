@@ -1,6 +1,4 @@
-# Material-sass
-
-[![Join the chat at https://gitter.im/mkhairi/material-sass](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mkhairi/material-sass?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Material-sass bootswatch [![Gem Version](https://badge.fury.io/rb/material-sass.svg)](http://badge.fury.io/rb/material-sass)
 
 `material-sass` is a Sass rubygems version of Material, a HTML5 UI design based on Google Material. Offical repo [github.com/Daemonite/material](https://github.com/Daemonite/material)
 
