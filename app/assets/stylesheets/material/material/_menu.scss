@@ -291,7 +291,7 @@
   &.disabled {
     background-color: transparent;
     color: $menu-link-color-disabled;
-    cursor: $cursor-disabled;
+    pointer-events: none;
   }
 
   // Size
@@ -349,6 +349,10 @@
     top: -1px;
     vertical-align: middle;
     width: 0;
+  }
+
+  &:empty::after {
+    margin-left: 0;
   }
 }
 
