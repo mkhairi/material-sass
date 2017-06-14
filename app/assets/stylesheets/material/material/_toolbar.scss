@@ -128,10 +128,6 @@
       background-color: $toolbar-element-bg-light;
     }
   }
-
-  .navbar-toggler-icon {
-    background-image: $toolbar-toggler-bg-light;
-  }
 }
 
 .navbar-light {
@@ -357,8 +353,9 @@
   color: inherit;
   display: inline-flex;
   height: $toolbar-link-height;
-  margin-right: ($toolbar-link-padding-x - (($toolbar-link-height - ($material-icon-size / $font-size-root) * 1rem) / 2));
-  margin-left: ($toolbar-link-padding-x - (($toolbar-link-height - ($material-icon-size / $font-size-root) * 1rem) / 2));
+  line-height: 1;
+  margin-right: ($toolbar-link-padding-x - ($toolbar-link-height - $material-icon-size) / 2);
+  margin-left: ($toolbar-link-padding-x - ($toolbar-link-height - $material-icon-size) / 2);
   position: relative;
   vertical-align: middle;
   width: $toolbar-link-height;
@@ -395,12 +392,12 @@
 }
 
 .navbar-toggler-icon {
-  background-image: $toolbar-toggler-bg-dark;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: $material-icon-size $material-icon-size;
+  @include set-material-icons;
+
   display: block;
-  height: $material-icon-size;
   margin: auto;
-  width: $material-icon-size;
+
+  &::before {
+    content: $toolbar-toggler-icon;
+  }
 }
