@@ -12,14 +12,12 @@
     flex: 0 1 auto;
     min-width: 0;
 
-    // Active, focus, hover
     &:active,
     &.active {
       background-color: $btn-bg-active;
       box-shadow: none;
     }
 
-    // Disabled
     &:disabled,
     &.disabled {
       background-color: transparent;
@@ -27,12 +25,15 @@
   }
 
   // Colour
-  @each $color in $palettes {
-    $i: index($palettes, $color);
-
+  @each $color, $values in $theme-colors {
     > .btn-#{$color} {
       @include plain-active-focus-hover {
-        color: nth($palettes-color, $i);
+        color: map-get(theme-color($color), color);
+
+        &:disabled,
+        &.disabled {
+          color: $btn-color-disabled;
+        }
       }
     }
   }
@@ -48,7 +49,7 @@
   > .btn + .btn-group,
   > .btn-group + .btn,
   > .btn-group + .btn-group {
-    margin-left: $btn-group-padding-x;
+    margin-left: $btn-group-inner-spacer-x;
   }
 }
 
@@ -66,7 +67,7 @@
   > .btn + .btn-group,
   > .btn-group + .btn,
   > .btn-group + .btn-group {
-    margin-top: $btn-group-padding-y;
+    margin-top: $btn-group-inner-spacer-y;
   }
 }
 
@@ -84,7 +85,8 @@
 // Checkbox and radio options
 
 [data-toggle='buttons'] {
-  > .btn {
+  > .btn,
+  > .btn-group > .btn {
     [type='checkbox'],
     [type='radio'] {
       clip: rect(0, 0, 0, 0);
@@ -99,8 +101,8 @@
 // Split button dropdown
 
 .btn + .dropdown-toggle-split {
-  padding-right: ($btn-padding-x * .5);
-  padding-left: ($btn-padding-x * .5);
+  padding-right: ($btn-padding-x / 2);
+  padding-left: ($btn-padding-x / 2);
 
   &::after {
     margin-left: 0;
@@ -113,13 +115,13 @@
 
 // Size
 .btn-lg + .dropdown-toggle-split {
-  padding-right: ($btn-padding-x-lg * .5);
-  padding-left: ($btn-padding-x-lg * .5);
+  padding-right: ($btn-padding-x-lg / 2);
+  padding-left: ($btn-padding-x-lg / 2);
 }
 
 .btn-sm + .dropdown-toggle-split {
-  padding-right: ($btn-padding-x-sm * .5);
-  padding-left: ($btn-padding-x-sm * .5);
+  padding-right: ($btn-padding-x-sm / 2);
+  padding-left: ($btn-padding-x-sm / 2);
 }
 
 

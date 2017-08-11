@@ -1,6 +1,11 @@
 // Alert
 
+$alert-border-radius:    $border-radius !default;
+$alert-elevation-shadow: $elevation-shadow-1dp !default;
 $alert-link-font-weight: $font-weight-medium !default;
+$alert-margin-y:         $spacer !default;
+$alert-padding-x:        1rem !default;
+$alert-padding-y:        1rem !default;
 
 
 
@@ -14,22 +19,25 @@ $body-color: $black-primary !default;
 // Breadcrumb
 
 $breadcrumb-bg:                $offwhite !default;
+$breadcrumb-border-radius:     $border-radius !default;
 $breadcrumb-height:            3.5rem !default;
+$breadcrumb-inner-spacer-x:    .5rem !default;
 $breadcrumb-item-color:        $black-secondary !default;
 $breadcrumb-item-color-active: $black-primary !default;
 $breadcrumb-item-icon:         'chevron_right' !default;
-$breadcrumb-item-padding:      $spacer-sm !default;
-$breadcrumb-margin-bottom:     $spacer !default;
-$breadcrumb-padding-x:         $spacer !default;
+$breadcrumb-margin-y:          $spacer !default;
+$breadcrumb-padding-x:         1rem !default;
 $breadcrumb-padding-y:         .625rem !default;
 
 
 
 // Button group
 
-$btn-group-bg:           $offwhite !default;
-$btn-group-padding-x:    $spacer-sm !default;
-$btn-group-padding-y:    $spacer-sm !default;
+$btn-group-bg:             $offwhite !default;
+$btn-group-inner-spacer-x: 1px !default;
+$btn-group-inner-spacer-y: 1px !default;
+$btn-group-padding-x:      .5rem !default;
+$btn-group-padding-y:      .625rem !default;
 
 
 
@@ -42,12 +50,22 @@ $caret-width: .4em !default;
 
 // Carousel
 
-$carousel-caption-color:     $white-primary !default;
-$carousel-caption-width:     50% !default;
-$carousel-control-next-icon: 'chevron_right' !default;
-$carousel-control-prev-icon: 'chevron_left' !default;
-$carousel-indicator-color:   $black-divider !default;
-$carousel-indicator-size:    .5rem !default;
+$carousel-caption-color:                   $white-primary !default;
+$carousel-caption-width:                   50% !default;
+$carousel-control-bg:                      rgba(255, 255, 255, .12) !default;
+$carousel-control-bg-active:               rgba(204, 204, 204, .25) !default;
+$carousel-control-color:                   $white-primary !default;
+$carousel-control-color-active:            $white-primary !default;
+$carousel-control-elevation-shadow:        $elevation-shadow-6dp !default;
+$carousel-control-elevation-shadow-active: $elevation-shadow-12dp !default;
+$carousel-control-font-size:               .8125rem !default;
+$carousel-control-next-icon:               'chevron_right' !default;
+$carousel-control-prev-icon:               'chevron_left' !default;
+$carousel-control-size:                    2.5rem !default;
+$carousel-indicator-bg:                    rgba(204, 204, 204, .25) !default;
+$carousel-indicator-border-color:          rgba(255, 255, 255, .12) !default;
+$carousel-indicator-border-width:          $border-width !default;
+$carousel-indicator-size:                  .5rem !default;
 
 
 
@@ -102,15 +120,15 @@ $input-group-addon-margin-x:         $spacer !default;
 
 // Jumbotron
 
-$jumbotron-bg:    $brand-color !default;
-$jumbotron-color: $brand-text-color !default;
+$jumbotron-bg:    $white-primary !default;
+$jumbotron-color: $black-primary !default;
 
 
 
 // Link
 
-$link-color:             $brand-color !default;
-$link-color-active:      $brand-color-dark !default;
+$link-color:             map-get(theme-color(primary), color) !default;
+$link-color-active:      map-get(theme-color(primary), daker) !default;
 $link-decoration:        none !default;
 $link-decoration-active: none !default;
 
@@ -166,9 +184,8 @@ $pagination-padding-y: $btn-group-padding-y !default;
 
 // Typography
 
-$blockquote-border-color: $brand-color !default;
+$blockquote-border-color: map-get(theme-color(primary), color) !default;
 $blockquote-border-width: .3125rem !default;
 $blockquote-small-color:  $black-hint !default;
 
 $text-muted:              $black-hint !default;
-$text-muted-active:       $black-secondary !default;
