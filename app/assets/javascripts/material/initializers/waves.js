@@ -4,10 +4,10 @@
  */
 
 $(function () {
-  if ($('.waves-attach').length && (typeof Waves !== 'undefined')) {
-    Waves.attach('.waves-attach')
+  if ($('.waves-attach').length && typeof Waves !== 'undefined') {
+    Waves.attach('.waves-attach');
     Waves.init({
       duration: 300
-    })
+    });
   }
-})
+});

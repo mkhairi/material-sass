@@ -1,359 +1,353 @@
-import Util from './util'
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /*
  * navigation drawer
  * based on bootstrap's (v4.0.0-alpha.6) modal.js
  */
 
-const NavDrawer = (($) => {
+var NavDrawer = function ($) {
 
   // constants >>>
-  const DATA_API_KEY                 = '.data-api'
-  const DATA_KEY                     = 'md.navdrawer'
-  const ESCAPE_KEYCODE               = 27
-  const EVENT_KEY                    = `.${DATA_KEY}`
-  const NAME                         = 'navdrawer'
-  const NO_CONFLICT                  = $.fn[NAME]
-  const TRANSITION_DURATION          = 292.5
-  const TRANSITION_DURATION_BACKDROP = 487.5
+  var DATA_API_KEY = '.data-api';
+  var DATA_KEY = 'md.navdrawer';
+  var ESCAPE_KEYCODE = 27;
+  var EVENT_KEY = '.' + DATA_KEY;
+  var NAME = 'navdrawer';
+  var NO_CONFLICT = $.fn[NAME];
+  var TRANSITION_DURATION = 292.5;
+  var TRANSITION_DURATION_BACKDROP = 487.5;
 
-  const ClassName = {
-    BACKDROP : 'navdrawer-backdrop',
-    OPEN     : 'navdrawer-open',
-    SHOW     : 'show'
-  }
+  var ClassName = {
+    BACKDROP: 'navdrawer-backdrop',
+    OPEN: 'navdrawer-open',
+    SHOW: 'show'
+  };
 
-  const Default = {
-    breakpoint : 1280,
-    keyboard   : true,
-    show       : true,
-    type       : 'default'
-  }
+  var Default = {
+    breakpoint: 1280,
+    keyboard: true,
+    show: true,
+    type: 'default'
+  };
 
-  const DefaultType = {
-    keyboard : 'boolean',
-    show     : 'boolean',
-    type     : 'string'
-  }
+  var DefaultType = {
+    keyboard: 'boolean',
+    show: 'boolean',
+    type: 'string'
+  };
 
-  const Event = {
-    CLICK_DATA_API    : `click${EVENT_KEY}${DATA_API_KEY}`,
-    CLICK_DISMISS     : `click.dismiss${EVENT_KEY}`,
-    FOCUSIN           : `focusin${EVENT_KEY}`,
-    HIDDEN            : `hidden${EVENT_KEY}`,
-    HIDE              : `hide${EVENT_KEY}`,
-    KEYDOWN_DISMISS   : `keydown.dismiss${EVENT_KEY}`,
-    MOUSEDOWN_DISMISS : `mousedown.dismiss${EVENT_KEY}`,
-    MOUSEUP_DISMISS   : `mouseup.dismiss${EVENT_KEY}`,
-    SHOW              : `show${EVENT_KEY}`,
-    SHOWN             : `shown${EVENT_KEY}`
-  }
+  var Event = {
+    CLICK_DATA_API: 'click' + EVENT_KEY + DATA_API_KEY,
+    CLICK_DISMISS: 'click.dismiss' + EVENT_KEY,
+    FOCUSIN: 'focusin' + EVENT_KEY,
+    HIDDEN: 'hidden' + EVENT_KEY,
+    HIDE: 'hide' + EVENT_KEY,
+    KEYDOWN_DISMISS: 'keydown.dismiss' + EVENT_KEY,
+    MOUSEDOWN_DISMISS: 'mousedown.dismiss' + EVENT_KEY,
+    MOUSEUP_DISMISS: 'mouseup.dismiss' + EVENT_KEY,
+    SHOW: 'show' + EVENT_KEY,
+    SHOWN: 'shown' + EVENT_KEY
+  };
 
-  const Selector = {
-    CONTENT      : '.navdrawer-content',
-    DATA_DISMISS : '[data-dismiss="navdrawer"]',
-    DATA_TOGGLE  : '[data-toggle="navdrawer"]'
-  }
+  var Selector = {
+    CONTENT: '.navdrawer-content',
+    DATA_DISMISS: '[data-dismiss="navdrawer"]',
+    DATA_TOGGLE: '[data-toggle="navdrawer"]'
+  };
   // <<< constants
 
-  class NavDrawer {
-    constructor(element, config) {
-      this._backdrop            = null
-      this._config              = this._getConfig(config)
-      this._content             = $(element).find(Selector.CONTENT)[0]
-      this._element             = element
-      this._ignoreBackdropClick = false
-      this._isShown             = false
+  var NavDrawer = function () {
+    function NavDrawer(element, config) {
+      _classCallCheck(this, NavDrawer);
+
+      this._backdrop = null;
+      this._config = this._getConfig(config);
+      this._content = $(element).find(Selector.CONTENT)[0];
+      this._element = element;
+      this._ignoreBackdropClick = false;
+      this._isShown = false;
     }
 
-    hide(event) {
+    NavDrawer.prototype.hide = function hide(event) {
       if (event) {
-        event.preventDefault()
+        event.preventDefault();
       }
 
-      const hideClassName = `${ClassName.OPEN}-${this._config.type}`
-      const hideEvent     = $.Event(Event.HIDE)
+      var hideClassName = ClassName.OPEN + '-' + this._config.type;
+      var hideEvent = $.Event(Event.HIDE);
 
-      $(this._element).trigger(hideEvent)
+      $(this._element).trigger(hideEvent);
 
-      if (!this._isShown ||
-        hideEvent.isDefaultPrevented()) {
-        return
+      if (!this._isShown || hideEvent.isDefaultPrevented()) {
+        return;
       }
 
-      this._isShown = false
-      this._setEscapeEvent()
-      $(document).off(Event.FOCUSIN)
-      $(this._content).off(Event.MOUSEDOWN_DISMISS)
+      this._isShown = false;
+      this._setEscapeEvent();
+      $(document).off(Event.FOCUSIN);
+      $(this._content).off(Event.MOUSEDOWN_DISMISS);
 
-      $(this._element)
-        .off(Event.CLICK_DISMISS)
-        .removeClass(ClassName.SHOW)
+      $(this._element).off(Event.CLICK_DISMISS).removeClass(ClassName.SHOW);
 
-      this._hideNavdrawer(hideClassName)
-    }
+      this._hideNavdrawer(hideClassName);
+    };
 
-    show(relatedTarget) {
-      const showEvent = $.Event(Event.SHOW, {
-        relatedTarget
-      })
+    NavDrawer.prototype.show = function show(relatedTarget) {
+      var _this = this;
 
-      $(this._element).trigger(showEvent)
+      var showEvent = $.Event(Event.SHOW, {
+        relatedTarget: relatedTarget
+      });
 
-      if (this._isShown ||
-        showEvent.isDefaultPrevented()) {
-        return
+      $(this._element).trigger(showEvent);
+
+      if (this._isShown || showEvent.isDefaultPrevented()) {
+        return;
       }
 
-      this._isShown = true
-      $(document.body).addClass(`${ClassName.OPEN}-${this._config.type}`)
-      this._setEscapeEvent()
-      $(this._element).addClass(`${NAME}-${this._config.type}`)
-      $(this._element).on(Event.CLICK_DISMISS, Selector.DATA_DISMISS, $.proxy(this.hide, this))
+      this._isShown = true;
+      $(document.body).addClass(ClassName.OPEN + '-' + this._config.type);
+      this._setEscapeEvent();
+      $(this._element).addClass(NAME + '-' + this._config.type);
+      $(this._element).on(Event.CLICK_DISMISS, Selector.DATA_DISMISS, $.proxy(this.hide, this));
 
-      $(this._content).on(Event.MOUSEDOWN_DISMISS, () => {
-        $(this._element).one(Event.MOUSEUP_DISMISS, (event) => {
-          if ($(event.target).is(this._element)) {
-            this._ignoreBackdropClick = true
+      $(this._content).on(Event.MOUSEDOWN_DISMISS, function () {
+        $(_this._element).one(Event.MOUSEUP_DISMISS, function (event) {
+          if ($(event.target).is(_this._element)) {
+            _this._ignoreBackdropClick = true;
           }
-        })
-      })
+        });
+      });
 
-      this._showBackdrop()
-      this._showElement(relatedTarget)
-    }
+      this._showBackdrop();
+      this._showElement(relatedTarget);
+    };
 
-    toggle(relatedTarget) {
-      return this._isShown ? this.hide() : this.show(relatedTarget)
-    }
+    NavDrawer.prototype.toggle = function toggle(relatedTarget) {
+      return this._isShown ? this.hide() : this.show(relatedTarget);
+    };
 
-    _enforceFocus() {
-      $(document)
-      .off(Event.FOCUSIN)
-      .on(Event.FOCUSIN, (event) => {
-        if (this._config.type === 'default' ||
-        $(window).width() <= this._config.breakpoint) {
-          if (this._element !== event.target &&
-          !$(this._element).has(event.target).length) {
-            this._element.focus()
+    NavDrawer.prototype._enforceFocus = function _enforceFocus() {
+      var _this2 = this;
+
+      $(document).off(Event.FOCUSIN).on(Event.FOCUSIN, function (event) {
+        if (_this2._config.type === 'default' || $(window).width() <= _this2._config.breakpoint) {
+          if (_this2._element !== event.target && !$(_this2._element).has(event.target).length) {
+            _this2._element.focus();
           }
         }
-      })
-    }
+      });
+    };
 
-    _getConfig(config) {
-      config = $.extend({}, Default, config)
-      Util.typeCheckConfig(NAME, config, DefaultType)
-      return config
-    }
+    NavDrawer.prototype._getConfig = function _getConfig(config) {
+      config = $.extend({}, Default, config);
+      Util.typeCheckConfig(NAME, config, DefaultType);
+      return config;
+    };
 
-    _hideNavdrawer(className) {
-      this._showBackdrop(() => {
-        $(document.body).removeClass(className)
+    NavDrawer.prototype._hideNavdrawer = function _hideNavdrawer(className) {
+      var _this3 = this;
 
-        this._element.setAttribute('aria-hidden', 'true')
-        this._element.style.display = 'none'
+      this._showBackdrop(function () {
+        $(document.body).removeClass(className);
 
-        $(this._element).trigger(Event.HIDDEN)
-      })
-    }
+        _this3._element.setAttribute('aria-hidden', 'true');
+        _this3._element.style.display = 'none';
 
-    _removeBackdrop() {
+        $(_this3._element).trigger(Event.HIDDEN);
+      });
+    };
+
+    NavDrawer.prototype._removeBackdrop = function _removeBackdrop() {
       if (this._backdrop) {
-        $(this._backdrop).remove()
-        this._backdrop = null
+        $(this._backdrop).remove();
+        this._backdrop = null;
       }
-    }
+    };
 
-    _setEscapeEvent() {
-      if (this._isShown &&
-      this._config.keyboard) {
-        $(this._element).on(Event.KEYDOWN_DISMISS, (event) => {
+    NavDrawer.prototype._setEscapeEvent = function _setEscapeEvent() {
+      var _this4 = this;
+
+      if (this._isShown && this._config.keyboard) {
+        $(this._element).on(Event.KEYDOWN_DISMISS, function (event) {
           if (event.which === ESCAPE_KEYCODE) {
-            this.hide()
+            _this4.hide();
           }
-        })
+        });
       } else if (!this._isShown) {
-        $(this._element).off(Event.KEYDOWN_DISMISS)
+        $(this._element).off(Event.KEYDOWN_DISMISS);
       }
-    }
+    };
 
-    _showBackdrop(callback) {
-      const supportsTransition = Util.supportsTransitionEnd()
+    NavDrawer.prototype._showBackdrop = function _showBackdrop(callback) {
+      var _this5 = this;
+
+      var supportsTransition = Util.supportsTransitionEnd();
 
       if (this._isShown) {
-        this._backdrop = document.createElement('div')
+        this._backdrop = document.createElement('div');
 
-        $(this._backdrop)
-          .addClass(ClassName.BACKDROP)
-          .addClass(`${ClassName.BACKDROP}-${this._config.type}`)
-          .appendTo(document.body)
+        $(this._backdrop).addClass(ClassName.BACKDROP).addClass(ClassName.BACKDROP + '-' + this._config.type).appendTo(document.body);
 
-        $(this._element).on(Event.CLICK_DISMISS, (event) => {
-          if (this._ignoreBackdropClick) {
-            this._ignoreBackdropClick = false
-            return
+        $(this._element).on(Event.CLICK_DISMISS, function (event) {
+          if (_this5._ignoreBackdropClick) {
+            _this5._ignoreBackdropClick = false;
+            return;
           }
 
           if (event.target !== event.currentTarget) {
-            return
+            return;
           }
 
-          this.hide()
-        })
+          _this5.hide();
+        });
 
         if (supportsTransition) {
-          Util.reflow(this._backdrop)
+          Util.reflow(this._backdrop);
         }
 
-        $(this._backdrop).addClass(ClassName.SHOW)
+        $(this._backdrop).addClass(ClassName.SHOW);
 
         if (!callback) {
-          return
+          return;
         }
 
         if (!supportsTransition) {
-          callback()
-          return
+          callback();
+          return;
         }
 
-        $(this._backdrop)
-          .one(Util.TRANSITION_END, callback)
-          .emulateTransitionEnd(TRANSITION_DURATION_BACKDROP)
+        $(this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(TRANSITION_DURATION_BACKDROP);
       } else if (this._backdrop && !this._isShown) {
-        $(this._backdrop).removeClass(ClassName.SHOW)
+        $(this._backdrop).removeClass(ClassName.SHOW);
 
-        const callbackRemove = () => {
-          this._removeBackdrop()
+        var callbackRemove = function callbackRemove() {
+          _this5._removeBackdrop();
 
           if (callback) {
-            callback()
+            callback();
           }
-        }
+        };
 
         if (supportsTransition) {
-          $(this._backdrop)
-            .one(Util.TRANSITION_END, callbackRemove)
-            .emulateTransitionEnd(TRANSITION_DURATION_BACKDROP)
+          $(this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(TRANSITION_DURATION_BACKDROP);
         } else {
-          callbackRemove()
+          callbackRemove();
         }
       } else if (callback) {
-        callback()
+        callback();
       }
-    }
+    };
 
-    _showElement(relatedTarget) {
-      const supportsTransition = Util.supportsTransitionEnd()
+    NavDrawer.prototype._showElement = function _showElement(relatedTarget) {
+      var _this6 = this;
 
-      if (!this._element.parentNode ||
-      this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
-        document.body.appendChild(this._element)
+      var supportsTransition = Util.supportsTransitionEnd();
+
+      if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
+        document.body.appendChild(this._element);
       }
 
-      this._element.removeAttribute('aria-hidden')
-      this._element.style.display = 'block'
+      this._element.removeAttribute('aria-hidden');
+      this._element.style.display = 'block';
 
       if (supportsTransition) {
-        Util.reflow(this._element)
+        Util.reflow(this._element);
       }
 
-      $(this._element).addClass(ClassName.SHOW)
-      this._enforceFocus()
+      $(this._element).addClass(ClassName.SHOW);
+      this._enforceFocus();
 
-      const shownEvent = $.Event(Event.SHOWN, {
-        relatedTarget
-      })
+      var shownEvent = $.Event(Event.SHOWN, {
+        relatedTarget: relatedTarget
+      });
 
-      const transitionComplete = () => {
-        this._element.focus()
-        $(this._element).trigger(shownEvent)
-      }
+      var transitionComplete = function transitionComplete() {
+        _this6._element.focus();
+        $(_this6._element).trigger(shownEvent);
+      };
 
       if (supportsTransition) {
-        $(this._content)
-          .one(Util.TRANSITION_END, transitionComplete)
-          .emulateTransitionEnd(TRANSITION_DURATION)
+        $(this._content).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(TRANSITION_DURATION);
       } else {
-        transitionComplete()
+        transitionComplete();
       }
-    }
+    };
 
-    static get Default() {
-      return Default
-    }
-
-    static _jQueryInterface(config, relatedTarget) {
+    NavDrawer._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
       return this.each(function () {
-        const _config = $.extend(
-          {},
-          NavDrawer.Default,
-          $(this).data(),
-          typeof config === 'object' && config
-        )
+        var _config = $.extend({}, NavDrawer.Default, $(this).data(), (typeof config === 'undefined' ? 'undefined' : _typeof(config)) === 'object' && config);
 
-        let data = $(this).data(DATA_KEY)
+        var data = $(this).data(DATA_KEY);
 
         if (!data) {
-          data = new NavDrawer(this, _config)
-          $(this).data(DATA_KEY, data)
+          data = new NavDrawer(this, _config);
+          $(this).data(DATA_KEY, data);
         }
 
         if (typeof config === 'string') {
           if (data[config] === undefined) {
-            throw new Error(`No method named "${config}"`)
+            throw new Error('No method named "' + config + '"');
           }
 
-          data[config](relatedTarget)
+          data[config](relatedTarget);
         } else if (_config.show) {
-          data.show(relatedTarget)
+          data.show(relatedTarget);
         }
-      })
-    }
-  }
+      });
+    };
+
+    _createClass(NavDrawer, null, [{
+      key: 'Default',
+      get: function get() {
+        return Default;
+      }
+    }]);
+
+    return NavDrawer;
+  }();
 
   $(document).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
-    const selector = Util.getSelectorFromElement(this)
-    let target
+    var _this7 = this;
+
+    var selector = Util.getSelectorFromElement(this);
+    var target = void 0;
 
     if (selector) {
-      target = $(selector)[0]
+      target = $(selector)[0];
     }
 
-    const config = $(target).data(DATA_KEY) ? 'toggle' : $.extend(
-      {},
-      $(target).data(),
-      $(this).data()
-    )
+    var config = $(target).data(DATA_KEY) ? 'toggle' : $.extend({}, $(target).data(), $(this).data());
 
     if (this.tagName === 'A') {
-      event.preventDefault()
+      event.preventDefault();
     }
 
-    const $target = $(target).one(Event.SHOW, (showEvent) => {
+    var $target = $(target).one(Event.SHOW, function (showEvent) {
       if (showEvent.isDefaultPrevented()) {
-        return
+        return;
       }
 
-      $target.one(Event.HIDDEN, () => {
-        if ($(this).is(':visible')) {
-          this.focus()
+      $target.one(Event.HIDDEN, function () {
+        if ($(_this7).is(':visible')) {
+          _this7.focus();
         }
-      })
-    })
+      });
+    });
 
-    NavDrawer._jQueryInterface.call($(target), config, this)
-  })
+    NavDrawer._jQueryInterface.call($(target), config, this);
+  });
 
-  $.fn[NAME]             = NavDrawer._jQueryInterface
-  $.fn[NAME].Constructor = NavDrawer
-  $.fn[NAME].noConflict  = function () {
-    $.fn[NAME] = NO_CONFLICT
-    return NavDrawer._jQueryInterface
-  }
+  $.fn[NAME] = NavDrawer._jQueryInterface;
+  $.fn[NAME].Constructor = NavDrawer;
+  $.fn[NAME].noConflict = function () {
+    $.fn[NAME] = NO_CONFLICT;
+    return NavDrawer._jQueryInterface;
+  };
 
-  return NavDrawer
-
-})(jQuery)
-
-export default NavDrawer
+  return NavDrawer;
+}(jQuery);
