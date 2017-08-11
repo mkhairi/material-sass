@@ -9,13 +9,25 @@ namespace :javascripts do
    rm_rf "app/assets/javascripts/material"
   end
   
-  desc "Copy #{source_dir}/assets/js/"
+  desc "Copy #{source_dir}/assets/js/src"
   task :copy do
-    src_dir = "#{source_dir}/assets/js/."
+    src_dir = "#{source_dir}/assets/js/src/."
+    tgt_dir = "app/assets/javascripts/material/components"
+    mkdir_p tgt_dir
+    cp_r src_dir, tgt_dir
+    cp "#{source_dir}/assets/js/src.js", "app/assets/javascripts/material.js"
+    
+    
+    src_dir = "#{source_dir}/assets/js/addons"
     tgt_dir = "app/assets/javascripts/material/"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
-    mv (tgt_dir+"src.js"), "app/assets/javascripts/material.js"
+    
+    src_dir = "#{source_dir}/assets/js/addons-materialise/."
+    tgt_dir = "app/assets/javascripts/material/initializers"
+    mkdir_p tgt_dir
+    cp_r src_dir, tgt_dir
+    
   end
   
 
