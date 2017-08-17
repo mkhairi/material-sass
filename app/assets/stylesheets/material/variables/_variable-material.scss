@@ -1,20 +1,30 @@
 // Appbar / toolbar (Bootstrap navbar)
 // Based on https://material.google.com/components/toolbars.html#toolbars-usage
 
-$toolbar-color-dark:          $black-primary !default;
-$toolbar-color-light:         $white-primary !default;
-$toolbar-element-bg-dark:     $black-divider !default;
-$toolbar-element-bg-light:    $white-divider !default;
-$toolbar-elevation-shadow:    $elevation-shadow-4dp !default;
-$toolbar-height:              3.5rem !default;
-$toolbar-link-font-size:      1rem !default;
-$toolbar-link-height:         2.25rem !default;
-$toolbar-link-opacity:        .7 !default;
-$toolbar-link-opacity-active: 1 !default;
-$toolbar-link-padding-x:      $spacer !default;
-$toolbar-padding-y:           (($toolbar-height - $toolbar-link-height) / 2) !default;
-$toolbar-toggler-icon:        'menu' !default;
-$toolbar-waterfall-bg:        map-get(theme-color(primary), color) !default;
+$toolbar-color:                 $black-primary !default;
+$toolbar-color-lighter:         $black-hint !default;
+$toolbar-element-bg:            $black-divider !default;
+$toolbar-element-border-radius: $border-radius !default;
+$toolbar-element-height:        2.25rem !default;
+$toolbar-element-opacity:       .7 !default;
+$toolbar-elevation-shadow:      $elevation-shadow-4dp !default;
+$toolbar-height:                3.5rem !default;
+$toolbar-inner-spacer-x:        1rem !default;
+$toolbar-inner-spacer-y:        1rem !default;
+$toolbar-link-font-size:        1rem !default;
+$toolbar-link-height:           $toolbar-element-height !default;
+$toolbar-link-line-height:      1 !default;
+$toolbar-link-padding-x:        1rem !default;
+$toolbar-link-padding-y:        (($toolbar-link-height - $toolbar-link-font-size * $toolbar-link-line-height) / 2) !default;
+$toolbar-padding-x:             1rem !default;
+$toolbar-padding-y:             (($toolbar-height - $toolbar-element-height) / 2) !default;
+$toolbar-toggler-icon:          'menu' !default;
+$toolbar-waterfall-bg:          map-get(theme-color(primary), color) !default;
+
+// Theme
+$toolbar-dark-color:            $white-primary !default;
+$toolbar-dark-color-lighter:    $white-hint !default;
+$toolbar-dark-element-bg:       $white-divider !default;
 
 
 
@@ -288,14 +298,17 @@ $picker-weekday-color:      $black-hint !default;
 // Progress (Bootstrap progress bar)
 // Based on https://material.google.com/components/progress-activity.html#progress-activity-types-of-indicators
 
-$progress-bar-bg:                 $material-color-indigo-500 !default;
-$progress-bar-mask:               $white-secondary !default;
-$progress-height:                 .25rem !default;
+$progress-bar-bg:                      $material-color-indigo-500 !default;
+$progress-bar-border-radius:           .25rem !default;
+$progress-bar-height:                  .25rem !default;
+$progress-bar-mask:                    $white-secondary !default;
+$progress-bg:                          $material-color-indigo-100 !default;
 
-// circular
-$progress-circular-bg:            $material-color-indigo-500 !default;
-$progress-circular-height:        2.5rem !default;
-$progress-circular-spinner-width: .25rem !default;
+// Circular
+$progress-circular-animation-duration: 5.332s !default;
+$progress-circular-bg:                 $material-color-indigo-500 !default;
+$progress-circular-height:             2.5rem !default;
+$progress-circular-spinner-width:      .25rem !default;
 
 
 
@@ -349,19 +362,21 @@ $stepper-text-font-weight:  $font-weight-regular !default;
 // Tab (Bootstrap nav tab)
 // Based on https://material.google.com/components/tabs.html#tabs-specs
 
-$nav-tab-border-color:         $black-divider !default;
+$nav-tab-bg-hover:             $black-divider !default;
+$nav-tab-border-color:         $border-color !default;
+$nav-tab-border-width:         $border-width !default;
+$nav-tab-color:                $black-primary !default;
+$nav-tab-color-active:         map-get(theme-color(secondary), color) !default;
+$nav-tab-color-disabled:       $black-hint !default;
+$nav-tab-font-size:            .875rem !default;
+$nav-tab-font-weight:          $font-weight-medium !default;
+$nav-tab-height:               3rem !default;
 $nav-tab-indicator-bg:         map-get(theme-color(secondary), color) !default;
-$nav-tab-indicator-height:     2px !default;
-$nav-tab-link-font-size:       .875rem !default;
-$nav-tab-link-font-weight:     $font-weight-medium !default;
-$nav-tab-link-height:          3rem !default;
+$nav-tab-indicator-height:     .125rem !default;
+$nav-tab-line-height:          1 !default;
 $nav-tab-link-opacity:         .7 !default;
-$nav-tab-link-opacity-visible: 1 !default;
-$nav-tab-link-max-width:       16.5rem !default;
-$nav-tab-link-min-width:       4.5rem !default;
-$nav-tab-link-min-width-lg:    10rem !default;
 $nav-tab-link-padding-x:       .75rem !default;
-$nav-tab-link-padding-x-lg:    1.5rem !default;
+$nav-tab-link-padding-y:       (($nav-tab-height - $nav-tab-font-size * $nav-tab-line-height) / 2) !default;
 
 
 
