@@ -1,5 +1,5 @@
 @import 'colours';
-@import 'custom';
+@import 'functions';
 @import 'mixins';
 @import 'variables';
 
@@ -66,3 +66,9 @@
 // Utilities
 
 @import 'utilities';
+
+
+
+// Very basic print styles
+
+@import 'print';
