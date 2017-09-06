@@ -1,5 +1,3 @@
-// Todo: `.table-inverse`, `.table-reflow` and `.table-sm`
-
 .table {
   background-color: $table-bg;
   border: 0;
@@ -84,14 +82,53 @@
   }
 }
 
-
-
-// Hover
-
 .table-hover {
   tbody tr {
     @include hover {
       background-color: $table-bg-hover;
+    }
+  }
+}
+
+// Size
+.table-sm {
+  td,
+  th {
+    padding-right: $table-sm-cell-padding-x;
+    padding-left: $table-sm-cell-padding-x;
+
+    &:first-child {
+      padding-left: $table-sm-cell-padding-x-alt;
+    }
+
+    &:last-child {
+      padding-right: $table-sm-cell-padding-x-alt;
+    }
+  }
+
+  tbody {
+    td,
+    th {
+      height: $table-sm-tbody-cell-height;
+      padding-top: $table-sm-tbody-padding-y;
+      padding-bottom: $table-sm-tbody-padding-y;
+    }
+  }
+
+  tfoot {
+    td,
+    th {
+      padding-top: $table-sm-tfoot-padding-y;
+      padding-bottom: $table-sm-tfoot-padding-y;
+    }
+  }
+
+  thead {
+    td,
+    th {
+      height: $table-sm-thead-cell-height;
+      padding-top: $table-sm-thead-padding-y;
+      padding-bottom: $table-sm-thead-padding-y;
     }
   }
 }
@@ -119,6 +156,57 @@
         @include color-yiq(map-get(theme-color($color), darker));
 
         background-color: map-get(theme-color($color), darker);
+      }
+    }
+  }
+}
+
+.table {
+  .thead-dark {
+    td,
+    th {
+      background-color: $table-dark-bg;
+      color: $table-dark-color;
+    }
+  }
+
+  .thead-light {
+    td,
+    th {
+      background-color: $table-thead-bg;
+      color: $table-thead-color;
+    }
+  }
+}
+
+.table-dark {
+  background-color: $table-dark-bg;
+  color: $table-dark-color;
+
+  tbody,
+  tfoot,
+  thead {
+    td,
+    th {
+      color: inherit;
+    }
+  }
+
+  td,
+  th {
+    border-color: $table-dark-border-color;
+  }
+
+  &.table-striped {
+    tbody tr:nth-of-type(odd) {
+      background-color: $table-dark-bg-accent;
+    }
+  }
+
+  &.table-hover {
+    tbody tr {
+      @include hover {
+        background-color: $table-dark-bg-hover;
       }
     }
   }

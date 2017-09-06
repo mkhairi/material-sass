@@ -29,9 +29,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     formatSubmit: '',
     klass: {
       // button
-      buttonClear: 'btn btn-flat btn-brand picker-button-clear',
-      buttonClose: 'btn btn-flat btn-brand picker-button-close',
-      buttonToday: 'btn btn-flat btn-brand picker-button-today',
+      buttonClear: 'btn btn-outline-primary picker-button-clear',
+      buttonClose: 'btn btn-outline-primary picker-button-close',
+      buttonToday: 'btn btn-outline-primary picker-button-today',
 
       // day
       day: 'picker-day',
@@ -83,7 +83,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     onStop: false,
     selectMonths: false,
     selectYears: false,
-    today: 'Today',
+    today: '',
     weekdaysFull: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
     weekdaysShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S']
   };
