@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["mkhairi"]
   spec.email         = ["khairi@labs.my"]
   spec.summary       = %q{Material Design for Bootstrap 4}
-  spec.description   = %q{Material Design for Bootstrap 4}
+  spec.description   = %q{Material Design for Bootstrap 4.}
   spec.homepage      = "https://github.com/mkhairi/material-sass"
   spec.license       = "MIT"
 
