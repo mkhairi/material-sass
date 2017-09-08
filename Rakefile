@@ -15,7 +15,8 @@ namespace :javascripts do
     tgt_dir = "app/assets/javascripts/material/components"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
-    cp "#{source_dir}/assets/js/src.js", "app/assets/javascripts/material.js"
+    cp "#{source_dir}/js/material.js", "app/assets/javascripts/material.js"
+    cp "#{source_dir}/js/material.min.js", "app/assets/javascripts/material.min.js"
     
     
     src_dir = "#{source_dir}/dist/assets/js/addons"
