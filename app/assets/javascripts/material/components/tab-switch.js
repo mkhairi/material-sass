@@ -2,7 +2,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /*
  * tab indicator animation
- * requires bootstrap's (v4.0.0-alpha.6) tab.js
+ * requires bootstrap's (v4.0.0-beta) tab.js
  */
 
 var TabSwitch = function ($) {
