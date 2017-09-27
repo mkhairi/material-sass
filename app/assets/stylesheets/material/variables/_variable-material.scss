@@ -61,9 +61,9 @@ $btn-group-toggle-opacity: .7 !default;
 // Based on https://material.google.com/components/cards.html#cards-usage
 
 $card-action-inner-spacer-x:  .5rem !default;
-$card-action-inner-spacer-y:  .5rem !default;
-$card-action-padding-x:       $card-action-inner-spacer-x !default;
-$card-action-padding-y:       $card-action-inner-spacer-y !default;
+$card-action-inner-spacer-y:  .25rem !default;
+$card-action-padding-x:       .5rem !default;
+$card-action-padding-y:       .5rem !default;
 $card-bg:                     $white !default;
 $card-border-radius:          $border-radius !default;
 $card-border-width:           $border-width !default;
@@ -156,40 +156,51 @@ $table-dark-color:            $white-primary !default;
 // Dialog (Bootstrap modal)
 // Based on https://material.google.com/components/dialogs.html#dialogs-specs
 
-$dialog-backdrop-bg:           $black-hint !default;
-$dialog-content-bg:            $white !default;
-$dialog-elevation-shadow:      $elevation-shadow-24dp !default;
-$dialog-footer-btn-min-width:  4rem !default;
-$dialog-footer-inner-spacer-x: .5rem !default;
-$dialog-footer-padding-x:      .5rem !default;
-$dialog-footer-padding-y:      .5rem !default;
-$dialog-margin-x:              $spacer-lg !default;
-$dialog-margin-y:              $spacer-lg !default;
-$dialog-padding-x:             1.5rem !default;
-$dialog-padding-y:             1.25rem !default;
-$dialog-scale:                 .87 !default;
-$dialog-width:                 35rem !default;
-$dialog-width-lg:              52.5rem !default;
-$dialog-width-sm:              17.5rem !default;
+$dialog-backdrop-bg:                  $black-hint !default;
+$dialog-border-radius:                $border-radius !default;
+$dialog-content-bg:                   $white !default;
+$dialog-elevation-shadow:             $elevation-shadow-24dp !default;
+$dialog-footer-btn-min-width:         4rem !default;
+$dialog-footer-btn-stacked-height:    3rem !default;
+$dialog-footer-btn-stacked-padding-x: 1rem !default;
+$dialog-footer-btn-stacked-padding-y: (($dialog-footer-btn-stacked-height - $btn-font-size * $btn-line-height) / 2) !default;
+$dialog-footer-inner-spacer-x:        .5rem !default;
+$dialog-footer-padding-x:             .5rem !default;
+$dialog-footer-padding-y:             .5rem !default;
+$dialog-margin-x:                     $spacer-lg !default;
+$dialog-margin-y:                     $spacer-lg !default;
+$dialog-padding-x:                    1.5rem !default;
+$dialog-padding-y:                    1.25rem !default;
+$dialog-scale:                        .87 !default;
+$dialog-width:                        35rem !default;
+$dialog-width-lg:                     52.5rem !default;
+$dialog-width-sm:                     17.5rem !default;
 
 
 
 // Expansion panel (Bootstrap list group)
 // Based on https://material.google.com/components/expansion-panels.html#expansion-panels-specs
 
-$expansion-panel-bg:               $white !default;
-$expansion-panel-bg-active:        $material-color-grey-200 !default;
-$expansion-panel-border-color:     $border-color !default;
-$expansion-panel-border-radius:    $border-radius !default;
-$expansion-panel-border-width:     $border-width !default;
-$expansion-panel-color:            $black-primary !default;
-$expansion-panel-color-disabled:   $black-hint !default;
-$expansion-panel-elevation-shadow: $elevation-shadow-1dp !default;
-$expansion-panel-font-size:        .9375rem !default;
-$expansion-panel-height:           3rem !default;
-$expansion-panel-line-height:      $line-height-base !default;
-$expansion-panel-padding-x:        1.5rem !default;
-$expansion-panel-padding-y:        (($expansion-panel-height - $expansion-panel-font-size * $expansion-panel-line-height) / 2) !default;
+$expansion-panel-bg:                    $white !default;
+$expansion-panel-bg-active:             $material-color-grey-200 !default;
+$expansion-panel-border-color:          $border-color !default;
+$expansion-panel-border-radius:         $border-radius !default;
+$expansion-panel-border-width:          $border-width !default;
+$expansion-panel-color:                 $black-primary !default;
+$expansion-panel-color-disabled:        $black-hint !default;
+$expansion-panel-elevation-shadow:      $elevation-shadow-1dp !default;
+$expansion-panel-font-size:             .9375rem !default;
+$expansion-panel-footer-btn-min-width:  4rem !default;
+$expansion-panel-footer-inner-spacer-x: .5rem !default;
+$expansion-panel-footer-inner-spacer-y: .25rem !default;
+$expansion-panel-footer-padding-x:      .5rem !default;
+$expansion-panel-height:                3rem !default;
+$expansion-panel-inner-spacer-x:        1rem !default;
+$expansion-panel-inner-spacer-y:        1rem !default;
+$expansion-panel-line-height:           $line-height-base !default;
+$expansion-panel-margin-y:              $spacer !default;
+$expansion-panel-padding-x:             1.5rem !default;
+$expansion-panel-padding-y:             (($expansion-panel-height - $expansion-panel-font-size * $expansion-panel-line-height) / 2) !default;
 
 
 

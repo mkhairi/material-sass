@@ -98,10 +98,18 @@
   > :last-child {
     margin-bottom: 0;
   }
+
+  &:first-child {
+    @include border-top-radius($dialog-border-radius);
+  }
+
+  &:last-child {
+    @include border-bottom-radius($dialog-border-radius);
+  }
 }
 
 .modal-content {
-  @include border-radius($border-radius);
+  @include border-radius($dialog-border-radius);
 
   background-clip: padding-box;
   background-color: $dialog-content-bg;
@@ -114,22 +122,32 @@
 }
 
 .modal-footer {
-  align-items: center;
+  align-items: flex-end;
   display: flex;
   justify-content: flex-end;
-  padding: $dialog-footer-padding-y ($dialog-footer-padding-x - $dialog-footer-inner-spacer-x / 2) $dialog-footer-padding-y ($dialog-padding-x - $dialog-footer-inner-spacer-x / 2);
+  padding: $dialog-footer-padding-y $dialog-footer-padding-x $dialog-footer-padding-y ($dialog-footer-padding-x - $dialog-footer-inner-spacer-x);
+
+  &:first-child {
+    @include border-top-radius($dialog-border-radius);
+  }
+
+  &:last-child {
+    @include border-bottom-radius($dialog-border-radius);
+  }
 
   > * {
-    margin-right: ($dialog-footer-inner-spacer-x / 2);
-    margin-left: ($dialog-footer-inner-spacer-x / 2);
+    margin-left: $dialog-footer-inner-spacer-x;
   }
 
   .btn {
     background-color: transparent;
     box-shadow: none;
+    max-width: calc(50% - #{$dialog-footer-inner-spacer-x});
     min-width: $dialog-footer-btn-min-width;
+    overflow: hidden;
     padding-right: $dialog-footer-inner-spacer-x;
     padding-left: $dialog-footer-inner-spacer-x;
+    text-overflow: ellipsis;
 
     &:active,
     &.active {
@@ -158,11 +176,36 @@
   }
 }
 
+.modal-footer-stacked {
+  align-items: stretch;
+  flex-direction: column;
+  padding-top: 0;
+  padding-right: 0;
+  padding-left: 0;
+
+  .btn {
+    @include text-align(right);
+
+    border-radius: 0;
+    margin-left: 0;
+    max-width: none;
+    padding: $dialog-footer-btn-stacked-padding-y $dialog-footer-btn-stacked-padding-x;
+  }
+}
+
 .modal-header {
   align-items: center;
   display: flex;
   justify-content: space-between;
   padding: $dialog-padding-y $dialog-padding-x;
+
+  &:first-child {
+    @include border-top-radius($dialog-border-radius);
+  }
+
+  &:last-child {
+    @include border-bottom-radius($dialog-border-radius);
+  }
 }
 
 .modal-title {

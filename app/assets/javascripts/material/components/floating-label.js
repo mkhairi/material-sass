@@ -1,7 +1,7 @@
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /*
- * floating label:
+ * floating label
  * when a user engages with the text input field,
  * the floating inline labels move to float above the field
  */
