@@ -42,9 +42,9 @@ namespace :stylesheets do
    rm_rf "app/assets/stylesheets/material"
   end
 
-  desc "Copy #{source_dir}/assets/sass/"
+  desc "Copy #{source_dir}/assets/scss/"
   task :copy do
-    src_dir = "#{source_dir}/assets/sass/."
+    src_dir = "#{source_dir}/assets/scss/."
     tgt_dir = "app/assets/stylesheets/material/"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir

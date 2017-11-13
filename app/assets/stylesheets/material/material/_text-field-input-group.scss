@@ -10,8 +10,6 @@
   }
 }
 
-
-
 // Addon and button
 
 .input-group .custom-file,
@@ -63,7 +61,6 @@
   box-shadow: map-get($btn-elevation-shadow, shadow);
 
   > .btn {
-    border-left: $btn-group-inner-spacer-x solid transparent;
     box-shadow: none;
     flex: 0 1 auto;
     margin-left: ($btn-group-inner-spacer-x * -1);
@@ -74,27 +71,11 @@
       box-shadow: none;
     }
 
-    &:disabled,
-    &.disabled {
-      + .btn:disabled,
-      + .btn.disabled {
-        border-left-color: $btn-group-divider-bg;
-      }
-    }
-
     &:first-child {
-      border-left-width: 0;
       margin-left: 0;
-    }
-
-    &.active {
-      + .btn.active {
-        border-left-color: $btn-group-divider-bg;
-      }
     }
   }
 
-  // Colour
   @each $color, $values in $theme-colors {
     > .btn-#{$color} {
       &:disabled,
@@ -122,8 +103,6 @@
     @include border-right-radius(0);
   }
 }
-
-
 
 // Size
 
