@@ -6,26 +6,26 @@ namespace :javascripts do
   
   desc "Cleaning javascripts directory"
   task :clean do
-   rm_rf "app/assets/javascripts/material"
+   rm_rf "assets/javascripts/material"
   end
   
   desc "Copy #{source_dir}/assets/js/src"
   task :copy do
     src_dir = "#{source_dir}/dist/assets/js/src/."
-    tgt_dir = "app/assets/javascripts/material/components"
+    tgt_dir = "assets/javascripts/material/components"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
-    cp "#{source_dir}/js/material.js", "app/assets/javascripts/material.js"
-    cp "#{source_dir}/js/material.min.js", "app/assets/javascripts/material.min.js"
+    cp "#{source_dir}/js/material.js", "assets/javascripts/material.js"
+    cp "#{source_dir}/js/material.min.js", "assets/javascripts/material.min.js"
     
     
     src_dir = "#{source_dir}/dist/assets/js/addons"
-    tgt_dir = "app/assets/javascripts/material/"
+    tgt_dir = "assets/javascripts/material/"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
     
     src_dir = "#{source_dir}/dist/assets/js/addons-materialise/."
-    tgt_dir = "app/assets/javascripts/material/initializers"
+    tgt_dir = "assets/javascripts/material/initializers"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
     
@@ -39,20 +39,20 @@ end
 namespace :stylesheets do
   desc "Cleaning stylesheets directory"
   task :clean do
-   rm_rf "app/assets/stylesheets/material"
+   rm_rf "assets/stylesheets/material"
   end
 
   desc "Copy #{source_dir}/assets/scss/"
   task :copy do
     src_dir = "#{source_dir}/assets/scss/."
-    tgt_dir = "app/assets/stylesheets/material/"
+    tgt_dir = "assets/stylesheets/material/"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
   end
  
   desc "Fix font url in stylesheets"
   task :fix_urls do
-    Dir.glob('app/assets/stylesheet/**/*.scss').each do |tgt_file|
+    Dir.glob('assets/stylesheet/**/*.scss').each do |tgt_file|
       content = File.read(tgt_file)
       fixed_content = content.gsub(/url\(\"\.\.\/Roboto\/([A-Za-z_]*.woff2)\"\)/, 'font-url("\1")')
       File.open(tgt_file, "w") { |f| f.puts fixed_content}
@@ -65,7 +65,7 @@ end
 
 desc "Remove minified file .min"
 task :cleanup do
-  Dir.glob('app/assets/**/*.min.*').each do |file|
+  Dir.glob('assets/**/*.min.*').each do |file|
     rm file
   end
 end
