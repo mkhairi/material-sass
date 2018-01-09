@@ -22,8 +22,8 @@ Since bootstrap relies on it, install it with ```bin/yarn add jquery``` or via `
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bootstrap',     '~> 4.0.0.beta'
-gem 'material-sass', '~> 4.0.0.beta'
+gem 'bootstrap',     '~> 4.0.0.beta2.1'
+gem 'material-sass', '~> 4.0.0.beta2'
 ```
 And then run the bundler and restart your server to make the files available through the pipeline:
 
@@ -34,7 +34,7 @@ $ bundle install
 Or install it yourself as:
 
 ```console
-$ gem install material-sass
+$ gem install material-sass --pre
 ```
 
 ## Usage
