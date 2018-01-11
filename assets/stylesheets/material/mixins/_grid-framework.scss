@@ -1,4 +1,12 @@
 @mixin make-grid-columns() {
+  %grid-column {
+    @include make-gutters;
+
+    min-height: 1px;
+    position: relative;
+    width: 100%;
+  }
+
   @each $breakpoint in map-keys($grid-breakpoints) {
     $infix: breakpoint-infix($breakpoint);
 
@@ -8,7 +16,24 @@
       }
     }
 
+    .col#{$infix},
+    .col#{$infix}-auto {
+      @extend %grid-column;
+    }
+
     @include media-breakpoint-up($breakpoint) {
+      .col#{$infix} {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+      }
+
+      .col#{$infix}-auto {
+        flex: 0 0 auto;
+        max-width: none;
+        width: auto;
+      }
+
       @for $i from 1 through $grid-columns {
         .col#{$infix}-#{$i} {
           @include make-col($i);
@@ -26,31 +51,6 @@
           order: $i;
         }
       }
-
-      .col#{$infix} {
-        flex-basis: 0;
-        flex-grow: 1;
-        max-width: 100%;
-      }
-
-      .col#{$infix}-auto {
-        flex: 0 0 auto;
-        max-width: none;
-        width: auto;
-      }
     }
-
-    .col#{$infix},
-    .col#{$infix}-auto {
-      @extend %grid-column;
-    }
-  }
-
-  %grid-column {
-    @include make-gutters;
-
-    min-height: 1px;
-    position: relative;
-    width: 100%;
   }
 }

@@ -125,6 +125,7 @@
   }
 }
 
+// Colour
 @each $color, $values in $theme-colors {
   .progress-circular-#{$color} {
     .progress-circular-gap,

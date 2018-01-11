@@ -3,6 +3,12 @@
 .form-check {
   display: block;
   margin-bottom: $textfield-margin-y;
+
+  &.disabled {
+    .form-check-label {
+      color: $textfield-color-disabled;
+    }
+  }
 }
 
 .form-check-inline {
@@ -28,11 +34,9 @@
   display: inline-flex;
   font-size: inherit;
   line-height: inherit;
-
-  .form-check.disabled & {
-    color: $textfield-color-disabled;
-  }
 }
+
+
 
 // Form group
 
@@ -52,6 +56,8 @@
     padding-left: ($textfield-margin-x / 2);
   }
 }
+
+
 
 // Inline
 
@@ -97,6 +103,8 @@
   }
 }
 
+
+
 // Label
 
 .col-form-label {
@@ -129,6 +137,8 @@
   padding-bottom: $textfield-padding-y;
 }
 
+
+
 // Misc
 
 .form-text {
@@ -150,28 +160,4 @@
 .form-control-file,
 .form-control-range {
   display: block;
-}
-
-// Validation
-
-.invalid-feedback {
-  @include typography-caption;
-
-  color: $form-feedback-invalid-color;
-  display: none;
-  margin-top: $textfield-margin-y;
-
-  .form-control-lg + & {
-    margin-top: $textfield-margin-y-lg;
-  }
-
-  .form-control-sm + & {
-    margin-top: $textfield-margin-y-sm;
-  }
-}
-
-.invalid-tooltip {
-  display: none;
-  position: absolute;
-  top: 100%;
 }

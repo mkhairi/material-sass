@@ -14,7 +14,6 @@
   display: none;
   float: left;
   font-size: $menu-font-size;
-  font-weight: $menu-font-weight;
   line-height: $menu-line-height;
   list-style: none;
   margin: 0;
@@ -22,6 +21,23 @@
   padding: $menu-padding-y 0;
   position: absolute;
   z-index: map-get($menu-elevation-shadow, elevation);
+
+  &::before {
+    @include border-radius($menu-border-radius);
+
+    background-clip: padding-box;
+    background-color: $menu-bg;
+    box-shadow: map-get($menu-elevation-shadow, shadow);
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform-origin: 0 0;
+    z-index: -1;
+  }
 
   &.show {
     display: block;
@@ -59,23 +75,6 @@
     > :nth-child(3) {
       animation-name: dropdown-item-show-3;
     }
-  }
-
-  &::before {
-    @include border-radius($menu-border-radius);
-
-    background-clip: padding-box;
-    background-color: $menu-bg;
-    box-shadow: map-get($menu-elevation-shadow, shadow);
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform-origin: 0 0;
-    z-index: -1;
   }
 
   .nav:not(.flex-column):not(.flex-column-reverse) & {
@@ -161,15 +160,15 @@
   }
 
   40% {
-    transform: scale((2 / 3), 0.25);
+    transform: scale((2 / 3), .25);
   }
 
   60% {
-    transform: scale(1, 0.5);
+    transform: scale(1, .5);
   }
 
   80% {
-    transform: scale(1, 0.75);
+    transform: scale(1, .75);
   }
 
   100% {
@@ -187,6 +186,7 @@
   }
 }
 
+// Positioning
 .dropdown-menu[x-placement='bottom-end']::before,
 .dropdown-menu[x-placement='left-start']::before {
   transform-origin: 100% 0;
@@ -239,8 +239,7 @@
   transform-origin: 0 calc(100% - #{$menu-link-height / 2 + $menu-padding-y});
 }
 
-// Cascading menu for desktop
-
+// Size
 .dropdown-menu-sm,
 .menu-cascading {
   font-size: $menu-font-size-cascading;
@@ -271,33 +270,9 @@
   }
 }
 
-// Divider
 
-.dropdown-divider {
-  @include nav-divider($menu-divider-bg);
-}
 
-// Header
-
-.dropdown-header {
-  color: $menu-header-color;
-  display: block;
-  font-size: $menu-font-size;
-  font-weight: bolder;
-  line-height: $menu-line-height;
-  margin: 0;
-  padding: $menu-link-padding-y $menu-link-padding-x;
-  white-space: nowrap;
-
-  .dropdown-menu-sm &,
-  .menu-cascading & {
-    font-size: $menu-font-size-cascading;
-    line-height: $menu-line-height-cascading;
-    padding: $menu-link-padding-y-cascading $menu-link-padding-x-cascading;
-  }
-}
-
-// Link
+// Button, link and more within the dropdown menu
 
 .dropdown-item {
   @include transition-standard(background-color, color);
@@ -307,7 +282,7 @@
   clear: both;
   color: $menu-link-color;
   display: block;
-  font-weight: inherit;
+  font-weight: normal;
   padding: $menu-link-padding-y $menu-link-padding-x;
   position: relative;
   text-align: inherit;
@@ -337,6 +312,38 @@
     padding: $menu-link-padding-y-cascading $menu-link-padding-x-cascading;
   }
 }
+
+
+
+// Divider
+
+.dropdown-divider {
+  @include nav-divider($menu-divider-bg);
+}
+
+
+
+// Header
+
+.dropdown-header {
+  color: $menu-header-color;
+  display: block;
+  font-size: $menu-font-size;
+  font-weight: bolder;
+  line-height: $menu-line-height;
+  margin: 0;
+  padding: $menu-link-padding-y $menu-link-padding-x;
+  white-space: nowrap;
+
+  .dropdown-menu-sm &,
+  .menu-cascading & {
+    font-size: $menu-font-size-cascading;
+    line-height: $menu-line-height-cascading;
+    padding: $menu-link-padding-y-cascading $menu-link-padding-x-cascading;
+  }
+}
+
+
 
 // Toggle
 

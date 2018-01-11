@@ -3,15 +3,15 @@
     $infix: breakpoint-infix($breakpoint);
 
     .float#{$infix}-left {
-      @include float-left;
+      @include pull-left;
     }
 
     .float#{$infix}-none {
-      @include float-none;
+      float: none !important;
     }
 
     .float#{$infix}-right {
-      @include float-right;
+      @include pull-right;
     }
   }
 }

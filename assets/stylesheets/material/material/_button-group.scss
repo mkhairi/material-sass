@@ -15,23 +15,13 @@
     flex: 0 1 auto;
     min-width: 0;
 
-    @each $color, $values in $theme-colors {
-      &-#{$color} {
-        &:disabled,
-        &.disabled {
-          background-color: map-get(theme-color($color), lighter);
-          color: color-yiq(map-get(theme-color($color), lighter));
-        }
-      }
-    }
-
-    &.active,
-    &:active {
+    &:active,
+    &.active {
       box-shadow: none;
     }
 
-    &.disabled,
-    &:disabled {
+    &:disabled,
+    &.disabled {
       opacity: $btn-group-toggle-opacity;
     }
 
@@ -46,6 +36,17 @@
       &:disabled,
       &.disabled {
         opacity: 1;
+      }
+    }
+  }
+
+  // Colour
+  @each $color, $values in $theme-colors {
+    > .btn-#{$color} {
+      &:disabled,
+      &.disabled {
+        background-color: map-get(theme-color($color), lighter);
+        color: color-yiq(map-get(theme-color($color), lighter));
       }
     }
   }
@@ -76,32 +77,15 @@
 
   // Border radius
 
-  > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  > .btn:not(:first-child),
+  > .btn-group:not(:first-child) > .btn {
+    @include border-left-radius(0);
+  }
+
+  > .btn:not(:last-child):not(.dropdown-toggle),
+  > .btn-group:not(:last-child) > .btn,
+  > .dropdown-toggle:not(:last-of-type) {
     @include border-right-radius(0);
-  }
-
-  > .btn:last-child:not(:first-child),
-  > .dropdown-toggle:not(:first-child) {
-    @include border-left-radius(0);
-  }
-
-  > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
-    border-radius: 0;
-  }
-
-  > .btn-group:first-child:not(:last-child) {
-    > .btn:last-child,
-    > .dropdown-toggle {
-      @include border-right-radius(0);
-    }
-  }
-
-  > .btn-group:last-child:not(:first-child) > .btn:first-child {
-    @include border-left-radius(0);
-  }
-
-  > .btn-group:not(:first-child):not(:last-child) > .btn {
-    border-radius: 0;
   }
 }
 
@@ -124,39 +108,25 @@
 
   // Border radius
 
-  > .btn:first-child:not(:last-child) {
+  > .btn:not(:first-child),
+  > .btn-group:not(:first-child) > .btn {
+    @include border-top-radius(0);
+  }
+
+  > .btn:not(:last-child):not(.dropdown-toggle),
+  > .btn-group:not(:last-child) > .btn,
+  > .dropdown-toggle:not(:last-of-type) {
     @include border-bottom-radius(0);
-  }
-
-  > .btn:last-child:not(:first-child) {
-    @include border-top-radius(0);
-  }
-
-  > .btn:not(:first-child):not(:last-child) {
-    border-radius: 0;
-  }
-
-  > .btn-group:first-child:not(:last-child) {
-    > .btn:last-child,
-    > .dropdown-toggle {
-      @include border-bottom-radius(0);
-    }
-  }
-
-  > .btn-group:last-child:not(:first-child) > .btn:first-child {
-    @include border-top-radius(0);
-  }
-
-  > .btn-group:not(:first-child):not(:last-child) > .btn {
-    border-radius: 0;
   }
 }
 
+// Fluid
 .btn-group-fluid {
   background-color: transparent;
   box-shadow: none;
 }
 
+// Size
 .btn-group-lg > .btn {
   @extend %btn-lg;
 }
@@ -164,6 +134,8 @@
 .btn-group-sm > .btn {
   @extend %btn-sm;
 }
+
+
 
 // Checkbox and radio options
 
@@ -180,6 +152,8 @@
     }
   }
 }
+
+
 
 // Split button dropdown
 
@@ -199,6 +173,8 @@
     }
   }
 }
+
+
 
 // Toolbar
 

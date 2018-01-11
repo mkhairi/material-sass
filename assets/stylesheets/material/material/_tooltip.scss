@@ -10,11 +10,6 @@
   word-break: break-word;
   z-index: $tooltip-zindex;
 
-  @include media-breakpoint-up(md) {
-    font-size: $tooltip-font-size-desktop;
-    margin: $tooltip-margin-desktop;
-  }
-
   &.show {
     opacity: $tooltip-opacity;
 
@@ -33,8 +28,19 @@
   padding: $tooltip-padding-y $tooltip-padding-x;
   text-align: center;
   transform: scale($tooltip-scale);
+}
 
-  @include media-breakpoint-up(md) {
+
+
+// Desktop
+
+@include media-breakpoint-up(md) {
+  .tooltip {
+    font-size: $tooltip-font-size-desktop;
+    margin: $tooltip-margin-desktop;
+  }
+
+  .tooltip-inner {
     padding: $tooltip-padding-y-desktop $tooltip-padding-x-desktop;
   }
 }

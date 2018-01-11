@@ -3,14 +3,15 @@
   clip: rect(0, 0, 0, 0);
   clip-path: inset(50%);
   height: 1px;
-  overflow: hidden;
   padding: 0;
+  overflow: hidden;
   position: absolute;
   white-space: nowrap;
   width: 1px;
 }
 
 @mixin sr-only-focusable {
+  // Active, focus, hover
   &:active,
   &:focus {
     clip: auto;

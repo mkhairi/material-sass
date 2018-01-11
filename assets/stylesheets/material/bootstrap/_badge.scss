@@ -24,6 +24,7 @@
   }
 }
 
+// Colour
 @each $color, $values in $theme-colors {
   .badge-#{$color} {
     background-color: map-get(theme-color($color), color);
@@ -38,8 +39,6 @@
     }
   }
 }
-
-// Pill badges with extra rounded corners
 
 .badge-pill {
   @include border-radius(1em);

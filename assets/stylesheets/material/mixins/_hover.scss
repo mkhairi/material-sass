@@ -1,35 +1,35 @@
 @mixin active-focus-hover {
   @if $enable-hover-media-query {
-    @include hover {
-      @content;
-    }
-
     &:active,
     &:focus {
-      @content;
+      @content
+    }
+
+    @include hover {
+      @content
     }
   } @else {
     &:active,
     &:focus,
     &:hover {
-      @content;
+      @content
     }
   }
 }
 
 @mixin focus-hover {
   @if $enable-hover-media-query {
-    @include hover {
-      @content;
+    &:focus {
+      @content
     }
 
-    &:focus {
-      @content;
+    @include hover {
+      @content
     }
   } @else {
     &:focus,
     &:hover {
-      @content;
+      @content
     }
   }
 }
@@ -38,33 +38,33 @@
   @if $enable-hover-media-query {
     @media (hover: hover) {
       &:hover {
-        @content;
+        @content
       }
     }
   } @else {
     &:hover {
-      @content;
+      @content
     }
   }
 }
 
 @mixin plain-active-focus-hover {
   @if $enable-hover-media-query {
-    @include hover {
-      @content;
-    }
-
     &,
     &:active,
     &:focus {
-      @content;
+      @content
+    }
+
+    @include hover {
+      @content
     }
   } @else {
     &,
     &:active,
     &:focus,
     &:hover {
-      @content;
+      @content
     }
   }
 }

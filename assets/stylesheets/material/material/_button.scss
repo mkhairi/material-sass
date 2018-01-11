@@ -60,13 +60,21 @@
   }
 }
 
-// stylelint-disable selector-no-qualifying-type
-a.btn.disabled,
-fieldset[disabled] a.btn {
-  pointer-events: none;
+a {
+  &.btn.disabled {
+    pointer-events: none;
+  }
 }
-// stylelint-enable
 
+fieldset {
+  &[disabled] a {
+    &.btn {
+      pointer-events: none;
+    }
+  }
+}
+
+// Colour
 @each $color, $values in $theme-colors {
   .btn-#{$color} {
     background-color: map-get(theme-color($color), color);
@@ -97,6 +105,7 @@ fieldset[disabled] a.btn {
   }
 }
 
+// Size
 .btn-lg,
 %btn-lg {
   font-size: $btn-font-size-lg;
@@ -108,6 +117,8 @@ fieldset[disabled] a.btn {
   font-size: $btn-font-size-sm;
   padding: $btn-padding-y-sm $btn-padding-x-sm;
 }
+
+
 
 // Block button
 
@@ -128,6 +139,8 @@ fieldset[disabled] a.btn {
   }
 }
 
+
+
 // Link button
 
 .btn-link {
@@ -135,7 +148,7 @@ fieldset[disabled] a.btn {
   border-radius: 0;
   box-shadow: none;
   color: $link-color;
-  font-weight: $font-weight-regular;
+  font-weight: normal;
   text-decoration: $link-decoration;
   text-transform: none;
 
@@ -161,6 +174,8 @@ fieldset[disabled] a.btn {
     text-decoration: none;
   }
 }
+
+
 
 // No minimum width
 

@@ -1,5 +1,3 @@
-// stylelint-disable declaration-no-important
-
 @each $prop, $prop-abbr in (height: h, width: w) {
   @each $size, $value in $sizes {
     .#{$prop-abbr}-#{$size} {
