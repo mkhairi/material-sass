@@ -6,6 +6,7 @@
   display: flex;
   overflow: hidden;
   position: relative;
+  z-index: 1;
 }
 
 .progress-bar {
@@ -132,7 +133,7 @@
 
   &::after,
   &::before {
-    @include border-radius($border-radius);
+    @include border-radius($progress-bar-border-radius);
 
     animation-duration: 2s;
     animation-iteration-count: infinite;

@@ -268,6 +268,7 @@ $navdrawer-width:                   17.5rem !default;
 // Picker
 // Based on https://material.google.com/components/pickers.html#pickers-date-pickers
 
+$picker-border-radius:      $border-radius !default;
 $picker-cell-size:          2.5rem !default;
 $picker-content-bg:         $dialog-content-bg !default;
 $picker-day-bg-selected:    map-get(theme-color(primary), color) !default;
@@ -472,6 +473,7 @@ $toolbar-dark-element-bg:       $white-divider !default;
 // Based on https://material.google.com/components/tooltips.html#tooltips-tooltips-desktop
 
 $tooltip-bg:                $material-color-grey-700 !default;
+$tooltip-border-radius:     $border-radius !default;
 $tooltip-color:             $white-primary !default;
 $tooltip-font-size:         .875rem !default;
 $tooltip-font-size-desktop: .625rem !default;
