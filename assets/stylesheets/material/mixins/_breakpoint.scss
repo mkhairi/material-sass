@@ -5,7 +5,7 @@
 @function breakpoint-max($name) {
   $next: breakpoint-next($name);
 
-  @return if($next, breakpoint-min($next) - .02px, null);
+  @return if($next, breakpoint-min($next) - 0.02px, null);
 }
 
 @function breakpoint-min($name) {
@@ -41,11 +41,9 @@
       @content;
     }
   } @else {
-    @content
+    @content;
   }
 }
-
-
 
 // Additional mixins
 
@@ -68,9 +66,12 @@
 }
 
 @mixin media-moz-webkit {
-  @media
-  screen and (-webkit-min-device-pixel-ratio: 0),
-  screen and (min--moz-device-pixel-ratio: 0) {
+  @-moz-document url-prefix('') {
+    @content;
+  }
+
+  // stylelint-disable-next-line media-feature-name-no-vendor-prefix
+  @media (-webkit-min-device-pixel-ratio: 0) {
     @content;
   }
 }

@@ -3,18 +3,17 @@
   background-color: transparent;
   box-shadow: none;
 
-  &:active,
-  &.active {
+  &.active,
+  &:active {
     box-shadow: none;
   }
 
-  &:disabled,
-  &.disabled {
+  &.disabled,
+  &:disabled {
     background-color: transparent;
   }
 }
 
-// Colour
 @each $color, $values in $theme-colors {
   .btn-flat-#{$color},
   .btn-outline-#{$color} {
@@ -22,8 +21,8 @@
       color: map-get(theme-color($color), color);
     }
 
-    &:disabled,
-    &.disabled {
+    &.disabled,
+    &:disabled {
       color: $btn-color-disabled;
     }
   }
@@ -35,8 +34,8 @@
     background-image: linear-gradient(to bottom, $btn-overlay-inverse, $btn-overlay-inverse);
   }
 
-  &:active,
-  &.active {
+  &.active,
+  &:active {
     background-color: $btn-bg-active-inverse;
   }
 }

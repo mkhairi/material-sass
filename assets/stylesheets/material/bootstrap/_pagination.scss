@@ -29,8 +29,8 @@
     background-image: linear-gradient(to bottom, $btn-overlay, $btn-overlay);
   }
 
-  &:active,
-  &.active {
+  &.active,
+  &:active {
     background-color: $btn-bg-active;
     background-image: none;
   }
@@ -59,7 +59,6 @@
   }
 }
 
-// Size
 .pagination-lg .page-link {
   font-size: $btn-font-size-lg;
   padding: $btn-padding-y-lg $btn-padding-x-lg;

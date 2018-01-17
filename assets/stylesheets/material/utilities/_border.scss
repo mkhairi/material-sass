@@ -1,3 +1,5 @@
+// stylelint-disable declaration-no-important
+
 // Border
 
 .border {
@@ -86,8 +88,6 @@
     border-color: map-get(theme-color($color), color) !important;
   }
 }
-
-
 
 // Border radius
 

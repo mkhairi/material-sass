@@ -11,8 +11,6 @@
   margin-right: ($selection-control-spacer-x * 2);
 }
 
-
-
 // Base styles for custom control indicators
 
 .custom-control-label {
@@ -43,7 +41,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: scale(.87, .87) translateZ(0);
+    transform: scale(0.87, 0.87) translateZ(0);
     width: ($selection-control-indicator-size * 2);
   }
 }
@@ -53,16 +51,14 @@
   position: absolute;
   z-index: -1;
 
-  // Active, focus, hover
-  &:active,
-  &.focus {
+  &.focus,
+  &:active {
     ~ .custom-control-label::before {
       opacity: $selection-control-radial-opacity;
       transform: scale(1, 1) translateZ(0);
     }
   }
 
-  // Checked
   &:checked ~ {
     .custom-control-label {
       &::after {
@@ -75,7 +71,6 @@
     }
   }
 
-  // Disabled
   &:disabled ~ {
     .custom-control-label {
       color: $selection-control-color-disabled;
@@ -91,8 +86,6 @@
   }
 }
 
-
-
 // Checkbox
 
 .custom-checkbox {
@@ -105,19 +98,15 @@
   }
 
   .custom-control-input {
-    // Checked
     &:checked ~ .custom-control-label::after {
       content: $selection-control-checkbox-icon-checked;
     }
 
-    // Indeterminate
     &:indeterminate ~ .custom-control-label::after {
       content: $selection-control-checkbox-icon-indeterminate;
     }
   }
 }
-
-
 
 // Radio button
 
@@ -131,14 +120,11 @@
   }
 
   .custom-control-input {
-    // Checked
     &:checked ~ .custom-control-label::after {
       content: $selection-control-radio-icon-checked;
     }
   }
 }
-
-
 
 // Switch
 
@@ -163,7 +149,6 @@
   }
 
   .custom-control-input {
-    // Checked
     &:checked {
       ~ .custom-control-label {
         // scss-lint:disable NestingDepth
@@ -179,11 +164,10 @@
       }
 
       ~ .custom-control-track {
-        background-color: hex-to-rgba($selection-control-color-active, .5);
+        background-color: hex-to-rgba($selection-control-color-active, 0.5);
       }
     }
 
-    // Disabled
     &:disabled {
       ~ .custom-control-label::after {
         background-color: $selection-control-thumb-bg-disabled;

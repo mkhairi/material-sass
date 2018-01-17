@@ -8,6 +8,16 @@
   position: relative;
   vertical-align: middle;
 
+  @each $color, $values in $theme-colors {
+    > .btn-#{$color} {
+      &.disabled,
+      &:disabled {
+        background-color: map-get(theme-color($color), lighter);
+        color: color-yiq(map-get(theme-color($color), lighter));
+      }
+    }
+  }
+
   > .btn {
     @include transition-standard(border-color, opacity);
 
@@ -15,38 +25,27 @@
     flex: 0 1 auto;
     min-width: 0;
 
-    &:active,
-    &.active {
+    &.active,
+    &:active {
       box-shadow: none;
     }
 
-    &:disabled,
-    &.disabled {
+    &.disabled,
+    &:disabled {
       opacity: $btn-group-toggle-opacity;
     }
 
     &[class*='btn-outline'] {
       opacity: $btn-group-toggle-opacity;
 
-      &:active,
-      &.active {
+      &.active,
+      &:active {
         opacity: 1;
       }
 
-      &:disabled,
-      &.disabled {
+      &.disabled,
+      &:disabled {
         opacity: 1;
-      }
-    }
-  }
-
-  // Colour
-  @each $color, $values in $theme-colors {
-    > .btn-#{$color} {
-      &:disabled,
-      &.disabled {
-        background-color: map-get(theme-color($color), lighter);
-        color: color-yiq(map-get(theme-color($color), lighter));
       }
     }
   }
@@ -74,8 +73,6 @@
   > .btn-group:first-child {
     margin-left: 0;
   }
-
-  // Border radius
 
   > .btn:not(:first-child),
   > .btn-group:not(:first-child) > .btn {
@@ -106,8 +103,6 @@
     margin-top: 0;
   }
 
-  // Border radius
-
   > .btn:not(:first-child),
   > .btn-group:not(:first-child) > .btn {
     @include border-top-radius(0);
@@ -120,13 +115,11 @@
   }
 }
 
-// Fluid
 .btn-group-fluid {
   background-color: transparent;
   box-shadow: none;
 }
 
-// Size
 .btn-group-lg > .btn {
   @extend %btn-lg;
 }
@@ -134,8 +127,6 @@
 .btn-group-sm > .btn {
   @extend %btn-sm;
 }
-
-
 
 // Checkbox and radio options
 
@@ -152,8 +143,6 @@
     }
   }
 }
-
-
 
 // Split button dropdown
 
@@ -173,8 +162,6 @@
     }
   }
 }
-
-
 
 // Toolbar
 

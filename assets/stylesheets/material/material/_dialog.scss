@@ -33,8 +33,6 @@
   }
 }
 
-
-
 // Backdrop
 
 .modal-backdrop {
@@ -46,8 +44,6 @@
   left: 0;
   z-index: (map-get($dialog-elevation-shadow, elevation) - 1);
 }
-
-
 
 // Dialog
 
@@ -87,8 +83,6 @@
   max-width: $dialog-width-sm;
 }
 
-
-
 // Misc
 
 .modal-body {
@@ -96,20 +90,20 @@
   padding: $dialog-padding-y $dialog-padding-x;
   position: relative;
 
-  .modal-header + & {
-    padding-top: 0;
-  }
-
-  > :last-child {
-    margin-bottom: 0;
-  }
-
   &:first-child {
     @include border-top-radius($dialog-border-radius);
   }
 
   &:last-child {
     @include border-bottom-radius($dialog-border-radius);
+  }
+
+  .modal-header + & {
+    padding-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
   }
 }
 
@@ -127,10 +121,6 @@
     @include border-bottom-radius($dialog-border-radius);
   }
 
-  > * {
-    margin-left: $dialog-footer-inner-spacer-x;
-  }
-
   .btn {
     background-color: transparent;
     box-shadow: none;
@@ -141,30 +131,33 @@
     padding-left: $dialog-footer-inner-spacer-x;
     text-overflow: ellipsis;
 
-    &:active,
-    &.active {
+    @each $color, $values in $theme-colors {
+      &-#{$color} {
+        @include plain-active-focus-hover {
+          color: map-get(theme-color($color), color);
+        }
+
+        &.disabled,
+        &:disabled {
+          color: $btn-color-disabled;
+        }
+      }
+    }
+
+    &.active,
+    &:active {
       background-color: $btn-bg-active;
       box-shadow: none;
     }
 
-    &:disabled,
-    &.disabled {
+    &.disabled,
+    &:disabled {
       background-color: transparent;
     }
   }
 
-  // Colour
-  @each $color, $values in $theme-colors {
-    .btn-#{$color} {
-      @include plain-active-focus-hover {
-        color: map-get(theme-color($color), color);
-      }
-
-      &:disabled,
-      &.disabled {
-        color: $btn-color-disabled;
-      }
-    }
+  > * {
+    margin-left: $dialog-footer-inner-spacer-x;
   }
 }
 
@@ -205,8 +198,6 @@
 
   margin: 0;
 }
-
-
 
 // Scrollbar measure
 

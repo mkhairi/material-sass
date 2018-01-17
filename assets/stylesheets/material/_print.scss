@@ -1,5 +1,11 @@
+// stylelint-disable declaration-no-important, selector-no-qualifying-type
+
 @if $enable-print-styles {
   @media print {
+    @page {
+      size: $print-page-size;
+    }
+
     *,
     *::after,
     *::before {
@@ -7,18 +13,12 @@
       text-shadow: none !important;
     }
 
-    @page {
-      size: $print-page-size;
-    }
-
     a:not(.btn) {
       text-decoration: underline;
     }
 
-    abbr {
-      &[title]::after {
-        content: ' (" attr(title) ") ';
-      }
+    abbr[title]::after {
+      content: ' (" attr(title) ") ';
     }
 
     blockquote {

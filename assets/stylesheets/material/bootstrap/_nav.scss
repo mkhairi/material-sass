@@ -20,8 +20,6 @@
   }
 }
 
-
-
 // Justified
 
 .nav-fill {
@@ -39,8 +37,6 @@
   }
 }
 
-
-
 // Pills
 
 .nav-pills {
@@ -55,10 +51,6 @@
       background-color: $nav-pills-bg-hover;
     }
 
-    &:active {
-      opacity: 1;
-    }
-
     &.active {
       color: $nav-pills-color-active;
       opacity: 1;
@@ -69,6 +61,10 @@
       color: $nav-link-color-disabled;
       opacity: 1;
     }
+
+    &:active {
+      opacity: 1;
+    }
   }
 
   .show > .nav-link {
@@ -76,8 +72,6 @@
     opacity: 1;
   }
 }
-
-
 
 // N.B. Tabs are defined in Material design
 // (https://material.google.com/components/tabs.html)

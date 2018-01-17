@@ -10,6 +10,19 @@
   position: relative;
   word-wrap: break-word;
 
+  @each $color, $values in $theme-colors {
+    &.border-#{$color} {
+      box-shadow: map-get($card-elevation-shadow, shadow), inset 0 0 0 1px map-get(theme-color($color), color);
+
+      &[href],
+      &[tabindex] {
+        @include active-focus-hover {
+          box-shadow: map-get($card-elevation-shadow-hover, shadow), inset 0 0 0 1px map-get(theme-color($color), color);
+        }
+      }
+    }
+  }
+
   &[href],
   &[tabindex] {
     @include active-focus-hover {
@@ -22,24 +35,6 @@
     }
   }
 }
-
-// Colour
-@each $color, $values in $theme-colors {
-  .card {
-    &.border-#{$color} {
-      box-shadow: map-get($card-elevation-shadow, shadow), inset 0 0 0 1px map-get(theme-color($color), color);
-
-      &[href],
-      &[tabindex] {
-        @include active-focus-hover {
-          box-shadow: map-get($card-elevation-shadow-hover, shadow), inset 0 0 0 1px map-get(theme-color($color), color);
-        }
-      }
-    }
-  }
-}
-
-
 
 // Action
 
@@ -67,8 +62,6 @@
     padding-left: $card-action-inner-spacer-x;
   }
 }
-
-
 
 // Body
 
@@ -107,8 +100,6 @@
   }
 }
 
-
-
 // Footer
 
 .card-footer {
@@ -132,12 +123,12 @@
 
   .card-body + &,
   .card-header + & {
-    &:not[class*='border-'] {
-      padding-top: 0;
-    }
-
     &[class*='border-'] {
       margin-top: ($card-padding-y - $card-inner-spacer-y);
+    }
+
+    &:not[class*='border-'] {
+      padding-top: 0;
     }
   }
 
@@ -152,8 +143,6 @@
   }
 }
 
-
-
 // Header
 
 .card-header {
@@ -164,6 +153,11 @@
     &.border-#{$color} {
       border-bottom: $card-border-width solid map-get(theme-color($color), color);
     }
+  }
+
+  &[class*='border-'] {
+    padding-top: $card-padding-y;
+    padding-bottom: $card-padding-y;
   }
 
   &:first-child,
@@ -188,11 +182,6 @@
     + .list-group {
       margin-top: ($card-padding-y - $card-inner-spacer-y);
     }
-  }
-
-  &[class*='border-'] {
-    padding-top: $card-padding-y;
-    padding-bottom: $card-padding-y;
   }
 }
 
@@ -220,10 +209,7 @@
 }
 
 .card-header-tabs {
-  margin-top: ($card-inner-spacer-y * -1);
-  margin-right: ($card-inner-spacer-x * -1);
-  margin-bottom: ($card-padding-y - $card-inner-spacer-y);
-  margin-left: ($card-inner-spacer-x * -1);
+  margin: ($card-inner-spacer-y * -1) ($card-inner-spacer-x * -1) ($card-padding-y - $card-inner-spacer-y);
 
   .card-header:first-child &,
   .card-header[class*='border-'] &,
@@ -237,8 +223,6 @@
     margin-bottom: ($card-padding-y * -1);
   }
 }
-
-
 
 // Image
 
@@ -254,8 +238,6 @@
   @include border-top-radius($card-border-radius);
 }
 
-
-
 // Image overlay
 
 .card-img-overlay {
@@ -266,8 +248,6 @@
   bottom: 0;
   left: 0;
 }
-
-
 
 // Set
 
@@ -365,8 +345,6 @@
     }
   }
 }
-
-
 
 // Text and title
 

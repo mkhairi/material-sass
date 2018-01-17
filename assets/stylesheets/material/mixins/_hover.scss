@@ -2,20 +2,20 @@
   &:active,
   &:focus,
   &:hover {
-    @content
+    @content;
   }
 }
 
 @mixin focus-hover {
   &:focus,
   &:hover {
-    @content
+    @content;
   }
 }
 
 @mixin hover {
   &:hover {
-    @content
+    @content;
   }
 }
 
@@ -24,6 +24,6 @@
   &:active,
   &:focus,
   &:hover {
-    @content
+    @content;
   }
 }
