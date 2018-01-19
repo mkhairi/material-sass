@@ -1,22 +1,13 @@
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 /*
- * customise pickadate js for material
- * requires addons/picker.js and addons/picker.date.js
+ * Customise pickadate JavaScript for Material
  */
-
-+function ($) {
-
+(function ($) {
   'use strict';
 
   var Datepicker = function Datepicker(element, options) {
     this._element = element;
     this._options = options;
   };
-
-  if (typeof $.fn.pickadate === 'undefined') {
-    throw new Error('Material\'s JavaScript requires pickadate.js');
-  }
 
   Datepicker.DEFAULTS = {
     cancel: 'Cancel',
@@ -32,7 +23,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       buttonClear: 'btn btn-outline-primary picker-button-clear',
       buttonClose: 'btn btn-outline-primary picker-button-close',
       buttonToday: 'btn btn-outline-primary picker-button-today',
-
       // day
       day: 'picker-day',
       disabled: 'picker-day-disabled',
@@ -42,7 +32,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       outfocus: 'picker-day-outfocus',
       selected: 'picker-day-selected',
       weekdays: 'picker-weekday',
-
       // element
       box: 'picker-box',
       footer: 'picker-footer',
@@ -51,11 +40,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       holder: 'picker-holder',
       table: 'picker-table',
       wrap: 'picker-wrap',
-
       // input element
       active: 'picker-input-active',
       input: 'picker-input',
-
       // month and year nav
       month: 'picker-month',
       navDisabled: 'picker-nav-disabled',
@@ -64,7 +51,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       selectMonth: 'picker-select-month',
       selectYear: 'picker-select-year',
       year: 'picker-year',
-
       // root picker
       focused: 'picker-focused',
       opened: 'picker-opened',
@@ -90,13 +76,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   Datepicker.prototype.display = function (datepickerApi, datepickerRoot, datepickerValue) {
     $('.picker-date-display', datepickerRoot).remove();
-
     $('.picker-wrap', datepickerRoot).prepend('<div class="picker-date-display">' + '<div class="picker-date-display-top">' + '<span class="picker-year-display">' + datepickerApi.get(datepickerValue, 'yyyy') + '</span>' + '</div>' + '<div class="picker-date-display-bottom">' + '<span class="picker-weekday-display">' + datepickerApi.get(datepickerValue, 'dddd') + '</span>' + '<span class="picker-day-display">' + datepickerApi.get(datepickerValue, 'd') + '</span>' + '<span class="picker-month-display">' + datepickerApi.get(datepickerValue, 'mmm') + '</span>' + '</div>' + '</div>');
   };
 
   Datepicker.prototype.show = function () {
     var that = this;
-
     $(this._element).pickadate({
       clear: that._options.cancel,
       close: that._options.ok,
@@ -124,11 +108,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       weekdaysFull: that._options.weekdaysFull,
       weekdaysShort: that._options.weekdaysShort
     });
-
     var datepickerApi = $(this._element).pickadate('picker'),
         datepickerNode = datepickerApi.$node,
         datepickerRoot = datepickerApi.$root;
-
     datepickerApi.on({
       close: function close() {
         $(document.activeElement).blur();
@@ -149,7 +131,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   function Plugin(option) {
     return this.each(function () {
       var data = $(this).data('bs.pickdate');
-      var options = $.extend({}, Datepicker.DEFAULTS, $(this).data(), (typeof option === 'undefined' ? 'undefined' : _typeof(option)) == 'object' && option);
+      var options = $.extend({}, Datepicker.DEFAULTS, $(this).data(), typeof option == 'object' && option);
 
       if (!data) {
         $(this).data('bs.pickdate', data = new Datepicker(this, options));
@@ -160,7 +142,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
 
   var old = $.fn.pickdate;
-
   $.fn.pickdate = Plugin;
   $.fn.pickdate.Constructor = Datepicker;
 
@@ -168,4 +149,5 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     $.fn.pickdate = old;
     return this;
   };
-}(jQuery);
+})(jQuery);
+//# sourceMappingURL=pickadate.js.map

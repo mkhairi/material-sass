@@ -1,18 +1,13 @@
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
 /*
  * tab indicator animation
  * requires bootstrap's (v4.0.0-beta) tab.js
  */
-
 var TabSwitch = function ($) {
-
   // constants >>>
   var DATA_KEY = 'md.tabswitch';
   var NAME = 'tabswitch';
   var NO_CONFLICT = $.fn[NAME];
   var TRANSITION_DURATION = 390;
-
   var ClassName = {
     ANIMATE: 'animate',
     DROPDOWN_ITEM: 'dropdown-item',
@@ -21,22 +16,20 @@ var TabSwitch = function ($) {
     SCROLLABLE: 'nav-tabs-scrollable',
     SHOW: 'show'
   };
-
   var Event = {
     SHOW_BS_TAB: 'show.bs.tab'
   };
-
   var Selector = {
     DATA_TOGGLE: '.nav-tabs [data-toggle="tab"]',
     DROPDOWN: '.dropdown',
-    NAV: '.nav-tabs'
+    NAV: '.nav-tabs' // <<< constants
+
   };
-  // <<< constants
 
-  var TabSwitch = function () {
+  var TabSwitch =
+  /*#__PURE__*/
+  function () {
     function TabSwitch(nav) {
-      _classCallCheck(this, TabSwitch);
-
       if (typeof $.fn.tab === 'undefined') {
         throw new Error('Material\'s JavaScript requires Bootstrap\'s tab.js');
       }
@@ -45,7 +38,9 @@ var TabSwitch = function ($) {
       this._navindicator = null;
     }
 
-    TabSwitch.prototype.switch = function _switch(element, relatedTarget) {
+    var _proto = TabSwitch.prototype;
+
+    _proto.switch = function _switch(element, relatedTarget) {
       var _this = this;
 
       var navLeft = $(this._nav).offset().left;
@@ -63,7 +58,6 @@ var TabSwitch = function ($) {
 
       var elLeft = $(element).offset().left;
       var elWidth = $(element).outerWidth();
-
       $(this._navindicator).addClass(ClassName.SHOW);
       Util.reflow(this._navindicator);
 
@@ -89,19 +83,17 @@ var TabSwitch = function ($) {
       $(this._navindicator).one(Util.TRANSITION_END, complete).emulateTransitionEnd(TRANSITION_DURATION);
     };
 
-    TabSwitch.prototype._createIndicator = function _createIndicator(navLeft, navScrollLeft, navWidth, relatedTarget) {
+    _proto._createIndicator = function _createIndicator(navLeft, navScrollLeft, navWidth, relatedTarget) {
       this._navindicator = document.createElement('div');
-
       $(this._navindicator).addClass(ClassName.INDICATOR).appendTo(this._nav);
 
-      if (relatedTarget !== undefined) {
+      if (relatedTarget !== 'undefined') {
         if ($(relatedTarget).hasClass(ClassName.DROPDOWN_ITEM)) {
           relatedTarget = $(relatedTarget).closest(Selector.DROPDOWN);
         }
 
         var relatedLeft = $(relatedTarget).offset().left;
         var relatedWidth = $(relatedTarget).outerWidth();
-
         $(this._navindicator).css({
           left: relatedLeft + navScrollLeft - navLeft,
           right: navWidth - (relatedLeft + navScrollLeft - navLeft + relatedWidth)
@@ -136,13 +128,14 @@ var TabSwitch = function ($) {
   $(document).on(Event.SHOW_BS_TAB, Selector.DATA_TOGGLE, function (event) {
     TabSwitch._jQueryInterface.call($(event.target), event.relatedTarget);
   });
-
   $.fn[NAME] = TabSwitch._jQueryInterface;
   $.fn[NAME].Constructor = TabSwitch;
+
   $.fn[NAME].noConflict = function () {
     $.fn[NAME] = NO_CONFLICT;
     return TabSwitch._jQueryInterface;
   };
 
   return TabSwitch;
-}(jQuery);
+}($);
+//# sourceMappingURL=tab-switch.js.map

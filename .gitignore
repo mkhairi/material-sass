@@ -22,3 +22,4 @@ tmp
 mkmf.log
 material-src/
 .scss-lint.yml
+*.map
