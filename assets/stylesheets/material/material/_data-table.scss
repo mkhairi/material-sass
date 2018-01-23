@@ -74,12 +74,20 @@
   }
 }
 
+.table-borderless {
+  td,
+  th,
+  .table {
+    border: 0;
+  }
+}
+
 .table-bordered {
   box-shadow: map-get($table-elevation-shadow, shadow);
 }
 
 .table-striped {
-  tbody tr:nth-of-type(odd) {
+  tbody tr:nth-of-type(#{$table-striped-order}) {
     background-color: $table-bg-accent;
   }
 }

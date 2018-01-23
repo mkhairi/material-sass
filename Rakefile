@@ -11,21 +11,16 @@ namespace :javascripts do
   
   desc "Copy #{source_dir}/assets/js/src"
   task :copy do
-    src_dir = "#{source_dir}/dist/assets/js/src/."
+    src_dir = "#{source_dir}/js/dist/src/."
     tgt_dir = "assets/javascripts/material/components"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
     cp "#{source_dir}/js/material.js", "assets/javascripts/material.js"
     cp "#{source_dir}/js/material.min.js", "assets/javascripts/material.min.js"
     
-    
-    src_dir = "#{source_dir}/dist/assets/js/addons"
-    tgt_dir = "assets/javascripts/material/"
-    mkdir_p tgt_dir
-    cp_r src_dir, tgt_dir
-    
-    src_dir = "#{source_dir}/dist/assets/js/addons-materialise/."
-    tgt_dir = "assets/javascripts/material/initializers"
+  
+    src_dir = "#{source_dir}/js/dist/third-party/."
+    tgt_dir = "assets/javascripts/material/addons"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
     
@@ -42,9 +37,9 @@ namespace :stylesheets do
    rm_rf "assets/stylesheets/material"
   end
 
-  desc "Copy #{source_dir}/assets/sass/"
+  desc "Copy #{source_dir}/assets/scss/"
   task :copy do
-    src_dir = "#{source_dir}/assets/sass/."
+    src_dir = "#{source_dir}/assets/scss/."
     tgt_dir = "assets/stylesheets/material/"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
@@ -74,3 +69,10 @@ end
 
 desc "Setup or update assets files"
 task setup: ["javascripts:setup", "stylesheets:setup"]
+
+desc 'Update material from upstream'
+task :update, :branch do |t, args|
+  require './tasks/updater'
+  Updater.new(branch: args[:branch]).update_material
+end
+
