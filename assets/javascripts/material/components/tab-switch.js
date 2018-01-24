@@ -138,4 +138,3 @@ var TabSwitch = function ($) {
 
   return TabSwitch;
 }($);
-//# sourceMappingURL=tab-switch.js.map

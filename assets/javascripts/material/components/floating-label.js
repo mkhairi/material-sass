@@ -86,4 +86,3 @@ var FloatingLabel = function ($) {
 
   return FloatingLabel;
 }($);
-//# sourceMappingURL=floating-label.js.map

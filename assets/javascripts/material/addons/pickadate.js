@@ -150,4 +150,3 @@
     return this;
   };
 })(jQuery);
-//# sourceMappingURL=pickadate.js.map

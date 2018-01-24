@@ -38,4 +38,3 @@ var ExpansionPanel = function ($) {
     }
   });
 }($);
-//# sourceMappingURL=expansion-panel.js.map

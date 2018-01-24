@@ -346,4 +346,3 @@ var NavDrawer = function ($) {
 
   return NavDrawer;
 }($);
-//# sourceMappingURL=nav-drawer.js.map

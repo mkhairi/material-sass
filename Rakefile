@@ -23,12 +23,20 @@ namespace :javascripts do
     tgt_dir = "assets/javascripts/material/addons"
     mkdir_p tgt_dir
     cp_r src_dir, tgt_dir
-    
   end
-  
+
+  desc "Remove map"
+  task :tidy do
+    Dir.glob('assets/javascripts/**/*.js').each do |tgt_file|
+      content = File.read(tgt_file)
+      removed_map_content = content.sub(%r{^//# sourceMappingURL=.*\n?\z}, '')
+      File.open(tgt_file, "w") { |f| f.puts removed_map_content}
+    end
+  end
+
 
   desc "Setup javascript assets"
-  task setup: [:clean, :copy]
+  task setup: [:clean, :copy, :tidy]
 end
 
 namespace :stylesheets do
@@ -69,10 +77,3 @@ end
 
 desc "Setup or update assets files"
 task setup: ["javascripts:setup", "stylesheets:setup"]
-
-desc 'Update material from upstream'
-task :update, :branch do |t, args|
-  require './tasks/updater'
-  Updater.new(branch: args[:branch]).update_material
-end
-
