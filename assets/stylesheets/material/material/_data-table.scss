@@ -23,9 +23,10 @@
   }
 
   tbody {
+    color: $table-tbody-color;
+
     td,
     th {
-      color: $table-tbody-color;
       font-size: $table-tbody-font-size;
       font-weight: $table-tbody-font-weight;
       height: $table-tbody-cell-height;
@@ -35,9 +36,10 @@
   }
 
   tfoot {
+    color: $table-tfoot-color;
+
     td,
     th {
-      color: $table-tfoot-color;
       font-size: $table-tfoot-font-size;
       font-weight: $table-tfoot-font-weight;
       height: $table-tfoot-cell-height;
@@ -47,9 +49,10 @@
   }
 
   thead {
+    color: $table-thead-color;
+
     td,
     th {
-      color: $table-thead-color;
       font-size: $table-thead-font-size;
       font-weight: $table-thead-font-weight;
       height: $table-thead-cell-height;
@@ -62,14 +65,10 @@
     border-top: $table-border-width solid $table-border-color;
   }
 
-  > :first-child {
-    > tr:first-child,
-    > tr:first-child,
-    > tr:first-child {
-      td,
-      th {
-        border-top: 0;
-      }
+  > :first-child > tr:first-child {
+    td,
+    th {
+      border-top: 0;
     }
   }
 }
@@ -84,20 +83,6 @@
 
 .table-bordered {
   box-shadow: map-get($table-elevation-shadow, shadow);
-}
-
-.table-striped {
-  tbody tr:nth-of-type(#{$table-striped-order}) {
-    background-color: $table-bg-accent;
-  }
-}
-
-.table-hover {
-  tbody tr {
-    @include hover {
-      background-color: $table-bg-hover;
-    }
-  }
 }
 
 .table-sm {
@@ -142,25 +127,61 @@
   }
 }
 
+.table-striped {
+  tbody tr:nth-of-type(#{$table-striped-order}) {
+    background-color: $table-bg-accent;
+  }
+}
+
+// Placed here because it has to come after the striping styles
+
+.table-hover {
+  tbody tr {
+    @include hover {
+      background-color: $table-bg-hover;
+    }
+  }
+}
+
 // Table background
 
 @each $color, $values in $theme-colors {
-  .table .table-#{$color} {
+  .table-#{$color} {
     &,
     > td,
     > th {
-      background-color: theme-color($color);
-      color: color-yiq(theme-color($color));
+      background-color: theme-color-light($color);
+      color: color-yiq(theme-color-light($color));
+    }
+
+    .table-hover & {
+      @include hover {
+        &,
+        > td,
+        > th {
+          background-color: theme-color($color);
+          color: color-yiq(theme-color($color));
+        }
+      }
     }
   }
+}
 
-  .table-hover .table-#{$color} {
+.table-active {
+  &,
+  > td,
+  > th {
+    background-color: $table-bg-active;
+    color: color-yiq($table-bg-active);
+  }
+
+  .table-hover & {
     @include hover {
       &,
       > td,
       > th {
-        background-color: theme-color-dark($color);
-        color: color-yiq(theme-color-dark($color));
+        background-color: $table-bg-active-hover;
+        color: color-yiq($table-bg-active-hover);
       }
     }
   }
@@ -206,14 +227,12 @@
   tbody,
   tfoot,
   thead {
-    td,
-    th {
-      color: inherit;
-    }
+    color: inherit;
   }
 
   td,
-  th {
+  th,
+  .table {
     border-color: $table-dark-border-color;
   }
 }
