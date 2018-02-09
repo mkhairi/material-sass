@@ -1,13 +1,16 @@
 /*
- * tab indicator animation
- * requires bootstrap's (v4.0.0-beta) tab.js
+ * Tab indicator animation
+ * Requires Bootstrap's (v4.0.0) `tab.js`
  */
 var TabSwitch = function ($) {
   // constants >>>
   var DATA_KEY = 'md.tabswitch';
   var NAME = 'tabswitch';
   var NO_CONFLICT = $.fn[NAME];
-  var TRANSITION_DURATION = 390;
+  var Breakpoints = {
+    DESKTOP: 992,
+    TABLET: 576
+  };
   var ClassName = {
     ANIMATE: 'animate',
     DROPDOWN_ITEM: 'dropdown-item',
@@ -22,7 +25,12 @@ var TabSwitch = function ($) {
   var Selector = {
     DATA_TOGGLE: '.nav-tabs [data-toggle="tab"]',
     DROPDOWN: '.dropdown',
-    NAV: '.nav-tabs' // <<< constants
+    NAV: '.nav-tabs'
+  };
+  var TransitionDuration = {
+    DESKTOP: 200,
+    MOBILE: 300,
+    TABLET: 390 // <<< constants
 
   };
 
@@ -30,10 +38,6 @@ var TabSwitch = function ($) {
   /*#__PURE__*/
   function () {
     function TabSwitch(nav) {
-      if (typeof $.fn.tab === 'undefined') {
-        throw new Error('Material\'s JavaScript requires Bootstrap\'s tab.js');
-      }
-
       this._nav = nav;
       this._navindicator = null;
     }
@@ -80,7 +84,15 @@ var TabSwitch = function ($) {
         return;
       }
 
-      $(this._navindicator).one(Util.TRANSITION_END, complete).emulateTransitionEnd(TRANSITION_DURATION);
+      var transitionDuration = TransitionDuration.MOBILE;
+
+      if (window.innerWidth >= Breakpoints.DESKTOP) {
+        transitionDuration = TransitionDuration.DESKTOP;
+      } else if (window.innerWidth >= Breakpoints.TABLET) {
+        transitionDuration = TransitionDuration.TABLET;
+      }
+
+      $(this._navindicator).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
     };
 
     _proto._createIndicator = function _createIndicator(navLeft, navScrollLeft, navWidth, relatedTarget) {
@@ -126,7 +138,7 @@ var TabSwitch = function ($) {
   }();
 
   $(document).on(Event.SHOW_BS_TAB, Selector.DATA_TOGGLE, function (event) {
-    TabSwitch._jQueryInterface.call($(event.target), event.relatedTarget);
+    TabSwitch._jQueryInterface.call($(this), event.relatedTarget);
   });
   $.fn[NAME] = TabSwitch._jQueryInterface;
   $.fn[NAME].Constructor = TabSwitch;

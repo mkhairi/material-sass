@@ -20,16 +20,16 @@ var ExpansionPanel = function ($) {
     PANEL_BODY: '.expansion-panel .collapse' // <<< constants
 
   };
-  $(document).on("" + Event.HIDE, Selector.PANEL_BODY, function (event) {
-    var target = $(event.target).closest(Selector.PANEL);
+  $(document).on("" + Event.HIDE, Selector.PANEL_BODY, function () {
+    var target = $(this).closest(Selector.PANEL);
     target.removeClass(ClassName.SHOW);
     var predecessor = target.prev(Selector.PANEL);
 
     if (predecessor.length) {
       predecessor.removeClass(ClassName.SHOW_PREDECESSOR);
     }
-  }).on("" + Event.SHOW, Selector.PANEL_BODY, function (event) {
-    var target = $(event.target).closest(Selector.PANEL);
+  }).on("" + Event.SHOW, Selector.PANEL_BODY, function () {
+    var target = $(this).closest(Selector.PANEL);
     target.addClass(ClassName.SHOW);
     var predecessor = target.prev(Selector.PANEL);
 

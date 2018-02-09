@@ -29,24 +29,25 @@ var FloatingLabel = function ($) {
   function () {
     function FloatingLabel(element) {
       this._element = element;
+      this._parent = $(element).closest(Selector.DATA_PARENT)[0];
     }
 
     var _proto = FloatingLabel.prototype;
 
-    _proto.change = function change(relatedTarget) {
+    _proto.change = function change() {
       if ($(this._element).val() || $(this._element).is('select') && $('option:first-child', $(this._element)).html().replace(' ', '') !== '') {
-        $(relatedTarget).addClass(ClassName.HAS_VALUE);
+        $(this._parent).addClass(ClassName.HAS_VALUE);
       } else {
-        $(relatedTarget).removeClass(ClassName.HAS_VALUE);
+        $(this._parent).removeClass(ClassName.HAS_VALUE);
       }
     };
 
-    _proto.focusin = function focusin(relatedTarget) {
-      $(relatedTarget).addClass(ClassName.IS_FOCUSED);
+    _proto.focusin = function focusin() {
+      $(this._parent).addClass(ClassName.IS_FOCUSED);
     };
 
-    _proto.focusout = function focusout(relatedTarget) {
-      $(relatedTarget).removeClass(ClassName.IS_FOCUSED);
+    _proto.focusout = function focusout() {
+      $(this._parent).removeClass(ClassName.IS_FOCUSED);
     };
 
     FloatingLabel._jQueryInterface = function _jQueryInterface(event) {
@@ -61,11 +62,11 @@ var FloatingLabel = function ($) {
         }
 
         if (typeof _event === 'string') {
-          if (data[_event] === 'undefined') {
+          if (typeof data[_event] === 'undefined') {
             throw new Error("No method named \"" + _event + "\"");
           }
 
-          data[_event]($(this).closest(Selector.DATA_PARENT));
+          data[_event]();
         }
       });
     };

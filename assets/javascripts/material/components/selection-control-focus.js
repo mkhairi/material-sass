@@ -23,11 +23,11 @@ var SelectionControlFocus = function ($) {
     INPUT: '.custom-control-input' // <<< constants
 
   };
-  $(document).on("" + Event.BLUR, Selector.INPUT, function (event) {
-    $(event.target).removeClass(ClassName.FOCUS);
-  }).on("" + Event.FOCUS, Selector.INPUT, function (event) {
+  $(document).on("" + Event.BLUR, Selector.INPUT, function () {
+    $(this).removeClass(ClassName.FOCUS);
+  }).on("" + Event.FOCUS, Selector.INPUT, function () {
     if (LastInteraction.IS_MOUSEDOWN === false) {
-      $(event.target).addClass(ClassName.FOCUS);
+      $(this).addClass(ClassName.FOCUS);
     }
   }).on("" + Event.MOUSEDOWN, Selector.CONTROL, function () {
     LastInteraction.IS_MOUSEDOWN = true;

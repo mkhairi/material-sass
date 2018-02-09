@@ -1,5 +1,5 @@
 /*!
- * Daemonite Material v4.0.0-beta (http://daemonite.github.io/material/)
+ * Daemonite Material v4.0.0 (http://daemonite.github.io/material/)
  * Copyright 2011-2018 Daemon Pty Ltd
  * Licensed under MIT (https://github.com/Daemonite/material/blob/master/LICENSE)
  */
@@ -2541,6 +2541,24 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
+function _extends() {
+  _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
 /*
  * Customise pickadate JavaScript for Material
  */
@@ -2715,16 +2733,16 @@ var ExpansionPanel = function ($$$1) {
     PANEL_BODY: '.expansion-panel .collapse' // <<< constants
 
   };
-  $$$1(document).on("" + Event.HIDE, Selector.PANEL_BODY, function (event) {
-    var target = $$$1(event.target).closest(Selector.PANEL);
+  $$$1(document).on("" + Event.HIDE, Selector.PANEL_BODY, function () {
+    var target = $$$1(this).closest(Selector.PANEL);
     target.removeClass(ClassName.SHOW);
     var predecessor = target.prev(Selector.PANEL);
 
     if (predecessor.length) {
       predecessor.removeClass(ClassName.SHOW_PREDECESSOR);
     }
-  }).on("" + Event.SHOW, Selector.PANEL_BODY, function (event) {
-    var target = $$$1(event.target).closest(Selector.PANEL);
+  }).on("" + Event.SHOW, Selector.PANEL_BODY, function () {
+    var target = $$$1(this).closest(Selector.PANEL);
     target.addClass(ClassName.SHOW);
     var predecessor = target.prev(Selector.PANEL);
 
@@ -2766,24 +2784,25 @@ var FloatingLabel = function ($$$1) {
   function () {
     function FloatingLabel(element) {
       this._element = element;
+      this._parent = $$$1(element).closest(Selector.DATA_PARENT)[0];
     }
 
     var _proto = FloatingLabel.prototype;
 
-    _proto.change = function change(relatedTarget) {
+    _proto.change = function change() {
       if ($$$1(this._element).val() || $$$1(this._element).is('select') && $$$1('option:first-child', $$$1(this._element)).html().replace(' ', '') !== '') {
-        $$$1(relatedTarget).addClass(ClassName.HAS_VALUE);
+        $$$1(this._parent).addClass(ClassName.HAS_VALUE);
       } else {
-        $$$1(relatedTarget).removeClass(ClassName.HAS_VALUE);
+        $$$1(this._parent).removeClass(ClassName.HAS_VALUE);
       }
     };
 
-    _proto.focusin = function focusin(relatedTarget) {
-      $$$1(relatedTarget).addClass(ClassName.IS_FOCUSED);
+    _proto.focusin = function focusin() {
+      $$$1(this._parent).addClass(ClassName.IS_FOCUSED);
     };
 
-    _proto.focusout = function focusout(relatedTarget) {
-      $$$1(relatedTarget).removeClass(ClassName.IS_FOCUSED);
+    _proto.focusout = function focusout() {
+      $$$1(this._parent).removeClass(ClassName.IS_FOCUSED);
     };
 
     FloatingLabel._jQueryInterface = function _jQueryInterface(event) {
@@ -2798,11 +2817,11 @@ var FloatingLabel = function ($$$1) {
         }
 
         if (typeof _event === 'string') {
-          if (data[_event] === 'undefined') {
+          if (typeof data[_event] === 'undefined') {
             throw new Error("No method named \"" + _event + "\"");
           }
 
-          data[_event]($$$1(this).closest(Selector.DATA_PARENT));
+          data[_event]();
         }
       });
     };
@@ -2825,8 +2844,8 @@ var FloatingLabel = function ($$$1) {
 }($);
 
 /*
- * global util js
- * based on bootstrap's (v4.0.0-beta) util.js
+ * Global util js
+ * Based on Bootstrap's (v4.0.0) `util.js`
  */
 
 var Util = function ($$$1) {
@@ -2940,8 +2959,8 @@ var Util = function ($$$1) {
 }($);
 
 /*
- * navigation drawer
- * based on bootstrap's (v4.0.0-beta) modal.js
+ * Navigation drawer
+ * Based on Bootstrap's (v4.0.0) `modal.js`
  */
 
 var NavDrawer = function ($$$1) {
@@ -2952,15 +2971,17 @@ var NavDrawer = function ($$$1) {
   var EVENT_KEY = "." + DATA_KEY;
   var NAME = 'navdrawer';
   var NO_CONFLICT = $$$1.fn[NAME];
-  var TRANSITION_DURATION = 292.5;
-  var TRANSITION_DURATION_BACKDROP = 487.5;
+  var Breakpoints = {
+    DESKTOP: 992,
+    TABLET: 576
+  };
   var ClassName = {
     BACKDROP: 'navdrawer-backdrop',
     OPEN: 'navdrawer-open',
     SHOW: 'show'
   };
   var Default = {
-    breakpoint: 1280,
+    breakpoint: '',
     keyboard: true,
     show: true,
     type: 'default'
@@ -2985,7 +3006,17 @@ var NavDrawer = function ($$$1) {
   var Selector = {
     CONTENT: '.navdrawer-content',
     DATA_DISMISS: '[data-dismiss="navdrawer"]',
-    DATA_TOGGLE: '[data-toggle="navdrawer"]' // <<< constants
+    DATA_TOGGLE: '[data-toggle="navdrawer"]'
+  };
+  var TransitionDurationEntering = {
+    DESKTOP: 150,
+    MOBILE: 225,
+    TABLET: 292.5
+  };
+  var TransitionDurationLeaving = {
+    DESKTOP: 130,
+    MOBILE: 195,
+    TABLET: 253.5 // <<< constants
 
   };
 
@@ -2999,16 +3030,22 @@ var NavDrawer = function ($$$1) {
       this._element = element;
       this._ignoreBackdropClick = false;
       this._isShown = false;
+      this._typeBreakpoint = this._config.breakpoint === '' ? '' : "-" + this._config.breakpoint;
     }
 
     var _proto = NavDrawer.prototype;
 
     _proto.hide = function hide(event) {
+      var _this = this;
+
       if (event) {
         event.preventDefault();
       }
 
-      var hideClassName = ClassName.OPEN + "-" + this._config.type;
+      if (this._isTransitioning || !this._isShown) {
+        return;
+      }
+
       var hideEvent = $$$1.Event(Event.HIDE);
       $$$1(this._element).trigger(hideEvent);
 
@@ -3017,18 +3054,40 @@ var NavDrawer = function ($$$1) {
       }
 
       this._isShown = false;
+      var supportsTransition = Util.supportsTransitionEnd();
+
+      if (supportsTransition) {
+        this._isTransitioning = true;
+      }
 
       this._setEscapeEvent();
 
       $$$1(document).off(Event.FOCUSIN);
+      $$$1(this._element).removeClass(ClassName.SHOW);
+      $$$1(this._element).off(Event.CLICK_DISMISS);
       $$$1(this._content).off(Event.MOUSEDOWN_DISMISS);
-      $$$1(this._element).off(Event.CLICK_DISMISS).removeClass(ClassName.SHOW);
 
-      this._hideNavdrawer(hideClassName);
+      if (supportsTransition) {
+        $$$1(this._element).one(Util.TRANSITION_END, function (event) {
+          return _this._hideNavdrawer(event);
+        }).emulateTransitionEnd(this._getTransitionDuration(TransitionDurationLeaving));
+      } else {
+        this._hideNavdrawer();
+      }
+
+      this._showBackdrop();
     };
 
     _proto.show = function show(relatedTarget) {
-      var _this = this;
+      var _this2 = this;
+
+      if (this._isTransitioning || this._isShown) {
+        return;
+      }
+
+      if (Util.supportsTransitionEnd()) {
+        this._isTransitioning = true;
+      }
 
       var showEvent = $$$1.Event(Event.SHOW, {
         relatedTarget: relatedTarget
@@ -3040,16 +3099,18 @@ var NavDrawer = function ($$$1) {
       }
 
       this._isShown = true;
-      $$$1(document.body).addClass(ClassName.OPEN + "-" + this._config.type);
+      $$$1(document.body).addClass(ClassName.OPEN + "-" + this._config.type + this._typeBreakpoint);
 
       this._setEscapeEvent();
 
-      $$$1(this._element).addClass(NAME + "-" + this._config.type);
-      $$$1(this._element).on(Event.CLICK_DISMISS, Selector.DATA_DISMISS, $$$1.proxy(this.hide, this));
+      $$$1(this._element).addClass(NAME + "-" + this._config.type + this._typeBreakpoint);
+      $$$1(this._element).on(Event.CLICK_DISMISS, Selector.DATA_DISMISS, function (event) {
+        return _this2.hide(event);
+      });
       $$$1(this._content).on(Event.MOUSEDOWN_DISMISS, function () {
-        $$$1(_this._element).one(Event.MOUSEUP_DISMISS, function (event) {
-          if ($$$1(event.target).is(_this._element)) {
-            _this._ignoreBackdropClick = true;
+        $$$1(_this2._element).one(Event.MOUSEUP_DISMISS, function (event) {
+          if ($$$1(event.target).is(_this2._element)) {
+            _this2._ignoreBackdropClick = true;
           }
         });
       });
@@ -3064,34 +3125,39 @@ var NavDrawer = function ($$$1) {
     };
 
     _proto._enforceFocus = function _enforceFocus() {
-      var _this2 = this;
+      var _this3 = this;
 
       $$$1(document).off(Event.FOCUSIN).on(Event.FOCUSIN, function (event) {
-        if (_this2._config.type === 'default' || $$$1(window).width() <= _this2._config.breakpoint) {
-          if (_this2._element !== event.target && !$$$1(_this2._element).has(event.target).length) {
-            _this2._element.focus();
-          }
+        if (document !== event.target && _this3._element !== event.target && $$$1(_this3._element).has(event.target).length === 0) {
+          _this3._element.focus();
         }
       });
     };
 
     _proto._getConfig = function _getConfig(config) {
-      config = $$$1.extend({}, Default, config);
+      config = _extends({}, Default, config);
       Util.typeCheckConfig(NAME, config, DefaultType);
       return config;
     };
 
-    _proto._hideNavdrawer = function _hideNavdrawer(className) {
-      var _this3 = this;
+    _proto._getTransitionDuration = function _getTransitionDuration(duration) {
+      if (window.innerWidth >= Breakpoints.DESKTOP) {
+        return duration.DESKTOP;
+      } else if (window.innerWidth >= Breakpoints.TABLET) {
+        return duration.TABLET;
+      }
 
-      this._showBackdrop(function () {
-        $$$1(document.body).removeClass(className);
+      return duration.MOBILE;
+    };
 
-        _this3._element.setAttribute('aria-hidden', 'true');
+    _proto._hideNavdrawer = function _hideNavdrawer() {
+      this._element.style.display = 'none';
 
-        _this3._element.style.display = 'none';
-        $$$1(_this3._element).trigger(Event.HIDDEN);
-      });
+      this._element.setAttribute('aria-hidden', true);
+
+      this._isTransitioning = false;
+      $$$1(document.body).removeClass(ClassName.OPEN + "-" + this._config.type + this._typeBreakpoint);
+      $$$1(this._element).trigger(Event.HIDDEN);
     };
 
     _proto._removeBackdrop = function _removeBackdrop() {
@@ -3107,6 +3173,8 @@ var NavDrawer = function ($$$1) {
       if (this._isShown && this._config.keyboard) {
         $$$1(this._element).on(Event.KEYDOWN_DISMISS, function (event) {
           if (event.which === ESCAPE_KEYCODE) {
+            event.preventDefault();
+
             _this4.hide();
           }
         });
@@ -3115,14 +3183,14 @@ var NavDrawer = function ($$$1) {
       }
     };
 
-    _proto._showBackdrop = function _showBackdrop(callback) {
+    _proto._showBackdrop = function _showBackdrop() {
       var _this5 = this;
 
       var supportsTransition = Util.supportsTransitionEnd();
 
       if (this._isShown) {
         this._backdrop = document.createElement('div');
-        $$$1(this._backdrop).addClass(ClassName.BACKDROP).addClass(ClassName.BACKDROP + "-" + this._config.type).appendTo(document.body);
+        $$$1(this._backdrop).addClass(ClassName.BACKDROP).addClass(ClassName.BACKDROP + "-" + this._config.type + this._typeBreakpoint).appendTo(document.body);
         $$$1(this._element).on(Event.CLICK_DISMISS, function (event) {
           if (_this5._ignoreBackdropClick) {
             _this5._ignoreBackdropClick = false;
@@ -3141,35 +3209,10 @@ var NavDrawer = function ($$$1) {
         }
 
         $$$1(this._backdrop).addClass(ClassName.SHOW);
-
-        if (!callback) {
-          return;
-        }
-
-        if (!supportsTransition) {
-          callback();
-          return;
-        }
-
-        $$$1(this._backdrop).one(Util.TRANSITION_END, callback).emulateTransitionEnd(TRANSITION_DURATION_BACKDROP);
-      } else if (this._backdrop && !this._isShown) {
+      } else if (!this._isShown && this._backdrop) {
         $$$1(this._backdrop).removeClass(ClassName.SHOW);
 
-        var callbackRemove = function callbackRemove() {
-          _this5._removeBackdrop();
-
-          if (callback) {
-            callback();
-          }
-        };
-
-        if (supportsTransition) {
-          $$$1(this._backdrop).one(Util.TRANSITION_END, callbackRemove).emulateTransitionEnd(TRANSITION_DURATION_BACKDROP);
-        } else {
-          callbackRemove();
-        }
-      } else if (callback) {
-        callback();
+        this._removeBackdrop();
       }
     };
 
@@ -3182,9 +3225,9 @@ var NavDrawer = function ($$$1) {
         document.body.appendChild(this._element);
       }
 
-      this._element.removeAttribute('aria-hidden');
-
       this._element.style.display = 'block';
+
+      this._element.removeAttribute('aria-hidden');
 
       if (supportsTransition) {
         Util.reflow(this._element);
@@ -3201,11 +3244,12 @@ var NavDrawer = function ($$$1) {
       var transitionComplete = function transitionComplete() {
         _this6._element.focus();
 
+        _this6._isTransitioning = false;
         $$$1(_this6._element).trigger(shownEvent);
       };
 
       if (supportsTransition) {
-        $$$1(this._content).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(TRANSITION_DURATION);
+        $$$1(this._content).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(this._getTransitionDuration(TransitionDurationEntering));
       } else {
         transitionComplete();
       }
@@ -3213,7 +3257,7 @@ var NavDrawer = function ($$$1) {
 
     NavDrawer._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
       return this.each(function () {
-        var _config = $$$1.extend({}, NavDrawer.Default, $$$1(this).data(), typeof config === 'object' && config);
+        var _config = _extends({}, NavDrawer.Default, $$$1(this).data(), typeof config === 'object' && config);
 
         var data = $$$1(this).data(DATA_KEY);
 
@@ -3223,8 +3267,8 @@ var NavDrawer = function ($$$1) {
         }
 
         if (typeof config === 'string') {
-          if (data[config] === 'undefined') {
-            throw new Error("No method named \"" + config + "\"");
+          if (typeof data[config] === 'undefined') {
+            throw new TypeError("No method named \"" + config + "\"");
           }
 
           data[config](relatedTarget);
@@ -3253,9 +3297,9 @@ var NavDrawer = function ($$$1) {
       target = $$$1(selector)[0];
     }
 
-    var config = $$$1(target).data(DATA_KEY) ? 'toggle' : $$$1.extend({}, $$$1(target).data(), $$$1(this).data());
+    var config = $$$1(target).data(DATA_KEY) ? 'toggle' : _extends({}, $$$1(target).data(), $$$1(this).data());
 
-    if (this.tagName === 'A') {
+    if (this.tagName === 'A' || this.tagName === 'AREA') {
       event.preventDefault();
     }
 
@@ -3310,11 +3354,11 @@ var SelectionControlFocus = function ($$$1) {
     INPUT: '.custom-control-input' // <<< constants
 
   };
-  $$$1(document).on("" + Event.BLUR, Selector.INPUT, function (event) {
-    $$$1(event.target).removeClass(ClassName.FOCUS);
-  }).on("" + Event.FOCUS, Selector.INPUT, function (event) {
+  $$$1(document).on("" + Event.BLUR, Selector.INPUT, function () {
+    $$$1(this).removeClass(ClassName.FOCUS);
+  }).on("" + Event.FOCUS, Selector.INPUT, function () {
     if (LastInteraction.IS_MOUSEDOWN === false) {
-      $$$1(event.target).addClass(ClassName.FOCUS);
+      $$$1(this).addClass(ClassName.FOCUS);
     }
   }).on("" + Event.MOUSEDOWN, Selector.CONTROL, function () {
     LastInteraction.IS_MOUSEDOWN = true;
@@ -3326,8 +3370,8 @@ var SelectionControlFocus = function ($$$1) {
 }($);
 
 /*
- * tab indicator animation
- * requires bootstrap's (v4.0.0-beta) tab.js
+ * Tab indicator animation
+ * Requires Bootstrap's (v4.0.0) `tab.js`
  */
 
 var TabSwitch = function ($$$1) {
@@ -3335,7 +3379,10 @@ var TabSwitch = function ($$$1) {
   var DATA_KEY = 'md.tabswitch';
   var NAME = 'tabswitch';
   var NO_CONFLICT = $$$1.fn[NAME];
-  var TRANSITION_DURATION = 390;
+  var Breakpoints = {
+    DESKTOP: 992,
+    TABLET: 576
+  };
   var ClassName = {
     ANIMATE: 'animate',
     DROPDOWN_ITEM: 'dropdown-item',
@@ -3350,7 +3397,12 @@ var TabSwitch = function ($$$1) {
   var Selector = {
     DATA_TOGGLE: '.nav-tabs [data-toggle="tab"]',
     DROPDOWN: '.dropdown',
-    NAV: '.nav-tabs' // <<< constants
+    NAV: '.nav-tabs'
+  };
+  var TransitionDuration = {
+    DESKTOP: 200,
+    MOBILE: 300,
+    TABLET: 390 // <<< constants
 
   };
 
@@ -3358,10 +3410,6 @@ var TabSwitch = function ($$$1) {
   /*#__PURE__*/
   function () {
     function TabSwitch(nav) {
-      if (typeof $$$1.fn.tab === 'undefined') {
-        throw new Error('Material\'s JavaScript requires Bootstrap\'s tab.js');
-      }
-
       this._nav = nav;
       this._navindicator = null;
     }
@@ -3408,7 +3456,15 @@ var TabSwitch = function ($$$1) {
         return;
       }
 
-      $$$1(this._navindicator).one(Util.TRANSITION_END, complete).emulateTransitionEnd(TRANSITION_DURATION);
+      var transitionDuration = TransitionDuration.MOBILE;
+
+      if (window.innerWidth >= Breakpoints.DESKTOP) {
+        transitionDuration = TransitionDuration.DESKTOP;
+      } else if (window.innerWidth >= Breakpoints.TABLET) {
+        transitionDuration = TransitionDuration.TABLET;
+      }
+
+      $$$1(this._navindicator).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
     };
 
     _proto._createIndicator = function _createIndicator(navLeft, navScrollLeft, navWidth, relatedTarget) {
@@ -3454,7 +3510,7 @@ var TabSwitch = function ($$$1) {
   }();
 
   $$$1(document).on(Event.SHOW_BS_TAB, Selector.DATA_TOGGLE, function (event) {
-    TabSwitch._jQueryInterface.call($$$1(event.target), event.relatedTarget);
+    TabSwitch._jQueryInterface.call($$$1(this), event.relatedTarget);
   });
   $$$1.fn[NAME] = TabSwitch._jQueryInterface;
   $$$1.fn[NAME].Constructor = TabSwitch;
