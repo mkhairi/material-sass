@@ -304,6 +304,39 @@ $selection-control-track-bg-disabled:           $black-divider !default;
 $selection-control-track-height:                1rem !default;
 $selection-control-track-width:                 ($selection-control-indicator-size * 2) !default;
 
+// Slider (Bootstrap custom form control)
+// Based on https://material.io/guidelines/components/sliders.html#sliders-continuous-slider
+
+$slider-thumb-bg:             theme-color(primary) !default;
+$slider-thumb-radial-opacity: $black-divider-opacity !default;
+$slider-thumb-size:           ($material-icon-size / 2) !default;
+$slider-track-bg:             rgba(0, 0, 0, 0.26) !default;
+$slider-track-bg-active:      rgba(0, 0, 0, 0.38) !default;
+$slider-track-height:         0.125rem !default;
+
+// Snackbar/toast (Bootstrap toast)
+// Based on https://material.io/guidelines/components/snackbars-toasts.html#snackbars-toasts-specs
+
+$snackbar-bg:                     #323232 !default;
+$snackbar-border-radius:          $border-radius !default;
+$snackbar-breakpoint:             sm !default;
+$snackbar-btn-color:              theme-color(secondary) !default;
+$snackbar-btn-color-hover:        theme-color-light(secondary) !default;
+$snackbar-color:                  $white-primary !default;
+$snackbar-elevation-shadow:       $elevation-shadow-6dp !default;
+$snackbar-font-size:              0.875rem !default;
+$snackbar-height-multi:           5rem !default;
+$snackbar-inner-spacer-x:         1.5rem !default;
+$snackbar-inner-spacer-x-desktop: 3rem !default;
+$snackbar-line-height:            $line-height-base !default;
+$snackbar-margin-x:               $spacer-lg !default;
+$snackbar-margin-y:               $spacer-lg !default;
+$snackbar-max-width:              35.5rem !default;
+$snackbar-min-width:              18rem !default;
+$snackbar-padding-x:              1.5rem !default;
+$snackbar-padding-y:              0.875rem !default;
+$snackbar-padding-y-multi:        1.25rem !default;
+
 // Stepper
 // Based on https://material.google.com/components/steppers.html#steppers-specs
 
@@ -357,6 +390,7 @@ $textfield-color-disabled:     $black-hint !default;
 $textfield-hint-color:         $black-hint !default;
 $textfield-line-height:        $line-height-base !default;
 $textfield-margin-x:           $spacer !default;
+$textfield-plaintext-color:    $body-color !default;
 
 $textfield-font-size:          1rem !default;
 $textfield-font-size-lg:       2.125rem !default;
@@ -432,6 +466,7 @@ $toolbar-dark-element-bg:       $white-divider !default;
 
 $tooltip-bg:                $material-color-grey-700 !default;
 $tooltip-border-radius:     $border-radius !default;
+$tooltip-breakpoint:        md !default;
 $tooltip-color:             $white-primary !default;
 $tooltip-font-size:         0.875rem !default;
 $tooltip-font-size-desktop: 0.625rem !default;

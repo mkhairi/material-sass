@@ -1,7 +1,6 @@
 .card {
   @include border-radius($card-border-radius);
 
-  background-clip: border-box;
   background-color: $card-bg;
   box-shadow: map-get($card-elevation-shadow, shadow);
   display: flex;
@@ -60,6 +59,10 @@
     min-width: 0;
     padding-right: $card-action-inner-spacer-x;
     padding-left: $card-action-inner-spacer-x;
+  }
+
+  .dropdown-toggle::after {
+    margin-right: 0;
   }
 }
 
