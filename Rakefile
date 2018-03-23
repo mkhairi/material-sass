@@ -19,10 +19,10 @@ namespace :javascripts do
     cp "#{source_dir}/js/material.min.js", "assets/javascripts/material.min.js"
     
   
-    src_dir = "#{source_dir}/js/dist/third-party/."
-    tgt_dir = "assets/javascripts/material/addons"
-    mkdir_p tgt_dir
-    cp_r src_dir, tgt_dir
+    #src_dir = "#{source_dir}/js/dist/third-party/."
+    #tgt_dir = "assets/javascripts/material/addons"
+    #mkdir_p tgt_dir
+    #cp_r src_dir, tgt_dir
   end
 
   desc "Remove map"

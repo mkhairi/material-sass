@@ -5,7 +5,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /*
- * Navigation drawer
+ * Navigation drawer plguin
  * Based on Bootstrap's (v4.0.0) `modal.js`
  */
 var NavDrawer = function ($) {
@@ -16,10 +16,6 @@ var NavDrawer = function ($) {
   var EVENT_KEY = "." + DATA_KEY;
   var NAME = 'navdrawer';
   var NO_CONFLICT = $.fn[NAME];
-  var Breakpoints = {
-    DESKTOP: 992,
-    TABLET: 576
-  };
   var ClassName = {
     BACKDROP: 'navdrawer-backdrop',
     OPEN: 'navdrawer-open',
@@ -51,17 +47,7 @@ var NavDrawer = function ($) {
   var Selector = {
     CONTENT: '.navdrawer-content',
     DATA_DISMISS: '[data-dismiss="navdrawer"]',
-    DATA_TOGGLE: '[data-toggle="navdrawer"]'
-  };
-  var TransitionDurationEntering = {
-    DESKTOP: 150,
-    MOBILE: 225,
-    TABLET: 292.5
-  };
-  var TransitionDurationLeaving = {
-    DESKTOP: 130,
-    MOBILE: 195,
-    TABLET: 253.5 // <<< constants
+    DATA_TOGGLE: '[data-toggle="navdrawer"]' // <<< constants
 
   };
 
@@ -113,9 +99,10 @@ var NavDrawer = function ($) {
       $(this._content).off(Event.MOUSEDOWN_DISMISS);
 
       if (supportsTransition) {
-        $(this._element).one(Util.TRANSITION_END, function (event) {
+        var transitionDuration = Util.getTransitionDurationFromElement(this._content);
+        $(this._content).one(Util.TRANSITION_END, function (event) {
           return _this._hideNavdrawer(event);
-        }).emulateTransitionEnd(this._getTransitionDuration(TransitionDurationLeaving));
+        }).emulateTransitionEnd(transitionDuration);
       } else {
         this._hideNavdrawer();
       }
@@ -183,16 +170,6 @@ var NavDrawer = function ($) {
       config = _extends({}, Default, config);
       Util.typeCheckConfig(NAME, config, DefaultType);
       return config;
-    };
-
-    _proto._getTransitionDuration = function _getTransitionDuration(duration) {
-      if (window.innerWidth >= Breakpoints.DESKTOP) {
-        return duration.DESKTOP;
-      } else if (window.innerWidth >= Breakpoints.TABLET) {
-        return duration.TABLET;
-      }
-
-      return duration.MOBILE;
     };
 
     _proto._hideNavdrawer = function _hideNavdrawer() {
@@ -294,7 +271,8 @@ var NavDrawer = function ($) {
       };
 
       if (supportsTransition) {
-        $(this._content).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(this._getTransitionDuration(TransitionDurationEntering));
+        var transitionDuration = Util.getTransitionDurationFromElement(this._content);
+        $(this._content).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
       } else {
         transitionComplete();
       }

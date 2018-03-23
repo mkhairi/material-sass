@@ -4,6 +4,7 @@
  */
 var Util = function ($) {
   var MAX_UID = 1000000;
+  var MILLISECONDS_MULTIPLIER = 1000;
   var transition = false;
 
   function getSpecialTransitionEndEvent() {
@@ -73,6 +74,20 @@ var Util = function ($) {
       } catch (err) {
         return null;
       }
+    },
+    getTransitionDurationFromElement: function getTransitionDurationFromElement(element) {
+      if (!element) {
+        return 0;
+      }
+
+      var transitionDuration = $(element).css('transition-duration');
+
+      if (!transitionDuration) {
+        return 0;
+      }
+
+      transitionDuration = transitionDuration.split(',')[0];
+      return parseFloat(transitionDuration) * MILLISECONDS_MULTIPLIER;
     },
     getUID: function getUID(prefix) {
       do {

@@ -7,10 +7,6 @@ var TabSwitch = function ($) {
   var DATA_KEY = 'md.tabswitch';
   var NAME = 'tabswitch';
   var NO_CONFLICT = $.fn[NAME];
-  var Breakpoints = {
-    DESKTOP: 992,
-    TABLET: 576
-  };
   var ClassName = {
     ANIMATE: 'animate',
     DROPDOWN_ITEM: 'dropdown-item',
@@ -25,12 +21,7 @@ var TabSwitch = function ($) {
   var Selector = {
     DATA_TOGGLE: '.nav-tabs [data-toggle="tab"]',
     DROPDOWN: '.dropdown',
-    NAV: '.nav-tabs'
-  };
-  var TransitionDuration = {
-    DESKTOP: 200,
-    MOBILE: 300,
-    TABLET: 390 // <<< constants
+    NAV: '.nav-tabs' // <<< constants
 
   };
 
@@ -84,14 +75,7 @@ var TabSwitch = function ($) {
         return;
       }
 
-      var transitionDuration = TransitionDuration.MOBILE;
-
-      if (window.innerWidth >= Breakpoints.DESKTOP) {
-        transitionDuration = TransitionDuration.DESKTOP;
-      } else if (window.innerWidth >= Breakpoints.TABLET) {
-        transitionDuration = TransitionDuration.TABLET;
-      }
-
+      var transitionDuration = Util.getTransitionDurationFromElement(this._navindicator);
       $(this._navindicator).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);
     };
 
