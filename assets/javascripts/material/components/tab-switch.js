@@ -83,7 +83,7 @@ var TabSwitch = function ($) {
       this._navindicator = document.createElement('div');
       $(this._navindicator).addClass(ClassName.INDICATOR).appendTo(this._nav);
 
-      if (relatedTarget !== 'undefined') {
+      if (typeof relatedTarget !== 'undefined') {
         if ($(relatedTarget).hasClass(ClassName.DROPDOWN_ITEM)) {
           relatedTarget = $(relatedTarget).closest(Selector.DROPDOWN);
         }
