@@ -6,7 +6,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 /*
  * Navigation drawer plguin
- * Based on Bootstrap's (v4.0.0) `modal.js`
+ * Based on Bootstrap's (v4.1.0) `modal.js`
  */
 var NavDrawer = function ($) {
   // constants >>>

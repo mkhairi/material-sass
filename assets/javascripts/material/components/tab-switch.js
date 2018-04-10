@@ -1,6 +1,6 @@
 /*
  * Tab indicator animation
- * Requires Bootstrap's (v4.0.0) `tab.js`
+ * Requires Bootstrap's (v4.1.0) `tab.js`
  */
 var TabSwitch = function ($) {
   // constants >>>
