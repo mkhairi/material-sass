@@ -22,8 +22,8 @@ Since bootstrap relies on it, install it with ```bin/yarn add jquery``` or via `
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'bootstrap',     '~> 4.0.0'
-gem 'material-sass', '~> 4.0.0'
+gem 'bootstrap',     '~> 4.1.0'
+gem 'material-sass', '~> 4.1.0'
 ```
 And then run the bundler and restart your server to make the files available through the pipeline:
 
@@ -45,6 +45,7 @@ Import Materialize styles in `app/assets/stylesheets/application.scss`:
 
 ```scss
 @import "material";
+//ps: no need to import 'bootstrap'
 ```
 
 **NOTE:** If you have just generated a new Rails application, it  may come with a `.css` file instead. If this file exists, it will be served instead of Sass, so remove it.
@@ -59,6 +60,7 @@ Require Material javascripts in `app/assets/javascripts/application.js`:
 
 ```js
 //= require jquery
+//= require popper
 //= require bootstrap
 //= require material
 ```
