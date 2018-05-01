@@ -103,6 +103,10 @@
         }
       }
 
+      ~ .custom-control-track {
+        background-color: rgba($color, $selection-control-track-opacity);
+      }
+
       ~ .#{$state}-feedback,
       ~ .#{$state}-tooltip {
         display: block;
@@ -155,11 +159,29 @@
     }
   }
 
+  .custom-switch .custom-control-input {
+    &.is-#{$state},
+    .was-validated &:#{$state} {
+      ~ .custom-control-label::after {
+        background-color: $color;
+      }
+    }
+  }
+
   .form-check-input {
     &.is-#{$state},
     .was-validated &:#{$state} {
       + .form-check-label {
         color: $color;
+      }
+    }
+  }
+
+  %form-textarea {
+    &.is-#{$state},
+    .was-validated &:#{$state} {
+      @include focus-hover {
+        box-shadow: inset $textfield-border-width-hover $textfield-border-width-hover 0 ($textfield-border-width * -1) $color, inset ($textfield-border-width-hover * -1) ($textfield-border-width-hover * -1) 0 ($textfield-border-width * -1) $color;
       }
     }
   }

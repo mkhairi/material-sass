@@ -202,7 +202,7 @@ var PickDate = function ($) {
 
     PickDate._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
-        var _config = _extends({}, PickDate.Default, $(this).data(), typeof config === 'object' && config);
+        var _config = _extends({}, Default, $(this).data(), typeof config === 'object' && config ? config : {});
 
         var data = $(this).data(DATA_KEY);
 

@@ -41,7 +41,6 @@ var TabSwitch = function ($) {
       var navLeft = $(this._nav).offset().left;
       var navScrollLeft = $(this._nav).scrollLeft();
       var navWidth = $(this._nav).outerWidth();
-      var supportsTransition = Util.supportsTransitionEnd();
 
       if (!this._navindicator) {
         this._createIndicator(navLeft, navScrollLeft, navWidth, relatedTarget);
@@ -55,11 +54,7 @@ var TabSwitch = function ($) {
       var elWidth = $(element).outerWidth();
       $(this._navindicator).addClass(ClassName.SHOW);
       Util.reflow(this._navindicator);
-
-      if (supportsTransition) {
-        $(this._nav).addClass(ClassName.ANIMATE);
-      }
-
+      $(this._nav).addClass(ClassName.ANIMATE);
       $(this._navindicator).css({
         left: elLeft + navScrollLeft - navLeft,
         right: navWidth - (elLeft + navScrollLeft - navLeft + elWidth)
@@ -69,11 +64,6 @@ var TabSwitch = function ($) {
         $(_this._nav).removeClass(ClassName.ANIMATE);
         $(_this._navindicator).removeClass(ClassName.SHOW);
       };
-
-      if (!supportsTransition) {
-        complete();
-        return;
-      }
 
       var transitionDuration = Util.getTransitionDurationFromElement(this._navindicator);
       $(this._navindicator).one(Util.TRANSITION_END, complete).emulateTransitionEnd(transitionDuration);

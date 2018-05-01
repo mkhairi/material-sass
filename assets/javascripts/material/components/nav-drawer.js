@@ -85,11 +85,7 @@ var NavDrawer = function ($) {
       }
 
       this._isShown = false;
-      var supportsTransition = Util.supportsTransitionEnd();
-
-      if (supportsTransition) {
-        this._isTransitioning = true;
-      }
+      this._isTransitioning = true;
 
       this._setEscapeEvent();
 
@@ -98,15 +94,10 @@ var NavDrawer = function ($) {
       $(this._element).removeClass(ClassName.SHOW);
       $(this._element).off(Event.CLICK_DISMISS);
       $(this._content).off(Event.MOUSEDOWN_DISMISS);
-
-      if (supportsTransition) {
-        var transitionDuration = Util.getTransitionDurationFromElement(this._content);
-        $(this._content).one(Util.TRANSITION_END, function (event) {
-          return _this._hideNavdrawer(event);
-        }).emulateTransitionEnd(transitionDuration);
-      } else {
-        this._hideNavdrawer();
-      }
+      var transitionDuration = Util.getTransitionDurationFromElement(this._content);
+      $(this._content).one(Util.TRANSITION_END, function (event) {
+        return _this._hideNavdrawer(event);
+      }).emulateTransitionEnd(transitionDuration);
 
       this._showBackdrop();
     };
@@ -118,10 +109,7 @@ var NavDrawer = function ($) {
         return;
       }
 
-      if (Util.supportsTransitionEnd()) {
-        this._isTransitioning = true;
-      }
-
+      this._isTransitioning = true;
       var showEvent = $.Event(Event.SHOW, {
         relatedTarget: relatedTarget
       });
@@ -207,8 +195,6 @@ var NavDrawer = function ($) {
     _proto._showBackdrop = function _showBackdrop() {
       var _this5 = this;
 
-      var supportsTransition = Util.supportsTransitionEnd();
-
       if (this._isShown) {
         this._backdrop = document.createElement('div');
         $(this._backdrop).addClass(ClassName.BACKDROP).addClass(ClassName.BACKDROP + "-" + this._config.type + this._typeBreakpoint).appendTo(document.body);
@@ -224,11 +210,7 @@ var NavDrawer = function ($) {
 
           _this5.hide();
         });
-
-        if (supportsTransition) {
-          Util.reflow(this._backdrop);
-        }
-
+        Util.reflow(this._backdrop);
         $(this._backdrop).addClass(ClassName.SHOW);
       } else if (!this._isShown && this._backdrop) {
         $(this._backdrop).removeClass(ClassName.SHOW);
@@ -240,8 +222,6 @@ var NavDrawer = function ($) {
     _proto._showElement = function _showElement(relatedTarget) {
       var _this6 = this;
 
-      var supportsTransition = Util.supportsTransitionEnd();
-
       if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
         document.body.appendChild(this._element);
       }
@@ -250,10 +230,7 @@ var NavDrawer = function ($) {
 
       this._element.removeAttribute('aria-hidden');
 
-      if (supportsTransition) {
-        Util.reflow(this._element);
-      }
-
+      Util.reflow(this._element);
       $(document.body).addClass(ClassName.OPEN + "-" + this._config.type + this._typeBreakpoint);
       $(this._element).addClass(ClassName.SHOW);
 
@@ -270,17 +247,13 @@ var NavDrawer = function ($) {
         $(_this6._element).trigger(shownEvent);
       };
 
-      if (supportsTransition) {
-        var transitionDuration = Util.getTransitionDurationFromElement(this._content);
-        $(this._content).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
-      } else {
-        transitionComplete();
-      }
+      var transitionDuration = Util.getTransitionDurationFromElement(this._content);
+      $(this._content).one(Util.TRANSITION_END, transitionComplete).emulateTransitionEnd(transitionDuration);
     };
 
     NavDrawer._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
       return this.each(function () {
-        var _config = _extends({}, NavDrawer.Default, $(this).data(), typeof config === 'object' && config);
+        var _config = _extends({}, Default, $(this).data(), typeof config === 'object' && config ? config : {});
 
         var data = $(this).data(DATA_KEY);
 

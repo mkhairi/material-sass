@@ -5,12 +5,12 @@
 var Util = function ($) {
   var MAX_UID = 1000000;
   var MILLISECONDS_MULTIPLIER = 1000;
-  var transition = false;
+  var TRANSITION_END = 'transitionend';
 
   function getSpecialTransitionEndEvent() {
     return {
-      bindType: transition.end,
-      delegateType: transition.end,
+      bindType: TRANSITION_END,
+      delegateType: TRANSITION_END,
       handle: function handle(event) {
         if ($(event.target).is(this)) {
           return event.handleObj.handler.apply(this, arguments); // eslint-disable-line prefer-rest-params
@@ -22,12 +22,8 @@ var Util = function ($) {
   }
 
   function setTransitionEndSupport() {
-    transition = transitionEndTest();
     $.fn.emulateTransitionEnd = transitionEndEmulator;
-
-    if (Util.supportsTransitionEnd()) {
-      $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
-    }
+    $.event.special[Util.TRANSITION_END] = getSpecialTransitionEndEvent();
   }
 
   function toType(obj) {
@@ -47,16 +43,6 @@ var Util = function ($) {
       }
     }, duration);
     return this;
-  }
-
-  function transitionEndTest() {
-    if (typeof window !== 'undefined' && window.QUnit) {
-      return false;
-    }
-
-    return {
-      end: 'transitionend'
-    };
   }
 
   var Util = {
@@ -104,10 +90,10 @@ var Util = function ($) {
       return element.offsetHeight;
     },
     supportsTransitionEnd: function supportsTransitionEnd() {
-      return Boolean(transition);
+      return Boolean(TRANSITION_END);
     },
     triggerTransitionEnd: function triggerTransitionEnd(element) {
-      $(element).trigger(transition.end);
+      $(element).trigger(TRANSITION_END);
     },
     typeCheckConfig: function typeCheckConfig(componentName, config, configTypes) {
       for (var property in configTypes) {
