@@ -19,7 +19,7 @@ var FloatingLabel = function ($) {
   };
   var Selector = {
     DATA_PARENT: '.floating-label',
-    DATA_TOGGLE: '.floating-label .form-control' // <<< constants
+    DATA_TOGGLE: '.floating-label .custom-select, .floating-label .form-control' // <<< constants
 
   };
 

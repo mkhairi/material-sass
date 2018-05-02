@@ -1,6 +1,6 @@
 /*
  * Global util js
- * Based on Bootstrap's (v4.1.0) `util.js`
+ * Based on Bootstrap's (v4.1.X) `util.js`
  */
 var Util = function ($) {
   var MAX_UID = 1000000;
